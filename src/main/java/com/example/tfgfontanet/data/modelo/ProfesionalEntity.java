@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Entity
 @Getter
@@ -41,4 +42,7 @@ public class ProfesionalEntity {
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "profesionalId", referencedColumnName = "userId")
     private UsuarioEntity usuario;
+
+    @OneToMany(mappedBy = "profesionalId", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<HerramientaEntity> herramientas;
 }
