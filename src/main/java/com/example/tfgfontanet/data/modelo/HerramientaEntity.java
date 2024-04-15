@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "herramientas", schema = "example_exam_2eva")
+@Table(name = "herramientas", schema = "samuelsanchez_tfg")
 public class HerramientaEntity {
 
     @Id

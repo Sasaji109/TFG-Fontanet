@@ -4,14 +4,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "clientes", schema = "example_exam_2eva")
+@Table(name = "clientes", schema = "samuelsanchez_tfg")
 public class ClienteEntity {
 
     @Id
@@ -29,9 +28,10 @@ public class ClienteEntity {
     private String numero;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "clienteId", referencedColumnName = "userId")
+    @Column(name = "usuario")
+    @JoinColumn(name = "usuarioId", referencedColumnName = "userId")
     private UsuarioEntity usuario;
 
-    @OneToMany(mappedBy = "clienteId", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "profesionalId", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ProfesionalEntity> profesionalesFavoritos;
 }

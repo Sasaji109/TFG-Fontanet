@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "profesionalHerramienta", schema = "example_exam_2eva")
+@Table(name = "profesionalHerramienta", schema = "samuelsanchez_tfg")
 public class ProfToolEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

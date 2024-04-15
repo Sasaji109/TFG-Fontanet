@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "favoritos", schema = "example_exam_2eva")
+@Table(name = "favoritos", schema = "samuelsanchez_tfg")
 public class FavoritosEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,7 @@ public class FavoritosEntity {
     private Integer clienteId;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "profesional")
     @JoinColumn(name = "profesionalId")
     private ProfesionalEntity profesional;
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "profesionales", schema = "example_exam_2eva")
+@Table(name = "profesionales", schema = "samuelsanchez_tfg")
 public class ProfesionalEntity {
 
     @Id
@@ -40,9 +40,10 @@ public class ProfesionalEntity {
     private Integer valoracion;
 
     @OneToOne(cascade = CascadeType.REMOVE)
+    @Column(name = "usuario")
     @JoinColumn(name = "profesionalId", referencedColumnName = "userId")
     private UsuarioEntity usuario;
 
     @OneToMany(mappedBy = "profesionalId", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<HerramientaEntity> herramientas;
+    private List<ProfToolEntity> herramientas;
 }
