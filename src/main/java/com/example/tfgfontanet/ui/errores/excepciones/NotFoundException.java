@@ -1,5 +1,4 @@
-package com.example.tfgfontanet.ui.errores;
-
+package com.example.tfgfontanet.ui.errores.excepciones;
 
 import com.example.tfgfontanet.common.Constantes;
 

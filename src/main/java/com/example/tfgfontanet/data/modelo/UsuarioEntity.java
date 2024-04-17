@@ -14,8 +14,8 @@ public class UsuarioEntity {
 
     @Id
     @Column(name = "userId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer userId;
 
     @Column(name = "username")
     private String username;

@@ -11,11 +11,11 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "profesionalHerramienta", schema = "samuelsanchez_tfg")
+@Table(name = "profesional_herramienta", schema = "samuelsanchez_tfg")
 public class ProfToolEntity {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 

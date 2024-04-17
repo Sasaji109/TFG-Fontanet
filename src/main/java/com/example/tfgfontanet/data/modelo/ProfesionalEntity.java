@@ -15,8 +15,8 @@ public class ProfesionalEntity {
 
     @Id
     @Column(name = "profesionalId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long profesionalId;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer profesionalId;
 
     @Column(name = "nombre")
     private String nombre;
@@ -40,7 +40,6 @@ public class ProfesionalEntity {
     private Integer valoracion;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @Column(name = "usuario")
     @JoinColumn(name = "profesionalId", referencedColumnName = "userId")
     private UsuarioEntity usuario;
 

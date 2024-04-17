@@ -14,8 +14,8 @@ public class ObjetoEntity {
 
     @Id
     @Column(name = "objetoId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long objetoId;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer objetoId;
 
     @Column(name = "nombre")
     private String nombre;

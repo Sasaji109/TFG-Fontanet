@@ -15,24 +15,30 @@ public class ContratoEntity {
 
     @Id
     @Column(name = "contratoId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long contratoId;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer contratoId;
 
+    @Column(name = "clienteId")
+    private Integer clienteId;
+
+    @Column(name = "profesionalId")
+    private Integer profesionalId;
+
+    @Column(name = "servicioId")
+    private Integer servicioId;
+/*
     @OneToOne(cascade = CascadeType.REMOVE)
-    @Column(name = "cliente")
     @JoinColumn(name = "contratoId", referencedColumnName = "clienteId")
     private ClienteEntity cliente;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @Column(name = "profesional")
     @JoinColumn(name = "contratoId", referencedColumnName = "profesionalId")
     private ProfesionalEntity profesional;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @Column(name = "servicio")
     @JoinColumn(name = "contratoId", referencedColumnName = "servicioId")
     private ServicioEntity servicio;
-
+*/
     @Column(name = "fechaInicio")
     private LocalDate fechaInicio;
 

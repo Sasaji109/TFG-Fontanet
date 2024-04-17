@@ -15,8 +15,8 @@ public class ClienteEntity {
 
     @Id
     @Column(name = "clienteId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clienteId;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer clienteId;
 
     @Column(name = "nombre")
     private String nombre;
@@ -28,8 +28,7 @@ public class ClienteEntity {
     private String numero;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @Column(name = "usuario")
-    @JoinColumn(name = "usuarioId", referencedColumnName = "userId")
+    @JoinColumn(name = "clienteId", referencedColumnName = "userId")
     private UsuarioEntity usuario;
 
     @OneToMany(mappedBy = "profesionalId", cascade = CascadeType.PERSIST, orphanRemoval = true)
