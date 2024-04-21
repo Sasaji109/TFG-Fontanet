@@ -9,14 +9,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "herramientas", schema = "samuelsanchez_tfg")
-public class HerramientaEntity {
+@Table(name = "materiales", schema = "samuelsanchez_tfg")
+public class MaterialEntity {
 
     @Id
-    @Column(name = "herramientaId")
+    @Column(name = "materialId")
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer herramientaId;
+    private Integer materialId;
 
     @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "precio")
+    private Double precio;
 }

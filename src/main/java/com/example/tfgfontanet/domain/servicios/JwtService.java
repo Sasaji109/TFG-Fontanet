@@ -44,10 +44,11 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-    }
+    } /*
 
     public Either<CustomError, String> generateToken(String username, int duration) {
         Either<CustomError, String> res;
+
         try {
             Usuario user = daoUsuarios.findByUsername(username);
             String token = Jwts.builder()
@@ -75,5 +76,5 @@ public class JwtService {
             either = Either.left(new CustomError("Constantes.ERROR_AL_RENOVAR_EL_TOKEN" + e.getMessage(), LocalDateTime.now()));
         }
         return either;
-    }
+    } */
 }

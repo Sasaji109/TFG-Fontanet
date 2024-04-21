@@ -1,12 +1,12 @@
 
-DELETE FROM profesional_herramienta;
+DELETE FROM factura_material;
 DELETE FROM contratos;
+DELETE FROM facturas;
 DELETE FROM favoritos;
 DELETE FROM clientes;
 DELETE FROM profesionales;
 DELETE FROM usuarios;
-DELETE FROM herramientas;
-DELETE FROM objetos;
+DELETE FROM materiales;
 DELETE FROM servicios;
 
 INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (1, 'juan123', 'juan123@example.com', 'juan123pass', false, 'CLIENTE');
@@ -29,9 +29,17 @@ INSERT INTO servicios (servicio_id, nombre, descripcion, tarifa_base) VALUES (1,
 INSERT INTO servicios (servicio_id, nombre, descripcion, tarifa_base) VALUES (2, 'Instalación Eléctrica', 'Instalación de sistemas eléctricos', 70.00);
 INSERT INTO servicios (servicio_id, nombre, descripcion, tarifa_base) VALUES (3, 'Construcción de Muebles', 'Construcción de muebles a medida', 100.00);
 
-INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (1, 1, 1, 1, '2024-04-15', '2024-04-20', 'En proceso');
-INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (2, 2, 2, 2, '2024-04-16', '2024-04-22', 'En proceso');
-INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (3, 3, 3, 3, '2024-04-17', '2024-04-25', 'En proceso');
+INSERT INTO materiales (material_id, nombre, descripcion, precio) VALUES (1, 'Mesa', 'Mesa de madera', 150.00);
+INSERT INTO materiales (material_id, nombre, descripcion, precio) VALUES (2, 'Silla', 'Silla de plástico', 30.00);
+INSERT INTO materiales (material_id, nombre, descripcion, precio) VALUES (3, 'Lámpara', 'Lámpara de pie', 80.00);
+
+INSERT INTO facturas (factura_id, cliente_id, profesional_id, servicio_id, precio, estado) VALUES (1, 1, 1, 1, 20.5, 'pendiente');
+INSERT INTO facturas (factura_id, cliente_id, profesional_id, servicio_id, precio, estado) VALUES (2, 2, 2, 2, 100.5, 'aceptado');
+INSERT INTO facturas (factura_id, cliente_id, profesional_id, servicio_id, precio, estado) VALUES (3, 3, 3, 3, 60.5, 'vigente');
+
+INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (1, 1, 1, 1, '2024-04-15', '2024-04-20', 'pendiente');
+INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (2, 2, 2, 2, '2024-04-16', '2024-04-22', 'pendiente');
+INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (3, 3, 3, 3, '2024-04-17', '2024-04-25', 'pagada');
 
 INSERT INTO favoritos (id, cliente_id, profesional_id) VALUES (1, 1, 1);
 INSERT INTO favoritos (id, cliente_id, profesional_id) VALUES (2, 2, 2);
@@ -40,14 +48,9 @@ INSERT INTO favoritos (id, cliente_id, profesional_id) VALUES (4, 1, 2);
 INSERT INTO favoritos (id, cliente_id, profesional_id) VALUES (5, 2, 3);
 INSERT INTO favoritos (id, cliente_id, profesional_id) VALUES (6, 3, 1);
 
-INSERT INTO herramientas (herramienta_id, nombre) VALUES (1, 'Martillo');
-INSERT INTO herramientas (herramienta_id, nombre) VALUES (2, 'Destornillador');
-INSERT INTO herramientas (herramienta_id, nombre) VALUES (3, 'Sierra');
-
-INSERT INTO objetos (objeto_id, nombre, descripcion, precio) VALUES (1, 'Mesa', 'Mesa de madera', 150.00);
-INSERT INTO objetos (objeto_id, nombre, descripcion, precio) VALUES (2, 'Silla', 'Silla de plástico', 30.00);
-INSERT INTO objetos (objeto_id, nombre, descripcion, precio) VALUES (3, 'Lámpara', 'Lámpara de pie', 80.00);
-
-INSERT INTO profesional_herramienta (id, profesional_id, herramienta_id, cantidad) VALUES (1, 1, 1, 4);
-INSERT INTO profesional_herramienta (id, profesional_id, herramienta_id, cantidad) VALUES (2, 2, 2, 2);
-INSERT INTO profesional_herramienta (id, profesional_id, herramienta_id, cantidad) VALUES (3, 3, 3, 3);
+INSERT INTO factura_material (id, factura_id, material_id, cantidad) VALUES (1, 1, 1, 4);
+INSERT INTO factura_material (id, factura_id, material_id, cantidad) VALUES (2, 2, 2, 2);
+INSERT INTO factura_material (id, factura_id, material_id, cantidad) VALUES (3, 3, 3, 3);
+INSERT INTO factura_material (id, factura_id, material_id, cantidad) VALUES (4, 1, 2, 1);
+INSERT INTO factura_material (id, factura_id, material_id, cantidad) VALUES (5, 2, 3, 6);
+INSERT INTO factura_material (id, factura_id, material_id, cantidad) VALUES (6, 3, 1, 9);

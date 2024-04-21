@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class RestAuth {
+public class RestAuth { /*
 
     private final AuthService service;
     private final JwtService jwtService;
@@ -28,5 +28,5 @@ public class RestAuth {
     @GetMapping("/refresh")
     public String refreshToken(@RequestParam("token") String token) {
         return jwtService.renovarAccessToken(token).get();
-    }
+    } */
 }

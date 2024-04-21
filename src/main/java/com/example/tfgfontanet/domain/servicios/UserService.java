@@ -15,7 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final DAOUsuarios dao;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder; /*
 
     public String addEmpleado(Usuario empleado) {
         try {
@@ -77,5 +77,5 @@ public class UserService {
         } catch (Exception e) {
             return Constantes.ADD_MOVIL_ERROR + e.getMessage();
         }
-    }
+    } */
 }

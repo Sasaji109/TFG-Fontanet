@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping(Constantes.EMPLEADOSPATH)
-public class RestEmpleados {
+public class RestEmpleados { /*
 
     private final UserService service;
 
@@ -27,5 +27,5 @@ public class RestEmpleados {
     @RolesAllowed({Constantes.ADMIN})
     public String addEmpleado(@RequestBody Usuario empleado) {
         return service.addEmpleado(empleado);
-    }
+    } */
 }

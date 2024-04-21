@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-public class EquiposController {
+public class EquiposController { /*
 
     private final EquiposService equiposService;
 
@@ -30,5 +30,5 @@ public class EquiposController {
     @MutationMapping
     public Integer addJugadorToEquipo(@Argument Jugador nuevoJugador) {
         return equiposService.addJugadorAEquipo(nuevoJugador);
-    }
+    } */
 }

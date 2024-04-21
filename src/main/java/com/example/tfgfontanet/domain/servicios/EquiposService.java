@@ -4,12 +4,11 @@ import com.example.tfgfontanet.data.repositorios.DAOEquipos;
 import com.example.tfgfontanet.domain.modelo.Equipo;
 import com.example.tfgfontanet.domain.modelo.Jugador;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EquiposService {
+public class EquiposService { /*
 
     private final DAOEquipos daoEquipos;
 
@@ -29,5 +28,5 @@ public class EquiposService {
 
     public Integer addJugadorAEquipo(Jugador nuevoJugador) {
         return daoEquipos.addJugadorAEquipo(nuevoJugador);
-    }
+    } */
 }

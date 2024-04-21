@@ -4,27 +4,25 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@NoArgsConstructor
+@Entity
 @Getter
 @Setter
-@ToString
-@Entity
-@Table(name = "profesional_herramienta", schema = "samuelsanchez_tfg")
-public class ProfToolEntity {
+@NoArgsConstructor
+@Table(name = "factura_material", schema = "samuelsanchez_tfg")
+public class FacturaMaterialEntity {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "profesionalId")
-    private Integer profesionalId;
+    @Column(name = "facturaId")
+    private Integer facturaId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "herramientaId")
-    private HerramientaEntity herramienta;
+    @JoinColumn(name = "materialId")
+    private MaterialEntity material;
 
     @Column(name = "cantidad")
     private Integer cantidad;

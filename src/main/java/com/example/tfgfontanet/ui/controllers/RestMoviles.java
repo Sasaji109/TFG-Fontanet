@@ -6,7 +6,6 @@ import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @Slf4j
@@ -14,7 +13,7 @@ import java.util.List;
 @RequestMapping(Constantes.MOVILESPATH)
 public class RestMoviles {
 
-    private final UserService service;
+    private final UserService service; /*
 
     @GetMapping()
     //@RolesAllowed({Constantes.ADMIN, Constantes.EMPLEADO})
@@ -38,5 +37,5 @@ public class RestMoviles {
     @RolesAllowed({Constantes.EMPLEADO})
     public String addMovil(@RequestBody Movil movil) {
         return service.addMovil(movil);
-    }
+    } */
 }

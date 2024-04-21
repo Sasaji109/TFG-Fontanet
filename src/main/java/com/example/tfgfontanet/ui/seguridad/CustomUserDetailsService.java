@@ -1,7 +1,7 @@
 package com.example.tfgfontanet.ui.seguridad;
 
-import com.example.exampsp2eva.dao.repositorios.DAOUsuarios;
-import com.example.exampsp2eva.domain.modelo.Usuario;
+import com.example.tfgfontanet.data.repositorios.DAOUsuarios;
+import com.example.tfgfontanet.domain.modelo.Usuario;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,14 +19,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+/*
         Usuario user = daoUsuarios.findByUsername(username);
 
         return User.builder()
                 .username(user.getNombre())
                 .password(user.getPassword())
                 .roles(user.getRole())
-                .build();
-
+                .build();*/
+        return null;
     }
 }

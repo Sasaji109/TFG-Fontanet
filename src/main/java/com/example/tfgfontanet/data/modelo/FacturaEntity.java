@@ -4,37 +4,37 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "contratos", schema = "samuelsanchez_tfg")
-public class ContratoEntity {
+@Table(name = "facturas", schema = "samuelsanchez_tfg")
+public class FacturaEntity {
 
     @Id
-    @Column(name = "contratoId")
+    @Column(name = "facturaId")
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contratoId;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "contratoId", referencedColumnName = "clienteId")
+    @JoinColumn(name = "facturaId", referencedColumnName = "clienteId")
     private ClienteEntity cliente;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "contratoId", referencedColumnName = "profesionalId")
+    @JoinColumn(name = "facturaId", referencedColumnName = "profesionalId")
     private ProfesionalEntity profesional;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "contratoId", referencedColumnName = "servicioId")
+    @JoinColumn(name = "facturaId", referencedColumnName = "servicioId")
     private ServicioEntity servicio;
 
-    @Column(name = "fechaInicio")
-    private LocalDate fechaInicio;
+    @OneToMany(mappedBy = "facturaId", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<FacturaMaterialEntity> materiales;
 
-    @Column(name = "fechaFin")
-    private LocalDate fechaFin;
+    @Column(name = "precio")
+    private Double precio;
 
     @Column(name = "estado")
     private String estado;

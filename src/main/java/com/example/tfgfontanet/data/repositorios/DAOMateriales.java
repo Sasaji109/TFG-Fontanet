@@ -3,5 +3,5 @@ package com.example.tfgfontanet.data.repositorios;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class DAOObjetos {
+public class DAOMateriales {
 }

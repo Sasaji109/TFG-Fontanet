@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class DAOEquipos {
+public class DAOEquipos { /*
 
     public List<Equipo> getAllEquipos() {
         return BD.equipos;
@@ -29,5 +29,5 @@ public class DAOEquipos {
             return 1;
         }
         return 0;
-    }
+    } */
 }
