@@ -17,13 +17,13 @@ INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUE
 INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (6, 'pedro7894', 'pedro7894@example.com', 'pedro7894pass', false, 'PROF');
 INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (7, 'juan1235', 'juan1235@example.com', 'juan1235pass', true, 'ADMIN');
 
-INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id) VALUES (1, 'Ana', 'García', '123456789', 1);
-INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id) VALUES (2, 'Juan', 'Martínez', '987654321', 2);
-INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id) VALUES (3, 'María', 'López', '456789123', 3);
+INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id_c) VALUES (1, 'Ana', 'García', '123456789', 1);
+INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id_c) VALUES (2, 'Juan', 'Martínez', '987654321', 2);
+INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id_c) VALUES (3, 'María', 'López', '456789123', 3);
 
-INSERT INTO profesionales (profesional_id, nombre, apellidos, numero, experiencia, oficio, disponibilidad, valoracion, user_id) VALUES (1, 'Carlos', 'Sánchez', '111222333', 5, 'Fontanero', 'Mañana', 4, 4);
-INSERT INTO profesionales (profesional_id, nombre, apellidos, numero, experiencia, oficio, disponibilidad, valoracion, user_id) VALUES (2, 'Laura', 'Díaz', '444555666', 8, 'Electricista', 'Tarde', 5, 5);
-INSERT INTO profesionales (profesional_id, nombre, apellidos, numero, experiencia, oficio, disponibilidad, valoracion, user_id) VALUES (3, 'Pedro', 'Gómez', '777888999', 10, 'Carpintero', 'Noche', 43, 6);
+INSERT INTO profesionales (profesional_id, nombre, apellidos, numero, experiencia, oficio, disponibilidad, valoracion, user_id_p) VALUES (1, 'Carlos', 'Sánchez', '111222333', 5, 'Fontanero', 'Mañana', 4, 4);
+INSERT INTO profesionales (profesional_id, nombre, apellidos, numero, experiencia, oficio, disponibilidad, valoracion, user_id_p) VALUES (2, 'Laura', 'Díaz', '444555666', 8, 'Electricista', 'Tarde', 5, 5);
+INSERT INTO profesionales (profesional_id, nombre, apellidos, numero, experiencia, oficio, disponibilidad, valoracion, user_id_p) VALUES (3, 'Pedro', 'Gómez', '777888999', 10, 'Carpintero', 'Noche', 43, 6);
 
 INSERT INTO servicios (servicio_id, nombre, descripcion, tarifa_base) VALUES (1, 'Reparación de Fontanería', 'Reparación de tuberías y grifos', 50.00);
 INSERT INTO servicios (servicio_id, nombre, descripcion, tarifa_base) VALUES (2, 'Instalación Eléctrica', 'Instalación de sistemas eléctricos', 70.00);
@@ -33,13 +33,13 @@ INSERT INTO materiales (material_id, nombre, descripcion, precio) VALUES (1, 'Me
 INSERT INTO materiales (material_id, nombre, descripcion, precio) VALUES (2, 'Silla', 'Silla de plástico', 30.00);
 INSERT INTO materiales (material_id, nombre, descripcion, precio) VALUES (3, 'Lámpara', 'Lámpara de pie', 80.00);
 
-INSERT INTO facturas (factura_id, cliente_id, profesional_id, servicio_id, precio, estado) VALUES (1, 1, 1, 1, 20.5, 'pendiente');
-INSERT INTO facturas (factura_id, cliente_id, profesional_id, servicio_id, precio, estado) VALUES (2, 2, 2, 2, 100.5, 'aceptado');
-INSERT INTO facturas (factura_id, cliente_id, profesional_id, servicio_id, precio, estado) VALUES (3, 3, 3, 3, 60.5, 'vigente');
+INSERT INTO facturas (factura_id, cliente_id_f, profesional_id_f, servicio_id_f, precio, estado) VALUES (1, 1, 1, 1, 20.5, 'pendiente');
+INSERT INTO facturas (factura_id, cliente_id_f, profesional_id_f, servicio_id_f, precio, estado) VALUES (2, 2, 2, 2, 100.5, 'aceptado');
+INSERT INTO facturas (factura_id, cliente_id_f, profesional_id_f, servicio_id_f, precio, estado) VALUES (3, 3, 3, 3, 60.5, 'vigente');
 
-INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (1, 1, 1, 1, '2024-04-15', '2024-04-20', 'pendiente');
-INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (2, 2, 2, 2, '2024-04-16', '2024-04-22', 'pendiente');
-INSERT INTO contratos (contrato_id, cliente_id, profesional_id, servicio_id, fecha_inicio, fecha_fin, estado) VALUES (3, 3, 3, 3, '2024-04-17', '2024-04-25', 'pagada');
+INSERT INTO contratos (contrato_id, cliente_id_c, profesional_id_c, servicio_id_c, fecha_inicio, fecha_fin, estado) VALUES (1, 1, 1, 1, '2024-04-15', '2024-04-20', 'pendiente');
+INSERT INTO contratos (contrato_id, cliente_id_c, profesional_id_c, servicio_id_c, fecha_inicio, fecha_fin, estado) VALUES (2, 2, 2, 2, '2024-04-16', '2024-04-22', 'pendiente');
+INSERT INTO contratos (contrato_id, cliente_id_c, profesional_id_c, servicio_id_c, fecha_inicio, fecha_fin, estado) VALUES (3, 3, 3, 3, '2024-04-17', '2024-04-25', 'pagada');
 
 INSERT INTO favoritos (id, cliente_id, profesional_id) VALUES (1, 1, 1);
 INSERT INTO favoritos (id, cliente_id, profesional_id) VALUES (2, 2, 2);

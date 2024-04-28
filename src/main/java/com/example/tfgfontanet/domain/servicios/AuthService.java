@@ -1,10 +1,6 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.domain.modelo.auth.AuthenticationRequest;
-import com.example.tfgfontanet.domain.modelo.auth.AuthenticationResponse;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 

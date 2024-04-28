@@ -15,7 +15,7 @@ public class ContratoEntity {
 
     @Id
     @Column(name = "contratoId")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contratoId;
 
     @OneToOne(cascade = CascadeType.REMOVE)

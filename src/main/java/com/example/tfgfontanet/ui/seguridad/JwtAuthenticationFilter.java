@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.ui.seguridad;
 
-import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.utiles.Constantes;
 import com.example.tfgfontanet.domain.servicios.JwtService;
 import com.example.tfgfontanet.ui.errores.excepciones.TokenException;
 import io.jsonwebtoken.Claims;
@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
-import static org.apache.logging.log4j.util.Strings.isEmpty;
 
 @Configuration
 @RequiredArgsConstructor

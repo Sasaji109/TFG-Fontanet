@@ -1,14 +1,9 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.data.repositorios.DAOUsuarios;
-import com.example.tfgfontanet.domain.modelo.Usuario;
-import com.example.tfgfontanet.ui.errores.excepciones.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

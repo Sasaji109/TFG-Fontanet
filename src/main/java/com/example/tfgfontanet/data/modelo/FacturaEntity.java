@@ -15,8 +15,8 @@ public class FacturaEntity {
 
     @Id
     @Column(name = "facturaId")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer contratoId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer facturaId;
 
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "facturaId", referencedColumnName = "clienteId")

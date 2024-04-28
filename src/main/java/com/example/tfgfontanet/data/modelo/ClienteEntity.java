@@ -15,7 +15,7 @@ public class ClienteEntity {
 
     @Id
     @Column(name = "clienteId")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer clienteId;
 
     @Column(name = "nombre")
@@ -29,7 +29,7 @@ public class ClienteEntity {
 
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "clienteId", referencedColumnName = "userId")
-    private UsuarioEntity usuario;
+    private UsuarioEntity usuarioClient;
 
     @OneToMany(mappedBy = "profesionalId", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ProfesionalEntity> profesionalesFavoritos;

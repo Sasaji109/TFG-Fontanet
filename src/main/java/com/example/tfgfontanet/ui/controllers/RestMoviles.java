@@ -1,8 +1,7 @@
 package com.example.tfgfontanet.ui.controllers;
 
-import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.utiles.Constantes;
 import com.example.tfgfontanet.domain.servicios.UserService;
-import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.ui.config;
 
-import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.utiles.Constantes;
 import com.example.tfgfontanet.ui.seguridad.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

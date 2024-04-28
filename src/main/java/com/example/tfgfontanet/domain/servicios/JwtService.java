@@ -1,21 +1,14 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.utiles.Constantes;
 import com.example.tfgfontanet.data.repositorios.DAOUsuarios;
-import com.example.tfgfontanet.domain.modelo.Usuario;
-import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.ui.errores.excepciones.PrivateKeyException;
-import com.example.tfgfontanet.ui.errores.excepciones.TokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.vavr.control.Either;
 import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.security.Key;
 import java.security.KeyStore;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 @Service
 public class JwtService {

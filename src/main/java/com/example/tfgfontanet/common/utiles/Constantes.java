@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.common;
+package com.example.tfgfontanet.common.utiles;
 
 public class Constantes {
 
@@ -39,6 +39,11 @@ public class Constantes {
     public static final int KEYSIZE = 2048;
     public static final int DAYS_TO_ADD = 365;
     public static final int VAL = 1;
+
+    //Mongo Configuration
+    public static final String DATABASE_HOST = "mongodb://informatica.iesquevedo.es:";
+    public static final String DATABASE_PORT = "2323";
+    public static final String DATABASE_NAME = "samuelsanchez_tfg";
 
 
     //Paths
