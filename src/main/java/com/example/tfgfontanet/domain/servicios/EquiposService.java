@@ -1,19 +1,14 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.data.repositorios.DAOEquipos;
-import com.example.tfgfontanet.domain.modelo.Equipo;
-import com.example.tfgfontanet.domain.modelo.Jugador;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EquiposService { /*
 
-    private final DAOEquipos daoEquipos;
+    private final DAOEquiposImpl daoEquipos;
 
 
-    public EquiposService(DAOEquipos daoEquipos) {
+    public EquiposService(DAOEquiposImpl daoEquipos) {
         this.daoEquipos = daoEquipos;
     }
 

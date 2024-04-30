@@ -19,10 +19,10 @@ public class FavoritosEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "clienteId")
+    @Column(name = "cliente_id")
     private Integer clienteId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profesionalId")
+    @JoinColumn(name = "profesional_id")
     private ProfesionalEntity profesional;
 }

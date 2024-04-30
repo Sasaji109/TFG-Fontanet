@@ -1,7 +1,7 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.data.repositorios.DAOUsuarios;
+import com.example.tfgfontanet.data.dao.DAOUsuarios;
 import com.example.tfgfontanet.ui.errores.excepciones.PrivateKeyException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -43,7 +43,7 @@ public class JwtService {
         Either<CustomError, String> res;
 
         try {
-            Usuario user = daoUsuarios.findByUsername(username);
+            Usuario user = daoUsuariosImpl.findByUsername(username);
             String token = Jwts.builder()
                     .setSubject(user.getNombre())
                     .setExpiration(Date.from(LocalDateTime.now().plusSeconds(duration).atZone(ZoneId.systemDefault()).toInstant()))

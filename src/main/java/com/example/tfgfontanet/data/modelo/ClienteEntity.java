@@ -4,17 +4,19 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @Table(name = "clientes", schema = "samuelsanchez_tfg")
 public class ClienteEntity {
 
     @Id
-    @Column(name = "clienteId")
+    @Column(name = "cliente_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer clienteId;
 
@@ -28,9 +30,9 @@ public class ClienteEntity {
     private String numero;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "clienteId", referencedColumnName = "userId")
+    @JoinColumn(name = "user_id_c", referencedColumnName = "user_id")
     private UsuarioEntity usuarioClient;
 
-    @OneToMany(mappedBy = "profesionalId", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ProfesionalEntity> profesionalesFavoritos;
+    @OneToMany(mappedBy = "clienteId", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<FavoritosEntity> profesionalesFavoritos;
 }

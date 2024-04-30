@@ -1,13 +1,9 @@
-package com.example.tfgfontanet.data.repositorios;
+package com.example.tfgfontanet.data.dao.implementaciones;
 
-import com.example.tfgfontanet.domain.modelo.Equipo;
-import com.example.tfgfontanet.domain.modelo.Jugador;
 import org.springframework.stereotype.Repository;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
-public class DAOEquipos { /*
+public class DAOEquiposImpl { /*
 
     public List<Equipo> getAllEquipos() {
         return BD.equipos;

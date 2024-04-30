@@ -4,16 +4,18 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @Table(name = "profesionales", schema = "samuelsanchez_tfg")
 public class ProfesionalEntity {
 
     @Id
-    @Column(name = "profesionalId")
+    @Column(name = "profesional_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer profesionalId;
 
@@ -39,6 +41,6 @@ public class ProfesionalEntity {
     private Integer valoracion;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "profesionalId", referencedColumnName = "userId")
+    @JoinColumn(name = "user_id_p", referencedColumnName = "user_id")
     private UsuarioEntity usuarioProf;
 }

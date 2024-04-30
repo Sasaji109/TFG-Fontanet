@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.data.repositorios.DAOUsuarios;
+import com.example.tfgfontanet.data.dao.DAOUsuarios;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,6 @@
 package com.example.tfgfontanet.ui.seguridad;
 
-import com.example.tfgfontanet.data.repositorios.DAOUsuarios;
-import com.example.tfgfontanet.domain.modelo.Usuario;
-import org.springframework.security.core.userdetails.User;
+import com.example.tfgfontanet.data.dao.implementaciones.DAOUsuariosImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,16 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final DAOUsuarios daoUsuarios;
+    private final DAOUsuariosImpl daoUsuariosImpl;
 
-    public CustomUserDetailsService(DAOUsuarios daoUsuarios) {
-        this.daoUsuarios = daoUsuarios;
+    public CustomUserDetailsService(DAOUsuariosImpl daoUsuariosImpl) {
+        this.daoUsuariosImpl = daoUsuariosImpl;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 /*
-        Usuario user = daoUsuarios.findByUsername(username);
+        Usuario user = daoUsuariosImpl.findByUsername(username);
 
         return User.builder()
                 .username(user.getNombre())
