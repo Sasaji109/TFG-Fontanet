@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoDBConfig {
 
+
     public static MongoClient createMongoClient() {
         String connectionString = Constantes.DATABASE_HOST + Constantes.DATABASE_PORT;
         return MongoClients.create(connectionString);

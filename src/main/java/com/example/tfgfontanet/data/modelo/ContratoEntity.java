@@ -1,42 +1,39 @@
 package com.example.tfgfontanet.data.modelo;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
+import lombok.*;
 import java.time.LocalDate;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Entity
 @Table(name = "contratos", schema = "samuelsanchez_tfg")
 public class ContratoEntity {
 
     @Id
-    @Column(name = "contratoId")
+    @Column(name = "contrato_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contratoId;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "contratoId", referencedColumnName = "clienteId")
+    @JoinColumn(name = "cliente_id_c", referencedColumnName = "cliente_id")
     private ClienteEntity cliente;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "contratoId", referencedColumnName = "profesionalId")
+    @JoinColumn(name = "profesional_id_c", referencedColumnName = "profesional_id")
     private ProfesionalEntity profesional;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "contratoId", referencedColumnName = "servicioId")
+    @JoinColumn(name = "servicio_id_c", referencedColumnName = "servicio_id")
     private ServicioEntity servicio;
 
-    @Column(name = "fechaInicio")
+    @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
-    @Column(name = "fechaFin")
+    @Column(name = "fecha_fin")
     private LocalDate fechaFin;
 
     @Column(name = "estado")

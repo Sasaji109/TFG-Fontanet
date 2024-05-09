@@ -42,9 +42,9 @@ public class Constantes {
 
 
     //Mongo Configuration
-    public static final String DATABASE_HOST = "mongodb://root:root@localhost:";
-    public static final String DATABASE_PORT = "27017";
-    public static final String DATABASE_NAME = "restaurantDB";
+    public static final String DATABASE_HOST = "mongodb://informatica.iesquevedo.es:";
+    public static final int DATABASE_PORT = 2323;
+    public static final String DATABASE_NAME = "samuelsanchez_tfg";
 
 
     //Alertas & Errores DAO

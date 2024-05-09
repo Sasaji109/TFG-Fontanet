@@ -1,7 +1,7 @@
 package com.example.tfgfontanet.ui.seguridad;
 
 import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.domain.servicios.JwtService;
+import com.example.tfgfontanet.domain.servicios.auth.JwtService;
 import com.example.tfgfontanet.ui.errores.excepciones.TokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

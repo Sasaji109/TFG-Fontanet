@@ -1,16 +1,14 @@
 package com.example.tfgfontanet.data.modelo;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Entity
 @Table(name = "profesionales", schema = "samuelsanchez_tfg")
 public class ProfesionalEntity {
 
@@ -42,5 +40,5 @@ public class ProfesionalEntity {
 
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id_p", referencedColumnName = "user_id")
-    private UsuarioEntity usuarioProf;
+    private UsuarioEntity usuario;
 }

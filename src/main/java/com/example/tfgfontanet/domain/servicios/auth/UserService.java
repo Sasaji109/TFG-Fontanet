@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.domain.servicios;
+package com.example.tfgfontanet.domain.servicios.auth;
 
 import com.example.tfgfontanet.data.dao.DAOUsuarios;
 import lombok.RequiredArgsConstructor;

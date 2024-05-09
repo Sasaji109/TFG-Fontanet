@@ -1,21 +1,19 @@
 package com.example.tfgfontanet.data.modelo;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Entity
 @Table(name = "materiales", schema = "samuelsanchez_tfg")
 public class MaterialEntity {
 
     @Id
-    @Column(name = "materialId")
+    @Column(name = "material_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer materialId;
 

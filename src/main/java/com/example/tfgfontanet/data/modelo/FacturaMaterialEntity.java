@@ -1,16 +1,14 @@
 package com.example.tfgfontanet.data.modelo;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Entity
 @Table(name = "factura_material", schema = "samuelsanchez_tfg")
 public class FacturaMaterialEntity {
 
@@ -19,11 +17,11 @@ public class FacturaMaterialEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "facturaId")
+    @Column(name = "factura_id")
     private Integer facturaId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "materialId")
+    @JoinColumn(name = "material_id")
     private MaterialEntity material;
 
     @Column(name = "cantidad")

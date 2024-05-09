@@ -1,36 +1,33 @@
 package com.example.tfgfontanet.data.modelo;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
+import lombok.*;
 import java.util.List;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Entity
 @Table(name = "facturas", schema = "samuelsanchez_tfg")
 public class FacturaEntity {
 
     @Id
-    @Column(name = "facturaId")
+    @Column(name = "factura_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer facturaId;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "facturaId", referencedColumnName = "clienteId")
+    @JoinColumn(name = "cliente_id_f", referencedColumnName = "cliente_id")
     private ClienteEntity cliente;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "facturaId", referencedColumnName = "profesionalId")
+    @JoinColumn(name = "profesional_id_f", referencedColumnName = "profesional_id")
     private ProfesionalEntity profesional;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "facturaId", referencedColumnName = "servicioId")
+    @JoinColumn(name = "servicio_id_f", referencedColumnName = "servicio_id")
     private ServicioEntity servicio;
 
     @OneToMany(mappedBy = "facturaId", cascade = CascadeType.PERSIST, orphanRemoval = true)

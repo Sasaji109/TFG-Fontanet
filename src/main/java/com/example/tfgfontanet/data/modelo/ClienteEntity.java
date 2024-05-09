@@ -1,17 +1,15 @@
 package com.example.tfgfontanet.data.modelo;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import java.util.List;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Entity
 @Table(name = "clientes", schema = "samuelsanchez_tfg")
 public class ClienteEntity {
 
@@ -29,10 +27,18 @@ public class ClienteEntity {
     @Column(name = "numero")
     private String numero;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
     @JoinColumn(name = "user_id_c", referencedColumnName = "user_id")
-    private UsuarioEntity usuarioClient;
+    private UsuarioEntity usuario;
 
     @OneToMany(mappedBy = "clienteId", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FavoritosEntity> profesionalesFavoritos;
+
+    public ClienteEntity(Integer clienteId, String nombre, String apellidos, String numero, UsuarioEntity usuario) {
+        this.clienteId = clienteId;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.numero = numero;
+        this.usuario = usuario;
+    }
 }
