@@ -1,0 +1,9 @@
+# @name loginAdmin
+GET http://localhost:8080/login?
+    username=admin&
+    password=1234
+
+###
+# @name getEmpleados
+GET http://localhost:8080/api/empleados
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI2MjUwNCwidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.fD7A-Gb4-AxjzuYZ1c3jfiPeql_6wnh2GFuMrPprhs3XdfEbhYeQqkYLVfZc4O6oVeqRuNLDofFZjUg5Xz7sJl5sb5vhjU81bksVGetPwIfNB59032L_oXDcbcmYiAAmifEEeVZnkiVYlSQjzagFHP_6OkKFeockkQfuwpa2ZtESOn4AFFwEqB5JXD3nXBuQhIxFTwDXRYxlJAIaeG7Du9XpIp_UecbT1_CukDMoTZGXV3FKgbLvG-rX_uJLzscG-PG19LkI5n5XdaHkEx1YemHZ4gx1TMWFxZwe9BPMgr6b7o_PPPG7yr7WkGN67Azlh8zAdEZ6lJ5uhTc5I2iCKA

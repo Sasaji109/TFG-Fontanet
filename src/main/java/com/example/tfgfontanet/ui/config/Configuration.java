@@ -1,6 +1,7 @@
 package com.example.tfgfontanet.ui.config;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
+import com.example.tfgfontanet.data.DAOUsuariosOr;
 import com.example.tfgfontanet.data.dao.implementaciones.DAOUsuariosImpl;
 import com.example.tfgfontanet.ui.seguridad.CustomUserDetailsService;
 import lombok.Data;
@@ -38,8 +39,8 @@ public class Configuration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(DAOUsuariosImpl daoUsuariosImpl) {
-        return new CustomUserDetailsService(daoUsuariosImpl);
+    public UserDetailsService userDetailsService(DAOUsuariosOr daoUsuariosOr) {
+        return new CustomUserDetailsService(daoUsuariosOr);
     }
 
     @Bean

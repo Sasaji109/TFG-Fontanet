@@ -16,10 +16,12 @@ public class Constantes {
     public static final String ADMIN = "ADMIN";
     public static final String PROFESIONAL = "PROF";
     public static final String CLIENTE = "CLIENT";
+    public static final String EMPLEADO = "EMPLEADO";
 
 
     //Tokens
-    public static final String BEARER = "Bearer ";
+    public static final String BEARER = "Bearer";
+    public static final String BEARERHEADER = "Bearer ";
     public static final int ACCESS_TOKEN_TIME = 4200;
     public static final int ACCESS_TOKEN_EXPIRATION_TIME_SECONDS = 4800;
     public static final int REFRESH_TOKEN_TIME = 4200;

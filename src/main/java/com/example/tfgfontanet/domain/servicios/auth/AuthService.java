@@ -1,6 +1,10 @@
 package com.example.tfgfontanet.domain.servicios.auth;
 
+import com.example.tfgfontanet.common.utiles.Constantes;
+import com.example.tfgfontanet.domain.modelo.auth.AuthenticationRequest;
+import com.example.tfgfontanet.domain.modelo.auth.AuthenticationResponse;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +20,7 @@ public class AuthService {
         this.userDetailsService = userDetailsService;
         this.jwtService = jwtService;
     }
-/*
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(), request.password())
@@ -28,5 +32,5 @@ public class AuthService {
         var refreshToken = jwtService.generateToken(user.getUsername(), Constantes.REFRESH_TOKEN_TIME).get();
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken).refreshToken(refreshToken).build();
-    } */
+    }
 }

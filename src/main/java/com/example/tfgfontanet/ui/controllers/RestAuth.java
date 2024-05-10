@@ -1,13 +1,20 @@
 package com.example.tfgfontanet.ui.controllers;
 
+import com.example.tfgfontanet.common.utiles.Constantes;
+import com.example.tfgfontanet.domain.modelo.auth.AuthenticationRequest;
+import com.example.tfgfontanet.domain.modelo.auth.AuthenticationResponse;
+import com.example.tfgfontanet.domain.servicios.auth.AuthService;
+import com.example.tfgfontanet.domain.servicios.auth.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class RestAuth { /*
+public class RestAuth {
 
     private final AuthService service;
     private final JwtService jwtService;
@@ -21,5 +28,5 @@ public class RestAuth { /*
     @GetMapping("/refresh")
     public String refreshToken(@RequestParam("token") String token) {
         return jwtService.renovarAccessToken(token).get();
-    } */
+    }
 }

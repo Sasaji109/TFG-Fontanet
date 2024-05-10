@@ -1,7 +1,6 @@
 package com.example.tfgfontanet.ui.errores;
 
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Builder

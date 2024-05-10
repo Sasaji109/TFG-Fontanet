@@ -4,7 +4,6 @@
              version="2.0">
 
     <persistence-unit name="unit3.hibernate">
-
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://dam2.mysql.iesquevedo.es:3335/samuelsanchez_tfg"/>

@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
+import static org.apache.logging.log4j.util.Strings.isEmpty;
 
 @Configuration
 @RequiredArgsConstructor
@@ -31,11 +32,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-/*
+
         if (isEmpty(header) || !header.startsWith(Constantes.BEARERHEADER)) {
             filterChain.doFilter(request, response);
             return;
-        } */
+        }
 
         String[] values = header.split(Constantes.SPACE);
         if (values[0].equalsIgnoreCase(Constantes.BEARER) && values.length > 1) {
