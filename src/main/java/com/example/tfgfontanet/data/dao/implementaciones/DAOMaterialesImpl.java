@@ -10,9 +10,11 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceException;
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class DAOMaterialesImpl implements DAOMateriales {
 
     private final JPAUtil jpaUtil;

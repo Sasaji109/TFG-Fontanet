@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.ui.main.pdfs;
+package com.example.tfgfontanet.ui.mainPDF;
 
 import com.example.tfgfontanet.common.utiles.pdfGenerator.PDFContratoGenerator;
 import com.example.tfgfontanet.data.modelo.ClienteEntity;

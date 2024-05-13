@@ -5,15 +5,15 @@ import com.example.tfgfontanet.data.dao.DAOServicios;
 import com.example.tfgfontanet.data.modelo.ServicioEntity;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ServiciosService {
-    private final DAOServicios dao;
 
-    @Inject
-    public ServiciosService(DAOServicios dao) {
-        this.dao = dao;
-    }
+    private final DAOServicios dao;
 
     public Either<ErrorC, List<ServicioEntity>> getAll() {
         return dao.getAll();

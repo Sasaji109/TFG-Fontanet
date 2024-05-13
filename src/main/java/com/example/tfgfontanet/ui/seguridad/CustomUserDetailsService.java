@@ -1,7 +1,10 @@
 package com.example.tfgfontanet.ui.seguridad;
 
-import com.example.tfgfontanet.data.DAOUsuariosOr;
+import com.example.tfgfontanet.data.dao.DAOUsuario;
+import com.example.tfgfontanet.data.modelo.UsuarioEntity;
+import com.example.tfgfontanet.domain.mapper.UsuarioEntityMapper;
 import com.example.tfgfontanet.domain.modelo.Usuario;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,21 +12,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final DAOUsuariosOr dao;
-
-    public CustomUserDetailsService(DAOUsuariosOr dao) {
-        this.dao = dao;
-    }
+    private final DAOUsuario daoUsuarios;
+    private final UsuarioEntityMapper usuarioEntityMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Usuario user = dao.findByUsername(username);
+        UsuarioEntity usuario = daoUsuarios.findByUsername(username);
+        Usuario user = usuarioEntityMapper.toUsuario(usuario);
 
         return User.builder()
-                .username(user.getNombre())
+                .username(user.getUsername())
                 .password(user.getPassword())
                 .roles(user.getRole())
                 .build();

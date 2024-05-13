@@ -9,13 +9,13 @@ DELETE FROM usuarios;
 DELETE FROM materiales;
 DELETE FROM servicios;
 
-INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (1, 'juan123', 'juan123@example.com', 'juan123pass', false, 'CLIENTE');
-INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (2, 'maria456', 'maria456@example.com', 'maria456pass', false, 'CLIENTE');
-INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (3, 'pedro789', 'pedro789@example.com', 'pedro789pass', false, 'CLIENTE');
-INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (4, 'juan1234', 'juan1234@example.com', 'juan1234pass', false, 'PROF');
-INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (5, 'maria4564', 'maria4564@example.com', 'maria4564pass', false, 'PROF');
-INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (6, 'pedro7894', 'pedro7894@example.com', 'pedro7894pass', false, 'PROF');
-INSERT INTO usuarios (user_id, username, correo, password, activado, role) VALUES (7, 'juan1235', 'juan1235@example.com', 'juan1235pass', true, 'ADMIN');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (1, 'juan123', 'juan123@example.com', 'juan123pass', false, null, null, 'CLIENTE');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (2, 'maria456', 'maria456@example.com', 'maria456pass', false, null, null, 'CLIENTE');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (3, 'pedro789', 'pedro789@example.com', 'pedro789pass', false, null, null, 'CLIENTE');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (4, 'juan1234', 'juan1234@example.com', 'juan1234pass', false, null, null, 'PROF');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (5, 'maria4564', 'maria4564@example.com', 'maria4564pass', false, null, null, 'PROF');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (6, 'pedro7894', 'pedro7894@example.com', 'pedro7894pass', false, null, null, 'PROF');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (7, 'sasaji', 'sasaji2004@gmial.com', '$2a$10$qFvk70IVphAh/q8O4.YCwOAiogSyK8ZLgwdbCX4pwI2bcBsKMfaCe', true, null, null, 'ADMIN');
 
 INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id_c) VALUES (1, 'Ana', 'García', '123456789', 1);
 INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id_c) VALUES (2, 'Juan', 'Martínez', '987654321', 2);

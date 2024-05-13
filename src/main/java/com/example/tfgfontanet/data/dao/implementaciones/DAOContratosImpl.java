@@ -11,9 +11,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class DAOContratosImpl implements DAOContratos {
 
     private final JPAUtil jpaUtil;

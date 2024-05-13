@@ -9,5 +9,4 @@ public class TfgFontanetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TfgFontanetApplication.class, args);
 	}
-
 }

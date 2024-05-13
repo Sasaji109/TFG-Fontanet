@@ -9,9 +9,11 @@ import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class DAOServiciosImpl implements DAOServicios {
 
     private final JPAUtil jpaUtil;

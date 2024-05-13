@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.ui.config;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
-import com.example.tfgfontanet.data.DAOUsuariosOr;
-import com.example.tfgfontanet.data.dao.implementaciones.DAOUsuariosImpl;
+import com.example.tfgfontanet.data.dao.DAOUsuario;
+import com.example.tfgfontanet.domain.mapper.UsuarioEntityMapper;
 import com.example.tfgfontanet.ui.seguridad.CustomUserDetailsService;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
@@ -39,8 +39,8 @@ public class Configuration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(DAOUsuariosOr daoUsuariosOr) {
-        return new CustomUserDetailsService(daoUsuariosOr);
+    public UserDetailsService userDetailsService(DAOUsuario daoUsuarios, UsuarioEntityMapper usuarioEntityMapper) {
+        return new CustomUserDetailsService(daoUsuarios, usuarioEntityMapper);
     }
 
     @Bean

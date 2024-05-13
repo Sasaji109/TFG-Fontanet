@@ -10,9 +10,11 @@ import com.example.tfgfontanet.data.modelo.ProfesionalEntity;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import jakarta.persistence.*;
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class DAOFavoritosImpl implements DAOFavoritos {
 
     private final JPAUtil jpaUtil;

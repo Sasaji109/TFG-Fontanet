@@ -1,9 +1,66 @@
 # @name loginAdmin
 GET http://localhost:8080/login?
-    username=admin&
+    username=sasaji&
     password=1234
 
 ###
-# @name getEmpleados
-GET http://localhost:8080/api/empleados
-Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI2MjUwNCwidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.fD7A-Gb4-AxjzuYZ1c3jfiPeql_6wnh2GFuMrPprhs3XdfEbhYeQqkYLVfZc4O6oVeqRuNLDofFZjUg5Xz7sJl5sb5vhjU81bksVGetPwIfNB59032L_oXDcbcmYiAAmifEEeVZnkiVYlSQjzagFHP_6OkKFeockkQfuwpa2ZtESOn4AFFwEqB5JXD3nXBuQhIxFTwDXRYxlJAIaeG7Du9XpIp_UecbT1_CukDMoTZGXV3FKgbLvG-rX_uJLzscG-PG19LkI5n5XdaHkEx1YemHZ4gx1TMWFxZwe9BPMgr6b7o_PPPG7yr7WkGN67Azlh8zAdEZ6lJ5uhTc5I2iCKA
+# @name loginCliente
+GET http://localhost:8080/login?
+    username=lucas90&
+    password=2dam
+
+###
+# @name loginProfesional
+GET http://localhost:8080/login?
+    username=fernando23&
+    password=2dam
+
+###
+# @name registroCliente
+POST http://localhost:8080/registro/cliente
+Content-Type: application/json
+
+{
+  "clienteId": 0,
+  "nombre": "Lucas",
+  "apellidos": "Ramirez Hernandez",
+  "numero": "633928272",
+  "usuario": {
+    "userId": 0,
+    "username": "lucas90",
+    "correo": "lucas90@example.com",
+    "password": "2dam",
+    "activado": false,
+    "fechaEnvio": null,
+    "codigoActivacion": "",
+    "role": "CLIENTE"
+  }
+}
+
+###
+# @name registroProfesional
+POST http://localhost:8080/registro/profesional
+Content-Type: application/json
+
+{
+  "profesionalId": 0,
+  "nombre": "Fernando",
+  "apellidos": "Montoya Gutierrez",
+  "numero": "622937362",
+  "experiencia": 15,
+  "oficio": "Pintor",
+  "disponibilidad": "Mañana",
+  "valoracion": 3,
+  "usuario": {
+    "userId": 0,
+    "username": "fernando23",
+    "correo": "fernando23@example.com",
+    "password": "2dam",
+    "activado": false,
+    "fechaEnvio": null,
+    "codigoActivacion": "",
+    "role": "PROF"
+  }
+}
+
+

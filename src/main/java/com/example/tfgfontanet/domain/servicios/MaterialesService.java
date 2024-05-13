@@ -4,16 +4,15 @@ import com.example.tfgfontanet.common.ErrorC;
 import com.example.tfgfontanet.data.dao.DAOMateriales;
 import com.example.tfgfontanet.data.modelo.MaterialEntity;
 import io.vavr.control.Either;
-import jakarta.inject.Inject;
-
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import java.util.List;
-public class MaterialesService {
-    private final DAOMateriales dao;
 
-    @Inject
-    public MaterialesService(DAOMateriales dao) {
-        this.dao = dao;
-    }
+@Service
+@RequiredArgsConstructor
+public class MaterialesService {
+
+    private final DAOMateriales dao;
 
     public Either<ErrorC, List<MaterialEntity>> getAll() {
         return dao.getAll();

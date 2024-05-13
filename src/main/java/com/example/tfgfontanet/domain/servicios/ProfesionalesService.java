@@ -1,19 +1,26 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.utiles.Constantes;
 import com.example.tfgfontanet.data.dao.DAOProfesionales;
 import com.example.tfgfontanet.data.modelo.ProfesionalEntity;
+import com.example.tfgfontanet.domain.mapper.ProfesionalEntityMapper;
+import com.example.tfgfontanet.domain.modelo.Profesional;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import io.vavr.control.Either;
-import jakarta.inject.Inject;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ProfesionalesService {
-    private final DAOProfesionales dao;
 
-    @Inject
-    public ProfesionalesService(DAOProfesionales dao) {
-        this.dao = dao;
-    }
+    private final DAOProfesionales dao;
+    private final ProfesionalEntityMapper profesionalEntityMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public Either<ErrorC, List<ProfesionalEntity>> getAll() {
         return dao.getAll();
@@ -39,8 +46,20 @@ public class ProfesionalesService {
         return dao.get(id);
     }
 
-    public Either<ErrorC, Integer> add(ProfesionalEntity profesional) {
-        return dao.add(profesional);
+    public Either<CustomError, Integer> registroProfesional(Profesional profesional) {
+         Either<CustomError, Integer> either;
+
+        try {
+            ProfesionalEntity profesionalEntity = profesionalEntityMapper.toProfesionalEntity(profesional);
+            profesionalEntity.getUsuario().setFechaEnvio(LocalDateTime.now());
+            profesionalEntity.getUsuario().setPassword(passwordEncoder.encode(profesionalEntity.getUsuario().getPassword()));
+            dao.add(profesionalEntity);
+            either = Either.right(1);
+        } catch (Exception e) {
+            either = Either.left(new CustomError(Constantes.ERROR_REGISTRO, LocalDateTime.now()));
+        }
+
+        return either;
     }
 
     public Either<ErrorC, Integer> update(ProfesionalEntity profesional) {

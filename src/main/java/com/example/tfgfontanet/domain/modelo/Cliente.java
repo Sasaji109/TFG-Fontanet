@@ -9,7 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Jugador {
+public class Cliente {
+    private Integer clienteId;
     private String nombre;
-    private Integer equipoId;
+    private String apellidos;
+    private String numero;
+    private Usuario usuario;
 }
+

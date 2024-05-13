@@ -11,9 +11,11 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceException;
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class DAOProfesionalesImpl implements DAOProfesionales {
 
     private final JPAUtil jpaUtil;
@@ -134,24 +136,24 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
     public Either<ErrorC, Integer> add(ProfesionalEntity profesional) {
         Either<ErrorC, Integer> either;
         em = jpaUtil.getEntityManager();
-        EntityTransaction entityTransaction = em.getTransaction();
+        EntityTransaction tx = em.getTransaction();
 
         try {
-            entityTransaction.begin();
+            tx.begin();
 
             UsuarioEntity usuario = profesional.getUsuario();
-            em.persist(usuario);
+            usuario = em.merge(usuario);
 
             ProfesionalEntity profesional1 = new ProfesionalEntity(profesional.getProfesionalId(), profesional.getNombre(), profesional.getApellidos(),
-                    profesional.getNumero(), profesional.getExperiencia(), profesional.getDisponibilidad(), profesional.getOficio(), profesional.getValoracion(), profesional.getUsuario());
-            em.persist(profesional1);
-            entityTransaction.commit();
+                    profesional.getNumero(), profesional.getExperiencia(), profesional.getDisponibilidad(), profesional.getOficio(), profesional.getValoracion(), usuario);
+            em.merge(profesional1);
+            tx.commit();
 
             int rowsAffected = 1;
             either = Either.right(rowsAffected);
         }
         catch (PersistenceException e) {
-            if (entityTransaction.isActive()) entityTransaction.rollback();
+            if (tx.isActive()) tx.rollback();
             either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();

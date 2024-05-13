@@ -1,7 +1,9 @@
-package com.example.tfgfontanet.domain.servicios.auth;
+package com.example.tfgfontanet.domain.auth;
 
 import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.data.DAOUsuariosOr;
+import com.example.tfgfontanet.data.dao.DAOUsuario;
+import com.example.tfgfontanet.data.modelo.UsuarioEntity;
+import com.example.tfgfontanet.domain.mapper.UsuarioEntityMapper;
 import com.example.tfgfontanet.domain.modelo.Usuario;
 import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.ui.errores.excepciones.PrivateKeyException;
@@ -9,6 +11,7 @@ import com.example.tfgfontanet.ui.errores.excepciones.TokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.vavr.control.Either;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.security.Key;
@@ -18,12 +21,11 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
-    private final DAOUsuariosOr daoUsuarios;
 
-    public JwtService(DAOUsuariosOr daoUsuarios) {
-        this.daoUsuarios = daoUsuarios;
-    }
+    private final DAOUsuario daoUsuarios;
+    private final UsuarioEntityMapper usuarioEntityMapper;
 
     private Key clavePrivadaKeyStore() {
         String passwordString = Constantes.KEYSTORE_PASSWORD;
@@ -48,13 +50,13 @@ public class JwtService {
 
     public Either<CustomError, String> generateToken(String username, int duration) {
         Either<CustomError, String> res;
-
         try {
-            Usuario user = daoUsuarios.findByUsername(username);
+            UsuarioEntity usuarioEntity = daoUsuarios.findByUsername(username);
+            Usuario user = usuarioEntityMapper.toUsuario(usuarioEntity);
             String token = Jwts.builder()
-                    .setSubject(user.getNombre())
+                    .setSubject(user.getUsername())
                     .setExpiration(Date.from(LocalDateTime.now().plusSeconds(duration).atZone(ZoneId.systemDefault()).toInstant()))
-                    .claim(Constantes.USER, user.getNombre())
+                    .claim(Constantes.USER, user.getUsername())
                     .claim(Constantes.ROLE, user.getRole())
                     .signWith(clavePrivadaKeyStore())
                     .compact();

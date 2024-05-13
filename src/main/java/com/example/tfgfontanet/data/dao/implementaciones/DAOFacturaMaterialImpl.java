@@ -12,9 +12,10 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceException;
-
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 
+@Repository
 public class DAOFacturaMaterialImpl implements DAOFacturaMaterial {
 
     private final JPAUtil jpaUtil;

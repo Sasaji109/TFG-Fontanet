@@ -5,16 +5,14 @@ import com.example.tfgfontanet.data.dao.DAOValoraciones;
 import com.example.tfgfontanet.data.modelo.ProfesionalMongo;
 import com.example.tfgfontanet.data.modelo.ValoracionMongo;
 import io.vavr.control.Either;
-import jakarta.inject.Inject;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class ValoracionesService {
 
     private final DAOValoraciones dao;
-
-    @Inject
-    public ValoracionesService(DAOValoraciones dao) {
-        this.dao = dao;
-    }
 
     public Either<ErrorC, ProfesionalMongo> getAllByProf(int profesionalId) {
         return dao.getAllByProf(profesionalId);

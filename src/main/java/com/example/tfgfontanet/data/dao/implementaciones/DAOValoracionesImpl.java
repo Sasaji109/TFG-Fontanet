@@ -16,9 +16,11 @@ import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class DAOValoracionesImpl implements DAOValoraciones {
 
     private final MongoDatabase mongoDatabase;

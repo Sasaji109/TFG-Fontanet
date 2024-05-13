@@ -1,10 +1,10 @@
-package com.example.tfgfontanet.ui.controllers;
+package com.example.tfgfontanet.ui.rest;
 
 import com.example.tfgfontanet.common.utiles.Constantes;
+import com.example.tfgfontanet.domain.auth.AuthService;
+import com.example.tfgfontanet.domain.auth.JwtService;
 import com.example.tfgfontanet.domain.modelo.auth.AuthenticationRequest;
 import com.example.tfgfontanet.domain.modelo.auth.AuthenticationResponse;
-import com.example.tfgfontanet.domain.servicios.auth.AuthService;
-import com.example.tfgfontanet.domain.servicios.auth.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

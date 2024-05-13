@@ -4,17 +4,15 @@ import com.example.tfgfontanet.common.ErrorC;
 import com.example.tfgfontanet.data.dao.DAOContratos;
 import com.example.tfgfontanet.data.modelo.ContratoEntity;
 import io.vavr.control.Either;
-import jakarta.inject.Inject;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ContratosService {
 
     private final DAOContratos dao;
-
-    @Inject
-    public ContratosService(DAOContratos dao) {
-        this.dao = dao;
-    }
 
     public Either<ErrorC, List<ContratoEntity>> getAll() {
         return dao.getAll();

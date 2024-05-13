@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -30,6 +31,12 @@ public class UsuarioEntity {
 
     @Column(name = "activado")
     private Boolean activado;
+
+    @Column(name = "fecha_envio")
+    private LocalDateTime fechaEnvio;
+
+    @Column(name = "codigo_activacion")
+    private String codigoActivacion;
 
     @Column(name = "role")
     private String role;

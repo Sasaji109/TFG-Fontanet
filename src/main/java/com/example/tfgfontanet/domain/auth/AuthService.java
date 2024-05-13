@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.domain.servicios.auth;
+package com.example.tfgfontanet.domain.auth;
 
 import com.example.tfgfontanet.common.utiles.Constantes;
 import com.example.tfgfontanet.domain.modelo.auth.AuthenticationRequest;
