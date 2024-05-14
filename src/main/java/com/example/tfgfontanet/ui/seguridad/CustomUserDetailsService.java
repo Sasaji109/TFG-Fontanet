@@ -2,7 +2,7 @@ package com.example.tfgfontanet.ui.seguridad;
 
 import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
-import com.example.tfgfontanet.domain.mapper.UsuarioEntityMapper;
+import com.example.tfgfontanet.domain.modelo.mapper.UsuarioEntityMapper;
 import com.example.tfgfontanet.domain.modelo.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;

@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
-import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOFavoritos;
 import com.example.tfgfontanet.data.modelo.ClienteEntity;
 import com.example.tfgfontanet.data.modelo.FavoritosEntity;
@@ -26,8 +26,8 @@ public class DAOFavoritosImpl implements DAOFavoritos {
     }
 
     @Override
-    public Either<ErrorC, List<FavoritosEntity>> getAllByCliente(int clienteId) {
-        Either<ErrorC, List<FavoritosEntity>> either;
+    public Either<DAOError, List<FavoritosEntity>> getAllByCliente(int clienteId) {
+        Either<DAOError, List<FavoritosEntity>> either;
         List<FavoritosEntity> favoritos;
         em = jpaUtil.getEntityManager();
 
@@ -39,14 +39,14 @@ public class DAOFavoritosImpl implements DAOFavoritos {
             either = Either.right(favoritos);
         }
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, Integer> addFavorito(int clienteId, int profesionalId) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> addFavorito(int clienteId, int profesionalId) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction entityTransaction = em.getTransaction();
 
@@ -66,12 +66,12 @@ public class DAOFavoritosImpl implements DAOFavoritos {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new ErrorC(404, "Cliente o Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, "Cliente o Profesional no encontrado", LocalDate.now()));
             }
         }
         catch (PersistenceException e) {
             if (entityTransaction.isActive()) entityTransaction.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -79,8 +79,8 @@ public class DAOFavoritosImpl implements DAOFavoritos {
     }
 
     @Override
-    public Either<ErrorC, Integer> deleteFavorito(int clienteId, int profesionalId) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> deleteFavorito(int clienteId, int profesionalId) {
+        Either<DAOError, Integer> either;
 
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -99,13 +99,13 @@ public class DAOFavoritosImpl implements DAOFavoritos {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new ErrorC(404, "Favorito no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, "Favorito no encontrado", LocalDate.now()));
             }
         } catch (NoResultException e) {
-            either = Either.left(new ErrorC(404, "Favorito no encontrado", LocalDate.now()));
+            either = Either.left(new DAOError(404, "Favorito no encontrado", LocalDate.now()));
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.common.configuracion;
 
-import com.example.tfgfontanet.common.utiles.Constantes;
+import com.example.tfgfontanet.common.Constantes;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;

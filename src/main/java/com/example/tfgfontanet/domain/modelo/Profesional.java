@@ -1,10 +1,5 @@
 package com.example.tfgfontanet.domain.modelo;
 
-import com.example.tfgfontanet.data.modelo.UsuarioEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +18,6 @@ public class Profesional {
     private String oficio;
     private String disponibilidad;
     private Integer valoracion;
-    private UsuarioEntity usuario;
+    private Usuario usuario;
 }
 

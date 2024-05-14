@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.common.configuracion;
 
-import com.example.tfgfontanet.common.utiles.Constantes;
+import com.example.tfgfontanet.common.Constantes;
 import jakarta.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;

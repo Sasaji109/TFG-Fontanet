@@ -1,15 +1,11 @@
 package com.example.tfgfontanet.ui.errores;
 
-import com.example.tfgfontanet.ui.errores.excepciones.NotFoundException;
+import com.example.tfgfontanet.ui.errores.excepciones.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionHandlers  {
@@ -20,18 +16,34 @@ public class ExceptionHandlers  {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationsExceptions(
-            MethodArgumentNotValidException ex) {
+    @ExceptionHandler(TokenException.class)
+    public ResponseEntity<ApiError> handleException(TokenException e) {
+        ApiError apiError = new ApiError(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
+    }
 
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
+    @ExceptionHandler(UsuarioNoActivadoException.class)
+    public ResponseEntity<ApiError> handleException(UsuarioNoActivadoException e) {
+        ApiError apiError = new ApiError(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
+    }
 
-        return errors;
+    @ExceptionHandler(MailException.class)
+    public ResponseEntity<ApiError> handleException(MailException e) {
+        ApiError apiError = new ApiError(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(apiError);
+    }
+
+    @ExceptionHandler(PrivateKeyException.class)
+    public ResponseEntity<ApiError> handleException(PrivateKeyException e) {
+        ApiError apiError = new ApiError(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
+    }
+
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ApiError> handleException(AuthenticationException e) {
+        ApiError apiError = new ApiError(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(apiError);
     }
 }

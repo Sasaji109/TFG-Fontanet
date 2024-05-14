@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOMateriales;
 import com.example.tfgfontanet.data.modelo.MaterialEntity;
 import io.vavr.control.Either;
@@ -14,23 +14,23 @@ public class MaterialesService {
 
     private final DAOMateriales dao;
 
-    public Either<ErrorC, List<MaterialEntity>> getAll() {
+    public Either<DAOError, List<MaterialEntity>> getAll() {
         return dao.getAll();
     }
 
-    public Either<ErrorC, MaterialEntity> getMaterial(int id) {
+    public Either<DAOError, MaterialEntity> getMaterial(int id) {
         return dao.get(id);
     }
 
-    public Either<ErrorC, Integer> addMaterial(MaterialEntity material) {
+    public Either<DAOError, Integer> addMaterial(MaterialEntity material) {
         return dao.add(material);
     }
 
-    public Either<ErrorC, Integer> updateMaterial(MaterialEntity material) {
+    public Either<DAOError, Integer> updateMaterial(MaterialEntity material) {
         return dao.update(material);
     }
 
-    public Either<ErrorC, Integer> deleteMaterial(int id) {
+    public Either<DAOError, Integer> deleteMaterial(int id) {
         return dao.delete(id);
     }
 }

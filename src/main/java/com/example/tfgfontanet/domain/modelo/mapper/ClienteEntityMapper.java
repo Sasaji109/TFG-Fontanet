@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.domain.mapper;
+package com.example.tfgfontanet.domain.modelo.mapper;
 
 import com.example.tfgfontanet.data.modelo.ClienteEntity;
 import com.example.tfgfontanet.domain.modelo.Cliente;

@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
-import com.example.tfgfontanet.common.utiles.Constantes;
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
 import io.vavr.control.Either;
@@ -54,8 +54,8 @@ public class DAOUsuarioImpl implements DAOUsuario {
     }
 
     @Override
-    public Either<ErrorC, Integer> registrarUsuario(UsuarioEntity usuario) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> registrarUsuario(UsuarioEntity usuario) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -68,7 +68,7 @@ public class DAOUsuarioImpl implements DAOUsuario {
             either = Either.right(rowsAffected);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -76,8 +76,8 @@ public class DAOUsuarioImpl implements DAOUsuario {
     }
 
     @Override
-    public Either<ErrorC, Integer> updateUsuario(UsuarioEntity usuario) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> updateUsuario(UsuarioEntity usuario) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction entityTransaction = em.getTransaction();
 
@@ -90,7 +90,7 @@ public class DAOUsuarioImpl implements DAOUsuario {
             either = Either.right(rowsAffected);
         } catch (PersistenceException e) {
             if (entityTransaction.isActive()) entityTransaction.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

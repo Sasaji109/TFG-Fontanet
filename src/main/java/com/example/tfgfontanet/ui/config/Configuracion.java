@@ -1,12 +1,15 @@
 package com.example.tfgfontanet.ui.config;
 
+import com.example.tfgfontanet.common.configuracion.ConfiguracionMail;
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
+import com.example.tfgfontanet.common.utiles.mail.MandarMail;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
-import com.example.tfgfontanet.domain.mapper.UsuarioEntityMapper;
+import com.example.tfgfontanet.domain.modelo.mapper.UsuarioEntityMapper;
 import com.example.tfgfontanet.ui.seguridad.CustomUserDetailsService;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,11 +20,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Log4j2
 @Data
-@org.springframework.context.annotation.Configuration
-public class Configuration {
+@Configuration
+public class Configuracion {
 
     @Bean
-    public PasswordEncoder createPasswordEncoder() {
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -46,5 +49,15 @@ public class Configuration {
     @Bean
     public JPAUtil jpaUtil() {
         return new JPAUtil();
+    }
+
+    @Bean
+    public ConfiguracionMail configuracionMail() {
+        return new ConfiguracionMail();
+    }
+
+    @Bean
+    public MandarMail mandarMail(ConfiguracionMail config) {
+        return new MandarMail(config);
     }
 }

@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
-import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOFacturaMaterial;
 import com.example.tfgfontanet.data.modelo.FacturaEntity;
 import com.example.tfgfontanet.data.modelo.FacturaMaterialEntity;
@@ -27,8 +27,8 @@ public class DAOFacturaMaterialImpl implements DAOFacturaMaterial {
     }
 
     @Override
-    public Either<ErrorC, Integer> addFacturaMaterial(FacturaMaterialEntity facturaMaterial) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> addFacturaMaterial(FacturaMaterialEntity facturaMaterial) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction entityTransaction = em.getTransaction();
 
@@ -45,12 +45,12 @@ public class DAOFacturaMaterialImpl implements DAOFacturaMaterial {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new ErrorC(404, "Factura o Material no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, "Factura o Material no encontrado", LocalDate.now()));
             }
         }
         catch (PersistenceException e) {
             if (entityTransaction.isActive()) entityTransaction.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

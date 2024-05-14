@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
-import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOProfesionales;
 import com.example.tfgfontanet.data.modelo.ProfesionalEntity;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
@@ -27,8 +27,8 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
     }
 
     @Override
-    public Either<ErrorC, List<ProfesionalEntity>> getAll() {
-        Either<ErrorC, List<ProfesionalEntity>> either;
+    public Either<DAOError, List<ProfesionalEntity>> getAll() {
+        Either<DAOError, List<ProfesionalEntity>> either;
         List<ProfesionalEntity> profesionales;
         em = jpaUtil.getEntityManager();
 
@@ -37,14 +37,14 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
             either = Either.right(profesionales);
         }
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<ProfesionalEntity>> getAllByExp(int experiencia) {
-        Either<ErrorC, List<ProfesionalEntity>> either;
+    public Either<DAOError, List<ProfesionalEntity>> getAllByExp(int experiencia) {
+        Either<DAOError, List<ProfesionalEntity>> either;
         List<ProfesionalEntity> profesionales;
         em = jpaUtil.getEntityManager();
 
@@ -56,14 +56,14 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
             either = Either.right(profesionales);
         }
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<ProfesionalEntity>> getAllByOficio(String oficio) {
-        Either<ErrorC, List<ProfesionalEntity>> either;
+    public Either<DAOError, List<ProfesionalEntity>> getAllByOficio(String oficio) {
+        Either<DAOError, List<ProfesionalEntity>> either;
         List<ProfesionalEntity> profesionales;
         em = jpaUtil.getEntityManager();
 
@@ -75,14 +75,14 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
             either = Either.right(profesionales);
         }
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<ProfesionalEntity>> getAllByDisp(String disponibilidad) {
-        Either<ErrorC, List<ProfesionalEntity>> either;
+    public Either<DAOError, List<ProfesionalEntity>> getAllByDisp(String disponibilidad) {
+        Either<DAOError, List<ProfesionalEntity>> either;
         List<ProfesionalEntity> profesionales;
         em = jpaUtil.getEntityManager();
 
@@ -94,14 +94,14 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
             either = Either.right(profesionales);
         }
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<ProfesionalEntity>> getAllByVal(int valoracion) {
-        Either<ErrorC, List<ProfesionalEntity>> either;
+    public Either<DAOError, List<ProfesionalEntity>> getAllByVal(int valoracion) {
+        Either<DAOError, List<ProfesionalEntity>> either;
         List<ProfesionalEntity> profesionales;
         em = jpaUtil.getEntityManager();
 
@@ -113,28 +113,28 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
             either = Either.right(profesionales);
         }
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, ProfesionalEntity> get(int id) {
-        Either<ErrorC, ProfesionalEntity> either;
+    public Either<DAOError, ProfesionalEntity> get(int id) {
+        Either<DAOError, ProfesionalEntity> either;
         em = jpaUtil.getEntityManager();
 
         try {
             ProfesionalEntity profesional = em.find(ProfesionalEntity.class,id);
             either = Either.right(profesional);
         } catch (Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, Integer> add(ProfesionalEntity profesional) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> add(ProfesionalEntity profesional) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -154,7 +154,7 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
         }
         catch (PersistenceException e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -162,8 +162,8 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
     }
 
     @Override
-    public Either<ErrorC, Integer> update(ProfesionalEntity profesional) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> update(ProfesionalEntity profesional) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -177,7 +177,7 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
             either = Either.right(rowsAffected);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -185,8 +185,8 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
     }
 
     @Override
-    public Either<ErrorC, Integer> updateVal(int id, int val) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> updateVal(int id, int val) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -201,11 +201,11 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new ErrorC(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
             }
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -213,8 +213,8 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
     }
 
     @Override
-    public Either<ErrorC, Integer> delete(int profesionalId) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> delete(int profesionalId) {
+        Either<DAOError, Integer> either;
 
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -235,11 +235,11 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new ErrorC(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
             }
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

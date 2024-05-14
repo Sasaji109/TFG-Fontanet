@@ -1,5 +1,6 @@
-package com.example.tfgfontanet.common.utiles;
+package com.example.tfgfontanet.common.utiles.mail;
 
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.common.configuracion.ConfiguracionMail;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -17,6 +18,7 @@ import java.util.Properties;
 public class MandarMail {
 
     private ConfiguracionMail config;
+
     @Inject
     public MandarMail(ConfiguracionMail config) {
         this.config = config;

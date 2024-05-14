@@ -4,18 +4,6 @@ GET http://localhost:8080/login?
     password=1234
 
 ###
-# @name loginCliente
-GET http://localhost:8080/login?
-    username=lucas90&
-    password=2dam
-
-###
-# @name loginProfesional
-GET http://localhost:8080/login?
-    username=fernando23&
-    password=2dam
-
-###
 # @name registroCliente
 POST http://localhost:8080/registro/cliente
 Content-Type: application/json
@@ -28,7 +16,7 @@ Content-Type: application/json
   "usuario": {
     "userId": 0,
     "username": "lucas90",
-    "correo": "lucas90@example.com",
+    "correo": "sasaji2004@gmail.com",
     "password": "2dam",
     "activado": false,
     "fechaEnvio": null,
@@ -36,6 +24,18 @@ Content-Type: application/json
     "role": "CLIENTE"
   }
 }
+
+###
+# @name activarUsuarioCliente
+GET http://localhost:8080/registro/activacion?
+    codigo=uRpbs0yJv4sRWmcfW663Sa9AbjB2LF6waX3HtODMSG0=
+
+
+###
+# @name loginCliente
+GET http://localhost:8080/login?
+    username=lucas90&
+    password=2dam
 
 ###
 # @name registroProfesional
@@ -54,7 +54,7 @@ Content-Type: application/json
   "usuario": {
     "userId": 0,
     "username": "fernando23",
-    "correo": "fernando23@example.com",
+    "correo": "sasaji2004@gmail.com",
     "password": "2dam",
     "activado": false,
     "fechaEnvio": null,
@@ -63,4 +63,14 @@ Content-Type: application/json
   }
 }
 
+###
+# @name activarUsuarioProfesional
+GET http://localhost:8080/registro/activacion?
+    codigo=uRpbs0yJv4sRWmcfW663Sa9AbjB2LF6waX3HtODMSG0=
+
+###
+# @name loginProfesional
+GET http://localhost:8080/login?
+    username=fernando23&
+    password=2dam
 

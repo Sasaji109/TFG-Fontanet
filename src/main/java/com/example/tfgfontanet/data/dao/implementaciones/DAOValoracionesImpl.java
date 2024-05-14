@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.MongoDBConfig;
-import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOValoraciones;
 import com.example.tfgfontanet.data.modelo.ProfesionalMongo;
 import com.example.tfgfontanet.data.modelo.ValoracionMongo;
@@ -32,8 +32,8 @@ public class DAOValoracionesImpl implements DAOValoraciones {
     }
 
     @Override
-    public Either<ErrorC, ProfesionalMongo> getAllByProf(int profesionalId) {
-        Either<ErrorC, ProfesionalMongo> either;
+    public Either<DAOError, ProfesionalMongo> getAllByProf(int profesionalId) {
+        Either<DAOError, ProfesionalMongo> either;
 
         try {
             MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("profesionales");
@@ -43,19 +43,19 @@ public class DAOValoracionesImpl implements DAOValoraciones {
                 ProfesionalMongo profesionalMongo = new Gson().fromJson(profesionalDocument.toJson(), ProfesionalMongo.class);
                 either = Either.right(profesionalMongo);
             } else {
-                either = Either.left(new ErrorC(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
             }
 
         } catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.MONGO_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.MONGO_ERROR + e.getMessage(), LocalDate.now()));
         }
 
         return either;
     }
 
     @Override
-    public Either<ErrorC, Integer> addValoracion(int profesionalId, ValoracionMongo valoracion) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> addValoracion(int profesionalId, ValoracionMongo valoracion) {
+        Either<DAOError, Integer> either;
 
         try {
 
@@ -74,10 +74,10 @@ public class DAOValoracionesImpl implements DAOValoraciones {
 
                 either = Either.right(1);
             } else {
-                either = Either.left(new ErrorC(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
             }
         } catch (Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.MONGO_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.MONGO_ERROR + e.getMessage(), LocalDate.now()));
         }
 
         return either;

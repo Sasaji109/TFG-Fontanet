@@ -1,9 +1,9 @@
-package com.example.tfgfontanet.domain.auth;
+package com.example.tfgfontanet.domain.servicios.auth;
 
-import com.example.tfgfontanet.common.utiles.Constantes;
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
-import com.example.tfgfontanet.domain.mapper.UsuarioEntityMapper;
+import com.example.tfgfontanet.domain.modelo.mapper.UsuarioEntityMapper;
 import com.example.tfgfontanet.domain.modelo.Usuario;
 import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.ui.errores.excepciones.PrivateKeyException;

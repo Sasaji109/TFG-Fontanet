@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
-import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOFacturas;
 import com.example.tfgfontanet.data.modelo.FacturaEntity;
 import com.example.tfgfontanet.data.modelo.FacturaMaterialEntity;
@@ -29,8 +29,8 @@ public class DAOFacturasImpl implements DAOFacturas {
     }
 
     @Override
-    public Either<ErrorC, List<FacturaEntity>> getAll() {
-        Either<ErrorC, List<FacturaEntity>> either;
+    public Either<DAOError, List<FacturaEntity>> getAll() {
+        Either<DAOError, List<FacturaEntity>> either;
         List<FacturaEntity> facturas;
         em = jpaUtil.getEntityManager();
 
@@ -40,14 +40,14 @@ public class DAOFacturasImpl implements DAOFacturas {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<FacturaEntity>> getAllByCliente(int clienteId) {
-        Either<ErrorC, List<FacturaEntity>> either;
+    public Either<DAOError, List<FacturaEntity>> getAllByCliente(int clienteId) {
+        Either<DAOError, List<FacturaEntity>> either;
         List<FacturaEntity> facturas;
         em = jpaUtil.getEntityManager();
 
@@ -59,14 +59,14 @@ public class DAOFacturasImpl implements DAOFacturas {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<FacturaEntity>> getAllByProfesional(int profesionalId) {
-        Either<ErrorC, List<FacturaEntity>> either;
+    public Either<DAOError, List<FacturaEntity>> getAllByProfesional(int profesionalId) {
+        Either<DAOError, List<FacturaEntity>> either;
         List<FacturaEntity> facturas;
         em = jpaUtil.getEntityManager();
 
@@ -78,14 +78,14 @@ public class DAOFacturasImpl implements DAOFacturas {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, FacturaEntity> get(int id) {
-        Either<ErrorC, FacturaEntity> either;
+    public Either<DAOError, FacturaEntity> get(int id) {
+        Either<DAOError, FacturaEntity> either;
         em = jpaUtil.getEntityManager();
 
         try {
@@ -94,14 +94,14 @@ public class DAOFacturasImpl implements DAOFacturas {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, Integer> add(FacturaEntity factura) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> add(FacturaEntity factura) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -140,7 +140,7 @@ public class DAOFacturasImpl implements DAOFacturas {
             either = Either.right(facturaId);
         } catch(Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -149,8 +149,8 @@ public class DAOFacturasImpl implements DAOFacturas {
     }
 
     @Override
-    public Either<ErrorC, Integer> updateEstado(int facturaId, String estado) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> updateEstado(int facturaId, String estado) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -164,7 +164,7 @@ public class DAOFacturasImpl implements DAOFacturas {
             either = Either.right(updatedRows);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

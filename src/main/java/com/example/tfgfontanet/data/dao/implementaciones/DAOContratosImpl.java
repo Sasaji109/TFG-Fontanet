@@ -1,8 +1,8 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
-import com.example.tfgfontanet.common.utiles.Constantes;
-import com.example.tfgfontanet.common.ErrorC;
+import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOContratos;
 import com.example.tfgfontanet.data.modelo.ContratoEntity;
 import io.vavr.control.Either;
@@ -27,8 +27,8 @@ public class DAOContratosImpl implements DAOContratos {
     }
 
     @Override
-    public Either<ErrorC, List<ContratoEntity>> getAll() {
-        Either<ErrorC, List<ContratoEntity>> either;
+    public Either<DAOError, List<ContratoEntity>> getAll() {
+        Either<DAOError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
@@ -38,13 +38,13 @@ public class DAOContratosImpl implements DAOContratos {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
     @Override
-    public Either<ErrorC, List<ContratoEntity>> getAllByCliente(int clienteId) {
-        Either<ErrorC, List<ContratoEntity>> either;
+    public Either<DAOError, List<ContratoEntity>> getAllByCliente(int clienteId) {
+        Either<DAOError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
@@ -56,14 +56,14 @@ public class DAOContratosImpl implements DAOContratos {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<ContratoEntity>> getAllByProfesional(int profesionalId) {
-        Either<ErrorC, List<ContratoEntity>> either;
+    public Either<DAOError, List<ContratoEntity>> getAllByProfesional(int profesionalId) {
+        Either<DAOError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
@@ -75,14 +75,14 @@ public class DAOContratosImpl implements DAOContratos {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, List<ContratoEntity>> getAllByEstado(String estado) {
-        Either<ErrorC, List<ContratoEntity>> either;
+    public Either<DAOError, List<ContratoEntity>> getAllByEstado(String estado) {
+        Either<DAOError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
@@ -94,14 +94,14 @@ public class DAOContratosImpl implements DAOContratos {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, ContratoEntity> get(int id) {
-        Either<ErrorC, ContratoEntity> either;
+    public Either<DAOError, ContratoEntity> get(int id) {
+        Either<DAOError, ContratoEntity> either;
         em = jpaUtil.getEntityManager();
 
         try {
@@ -110,14 +110,14 @@ public class DAOContratosImpl implements DAOContratos {
         }
 
         catch(Exception e) {
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<ErrorC, Integer> add(ContratoEntity contrato) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> add(ContratoEntity contrato) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -128,7 +128,7 @@ public class DAOContratosImpl implements DAOContratos {
             either = Either.right(1);
         } catch(Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -137,8 +137,8 @@ public class DAOContratosImpl implements DAOContratos {
     }
 
     @Override
-    public Either<ErrorC, Integer> update(ContratoEntity contrato) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> update(ContratoEntity contrato) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -149,7 +149,7 @@ public class DAOContratosImpl implements DAOContratos {
             either = Either.right(1);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -157,8 +157,8 @@ public class DAOContratosImpl implements DAOContratos {
     }
 
     @Override
-    public Either<ErrorC, Integer> updateEstado(int contratoId, String estado) {
-        Either<ErrorC, Integer> either;
+    public Either<DAOError, Integer> updateEstado(int contratoId, String estado) {
+        Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -172,7 +172,7 @@ public class DAOContratosImpl implements DAOContratos {
             either = Either.right(updatedRows);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new ErrorC(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

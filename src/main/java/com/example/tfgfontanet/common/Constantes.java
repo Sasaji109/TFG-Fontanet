@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.common.utiles;
+package com.example.tfgfontanet.common;
 
 public class Constantes {
 
@@ -42,7 +42,7 @@ public class Constantes {
     public static final int VAL = 1;
 
 
-    //Mongo Configuration
+    //Mongo Configuracion
     public static final String DATABASE_HOST = "mongodb://informatica.iesquevedo.es:";
     public static final int DATABASE_PORT = 2323;
     public static final String DATABASE_NAME = "samuelsanchez_tfg";
@@ -64,10 +64,11 @@ public class Constantes {
     public static final String ACTIVACION_PATH = "/activacion";
     public static final String ACTIVACION_CODIGO = "codigo";
     public static final int TIEMPO_ACTIVACION_MINUTOS = 1;
-    public static final String MSG1 = "<html><body>Pincha en el siguiente enlace para activar tu usuario: <a href=\"http://192.168.1.136:8080/ServerRegistroyJWTSamuel-1.0-SNAPSHOT/api/registro/activacion?codigo=";
+    public static final String MSG1 = "<html><body>Pincha en el siguiente enlace para activar tu usuario: <a href=\"http://localhost:8080/registro/activacion?codigo=";
     public static final String MSG2 = "\">Activar usuario</a></body></html>";
     public static final String SUBJECT = "Activación del usuario";
     public static final String ACTIVADO = "Usuario activado";
+
 
     //Avisos de Registro, Activacion y Autenticacion
     public static final String EL_REGISTRO_NO_PUDO_COMPLETARSE = "El registro no pudo completarse";
