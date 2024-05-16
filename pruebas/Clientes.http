@@ -1,0 +1,59 @@
+###
+# @name getClientes
+GRAPHQL http://localhost:8080/graphql
+
+query getClientes {
+  getAllClientes {
+    clienteId
+    nombre
+    apellidos
+  }
+}
+
+###
+# @name deleteCliente
+GRAPHQL http://localhost:8080/graphql
+
+mutation deleteCliente {
+  deleteCliente(clienteId: 38)
+}
+
+###
+# @name getClienteById
+GRAPHQL http://localhost:8080/graphql
+
+query getClienteById {
+  getClienteById(clienteId: 1) {
+    clienteId
+    nombre
+    apellidos
+    numero
+    usuario {
+        username
+        correo
+        password
+    }
+  }
+}
+
+###
+# @name updateCliente
+PUT http://localhost:8080/cliente/update
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "nombre": "Lucasss",
+  "apellidos": "Ramirez Hernandez",
+  "numero": "633928272",
+  "usuario": {
+    "userId": 1,
+    "username": "lucas90",
+    "correo": "sasaji2004@gmail.com",
+    "password": "2dam",
+    "activado": false,
+    "fechaEnvio": null,
+    "codigoActivacion": "",
+    "role": "CLIENTE"
+  }
+}

@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.ui.rest;
+package com.example.tfgfontanet.ui.controllers.auth;
 
 import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.domain.servicios.auth.AuthService;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class RestAuth {
+public class LoginController {
 
     private final AuthService authService;
     private final JwtService jwtService;

@@ -70,7 +70,7 @@ public class DAOMaterialesImpl implements DAOMateriales {
 
         try {
             entityTransaction.begin();
-            em.persist(material);
+            em.merge(material);
             entityTransaction.commit();
 
             int rowsAffected = 1;

@@ -1,4 +1,4 @@
-package com.example.tfgfontanet.ui.rest;
+package com.example.tfgfontanet.ui.controllers.auth;
 
 import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.domain.modelo.Cliente;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequestMapping("/registro")
-public class RestRegistro {
+public class RegistroController {
 
     private final ClientesService clientesService;
     private final UsuariosService usuariosService;
@@ -22,7 +22,7 @@ public class RestRegistro {
     private final MandarMailActivacion mandarMailActivacion;
 
     @Inject
-    public RestRegistro(ClientesService clientesService, UsuariosService usuariosService, ProfesionalesService profesionalesService, MandarMailActivacion mandarMailActivacion) {
+    public RegistroController(ClientesService clientesService, UsuariosService usuariosService, ProfesionalesService profesionalesService, MandarMailActivacion mandarMailActivacion) {
         this.clientesService = clientesService;
         this.usuariosService = usuariosService;
         this.profesionalesService = profesionalesService;

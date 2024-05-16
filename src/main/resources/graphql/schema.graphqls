@@ -1,0 +1,62 @@
+type Cliente {
+    clienteId: Int!
+    nombre: String
+    apellidos: String
+    numero: String
+    usuario: Usuario
+}
+
+type Usuario {
+    userId: Int!
+    username: String
+    correo: String
+    password: String
+    activado: Boolean
+    fechaEnvio: String
+    codigoActivacion: String
+    role: String
+}
+
+type Material {
+    materialId: Int!
+    nombre: String
+    descripcion: String
+    precio: String
+}
+
+type Query {
+    getAllClientes: [Cliente]!
+    getClienteById(clienteId: Int!): Cliente
+    getAllMateriales: [Material]!
+    getMaterialById(materialId: Int!): Material
+}
+
+type Mutation {
+    deleteCliente(clienteId: Int!): Int
+    deleteMaterial(materialId: Int!): Int
+}
+
+input ClienteInput {
+    clienteId: Int!
+    nombre: String
+    apellidos: String
+    numero: String
+    usuario: UsuarioInput
+}
+
+input UsuarioInput {
+    userId: Int!
+    username: String
+    correo: String
+    password: String
+    activado: Boolean
+    codigoActivacion: String
+    role: String
+}
+
+input MaterialInput {
+    materialId: Int!
+    nombre: String
+    descripcion: String
+    precio: String
+}

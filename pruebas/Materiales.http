@@ -1,0 +1,56 @@
+###
+# @name getMateriales
+GRAPHQL http://localhost:8080/graphql
+
+query getMateriales {
+  getAllMateriales {
+    materialId
+    nombre
+  }
+}
+
+###
+# @name getMaterialById
+GRAPHQL http://localhost:8080/graphql
+
+query getMaterialById {
+  getMaterialById(materialId: 1) {
+    materialId
+    nombre
+    descripcion
+    precio
+  }
+}
+
+###
+# @name deleteMaterial
+GRAPHQL http://localhost:8080/graphql
+
+mutation deleteMaterial {
+  deleteMaterial(materialId: 7)
+}
+
+###
+# @name addMaterial
+POST http://localhost:8080/material/add
+Content-Type: application/json
+
+{
+  "materialId": 0,
+  "nombre": "Nombre del Material",
+  "descripcion": "Descripción del Material",
+  "precio": 29.99
+}
+
+###
+# @name updateMaterial
+PUT http://localhost:8080/material/update
+Content-Type: application/json
+
+{
+  "materialId": 8,
+  "nombre": "Nombre del MaterialII",
+  "descripcion": "Descripción del Material",
+  "precio": 29.99
+}
+

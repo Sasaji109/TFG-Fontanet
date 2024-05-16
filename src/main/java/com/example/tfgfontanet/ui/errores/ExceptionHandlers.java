@@ -34,6 +34,12 @@ public class ExceptionHandlers  {
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(apiError);
     }
 
+    @ExceptionHandler(CRUDException.class)
+    public ResponseEntity<ApiError> handleException(CRUDException e) {
+        ApiError apiError = new ApiError(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(apiError);
+    }
+
     @ExceptionHandler(PrivateKeyException.class)
     public ResponseEntity<ApiError> handleException(PrivateKeyException e) {
         ApiError apiError = new ApiError(e.getMessage());

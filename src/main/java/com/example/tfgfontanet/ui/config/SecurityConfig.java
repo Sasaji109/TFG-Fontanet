@@ -21,7 +21,9 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
 
-    private static final String[] WHITE_LIST_URL = {Constantes.WHITELIST_LOGIN, Constantes.WHITELIST_REGISTRO};
+    private static final String[] WHITE_LIST_URL = {Constantes.WHITELIST_LOGIN,
+            Constantes.WHITELIST_REGISTRO, "/graphql/**", "/graphiql/**",
+            "/cliente/**", "/material/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
