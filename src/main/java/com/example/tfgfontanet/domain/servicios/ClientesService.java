@@ -43,6 +43,7 @@ public class ClientesService {
             ClienteEntity clienteEntity = clienteEntityMapper.toClienteEntity(cliente);
             clienteEntity.getUsuario().setFechaEnvio(LocalDateTime.now());
             clienteEntity.getUsuario().setPassword(passwordEncoder.encode(clienteEntity.getUsuario().getPassword()));
+            clienteEntity.getUsuario().setRole("CLIENTE");
             dao.add(clienteEntity);
             return true;
         } catch (CRUDException e) {

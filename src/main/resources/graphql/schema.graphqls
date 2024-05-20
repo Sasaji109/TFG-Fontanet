@@ -6,27 +6,52 @@ type Cliente {
     usuario: Usuario
 }
 
+type Profesional {
+    profesionalId: Int!
+    nombre: String
+    apellidos: String
+    numero: String
+    experiencia: Int
+    oficio: String
+    disponibilidad: String
+    valoracion: String
+    usuario: Usuario
+}
+
 type Usuario {
     userId: Int!
     username: String
     correo: String
     password: String
     activado: Boolean
-    fechaEnvio: String
+    fechaEnvio: LocalDateTime
     codigoActivacion: String
     role: String
 }
+
+scalar LocalDateTime
 
 type Material {
     materialId: Int!
     nombre: String
     descripcion: String
-    precio: String
+    precio: Double
 }
+
+scalar Double
 
 type Query {
     getAllClientes: [Cliente]!
     getClienteById(clienteId: Int!): Cliente
+
+    getAllProfesionales: [Profesional]!
+    getProfesionalById(profesionalId: Int!): Profesional
+    getAllProfesionalesByExp(experiencia: Int!): [Profesional]!
+    getAllProfesionalesByOficio(oficio: String!): [Profesional]!
+    getAllProfesionalesByDisp(disponibilidad: String!): [Profesional]!
+    getAllProfesionalesByVal(valoracion: Int!): [Profesional]!
+    updateProfesionalVal(profesionalId: Int!, valoracion: Int!): Int
+
     getAllMateriales: [Material]!
     getMaterialById(materialId: Int!): Material
 }
@@ -34,29 +59,5 @@ type Query {
 type Mutation {
     deleteCliente(clienteId: Int!): Int
     deleteMaterial(materialId: Int!): Int
-}
-
-input ClienteInput {
-    clienteId: Int!
-    nombre: String
-    apellidos: String
-    numero: String
-    usuario: UsuarioInput
-}
-
-input UsuarioInput {
-    userId: Int!
-    username: String
-    correo: String
-    password: String
-    activado: Boolean
-    codigoActivacion: String
-    role: String
-}
-
-input MaterialInput {
-    materialId: Int!
-    nombre: String
-    descripcion: String
-    precio: String
+    deleteProfesional(profesionalId: Int!): Int
 }

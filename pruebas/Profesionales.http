@@ -1,0 +1,173 @@
+###
+# @name getProfesionales
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionales {
+  getAllProfesionales {
+    profesionalId
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    valoracion
+  }
+}
+
+###
+# @name getProfesionalesByExperiencia
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionalesByExp {
+  getAllProfesionalesByExp(experiencia: 5) {
+    profesionalId
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    valoracion
+  }
+}
+
+###
+# @name getProfesionalesByOficio
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionalesByOficio {
+  getAllProfesionalesByOficio(oficio: "Fontanero") {
+    profesionalId
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    valoracion
+  }
+}
+
+###
+# @name getProfesionalesByDisponibilidad
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionalesByDisp {
+  getAllProfesionalesByDisp(disponibilidad: "Tarde") {
+    profesionalId
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    valoracion
+  }
+}
+
+###
+# @name getProfesionalesByValoracion
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionalesByVal {
+  getAllProfesionalesByVal(valoracion: 4) {
+    profesionalId
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    valoracion
+  }
+}
+
+###
+# @name getProfesionalById
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionalById {
+  getProfesionalById(profesionalId: 1) {
+    profesionalId
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    usuario {
+        username
+        correo
+        password
+    }
+  }
+}
+
+###
+# @name getProfesionalParaCliente
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionalParaCliente {
+  getProfesionalById(profesionalId: 1) {
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    valoracion
+  }
+}
+
+###
+# @name getProfesionalNombre
+GRAPHQL http://localhost:8080/graphql
+
+query getProfesionalNombre {
+  getProfesionalById(profesionalId: 1) {
+    nombre
+  }
+}
+
+###
+# @name deleteProfesional
+GRAPHQL http://localhost:8080/graphql
+
+mutation deleteProfesional {
+  deleteProfesional(profesionalId: 14)
+}
+
+###
+# @name updateProfesional
+PUT http://localhost:8080/profesional/update
+Content-Type: application/json
+
+{
+  "profesionalId": 1,
+  "nombre": "Fernando II",
+  "apellidos": "Montoya Gutierrez",
+  "numero": "622937362",
+  "experiencia": 15,
+  "oficio": "Pintor",
+  "disponibilidad": "Mañana",
+  "valoracion": 3,
+  "usuario": {
+    "userId": 4,
+    "username": "fernando23",
+    "correo": "sasaji2004@gmail.com",
+    "password": "2dam",
+    "activado": false,
+    "fechaEnvio": null,
+    "codigoActivacion": "",
+    "role": "PROF"
+  }
+}
+
+###
+# @name updateProfesionalVal
+GRAPHQL http://localhost:8080/graphql
+
+query updateProfesionalVal {
+  updateProfesionalVal(profesionalId: 3, valoracion: 1)
+}

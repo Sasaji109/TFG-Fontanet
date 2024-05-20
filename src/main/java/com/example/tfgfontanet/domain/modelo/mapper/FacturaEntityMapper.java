@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface FacturaEntityMapper {
-    FacturaEntity toFacturaEntity(Factura contrato);
-    Factura toFactura(FacturaEntity contratoEntity);
+    FacturaEntity toFacturaEntity(Factura factura);
+    Factura toFactura(FacturaEntity facturaEntity);
 }

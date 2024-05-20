@@ -11,14 +11,6 @@ query getClientes {
 }
 
 ###
-# @name deleteCliente
-GRAPHQL http://localhost:8080/graphql
-
-mutation deleteCliente {
-  deleteCliente(clienteId: 38)
-}
-
-###
 # @name getClienteById
 GRAPHQL http://localhost:8080/graphql
 
@@ -37,13 +29,21 @@ query getClienteById {
 }
 
 ###
+# @name deleteCliente
+GRAPHQL http://localhost:8080/graphql
+
+mutation deleteCliente {
+  deleteCliente(clienteId: 38)
+}
+
+###
 # @name updateCliente
 PUT http://localhost:8080/cliente/update
 Content-Type: application/json
 
 {
   "clienteId": 1,
-  "nombre": "Lucasss",
+  "nombre": "Lucas II",
   "apellidos": "Ramirez Hernandez",
   "numero": "633928272",
   "usuario": {

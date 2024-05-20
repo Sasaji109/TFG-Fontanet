@@ -1,4 +1,5 @@
 package com.example.tfgfontanet.domain.modelo.mapper;
+
 import com.example.tfgfontanet.data.modelo.ProfesionalEntity;
 import com.example.tfgfontanet.domain.modelo.Profesional;
 import org.mapstruct.Mapper;

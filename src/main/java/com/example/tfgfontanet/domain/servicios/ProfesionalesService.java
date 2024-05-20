@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,28 +21,63 @@ public class ProfesionalesService {
     private final ProfesionalEntityMapper profesionalEntityMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public Either<DAOError, List<ProfesionalEntity>> getAll() {
-        return dao.getAll();
+    public Either<DAOError, List<Profesional>> getAll() {
+        return dao.getAll().map(profesionalEntityList -> {
+            List<Profesional> profesionales = new ArrayList<>();
+            for (ProfesionalEntity profesionalEntity : profesionalEntityList) {
+                Profesional profesional = profesionalEntityMapper.toProfesional(profesionalEntity);
+                profesionales.add(profesional);
+            }
+            return profesionales;
+        });
     }
 
-    public Either<DAOError, List<ProfesionalEntity>> getAllByExp(int experiencia) {
-        return dao.getAllByExp(experiencia);
+    public Either<DAOError, List<Profesional>> getAllByExp(int experiencia) {
+        return dao.getAllByExp(experiencia).map(profesionalEntityList -> {
+            List<Profesional> profesionales = new ArrayList<>();
+            for (ProfesionalEntity profesionalEntity : profesionalEntityList) {
+                Profesional profesional = profesionalEntityMapper.toProfesional(profesionalEntity);
+                profesionales.add(profesional);
+            }
+            return profesionales;
+        });
     }
 
-    public Either<DAOError, List<ProfesionalEntity>> getAllByOficio(String oficio) {
-        return dao.getAllByOficio(oficio);
+    public Either<DAOError, List<Profesional>> getAllByOficio(String oficio) {
+        return dao.getAllByOficio(oficio).map(profesionalEntityList -> {
+            List<Profesional> profesionales = new ArrayList<>();
+            for (ProfesionalEntity profesionalEntity : profesionalEntityList) {
+                Profesional profesional = profesionalEntityMapper.toProfesional(profesionalEntity);
+                profesionales.add(profesional);
+            }
+            return profesionales;
+        });
     }
 
-    public Either<DAOError, List<ProfesionalEntity>> getAllByDisp(String disponibilidad) {
-        return dao.getAllByDisp(disponibilidad);
+    public Either<DAOError, List<Profesional>> getAllByDisp(String disponibilidad) {
+        return dao.getAllByDisp(disponibilidad).map(profesionalEntityList -> {
+            List<Profesional> profesionales = new ArrayList<>();
+            for (ProfesionalEntity profesionalEntity : profesionalEntityList) {
+                Profesional profesional = profesionalEntityMapper.toProfesional(profesionalEntity);
+                profesionales.add(profesional);
+            }
+            return profesionales;
+        });
     }
 
-    public Either<DAOError, List<ProfesionalEntity>> getAllByVal(int valoracion) {
-        return dao.getAllByVal(valoracion);
+    public Either<DAOError, List<Profesional>> getAllByVal(int valoracion) {
+        return dao.getAllByVal(valoracion).map(profesionalEntityList -> {
+            List<Profesional> profesionales = new ArrayList<>();
+            for (ProfesionalEntity profesionalEntity : profesionalEntityList) {
+                Profesional profesional = profesionalEntityMapper.toProfesional(profesionalEntity);
+                profesionales.add(profesional);
+            }
+            return profesionales;
+        });
     }
 
-    public Either<DAOError, ProfesionalEntity> get(int id) {
-        return dao.get(id);
+    public Either<DAOError, Profesional> get(int id) {
+        return dao.get(id).map(profesionalEntityMapper::toProfesional);
     }
 
     public Boolean registroProfesional(Profesional profesional) {
@@ -49,6 +85,7 @@ public class ProfesionalesService {
             ProfesionalEntity profesionalEntity = profesionalEntityMapper.toProfesionalEntity(profesional);
             profesionalEntity.getUsuario().setFechaEnvio(LocalDateTime.now());
             profesionalEntity.getUsuario().setPassword(passwordEncoder.encode(profesionalEntity.getUsuario().getPassword()));
+            profesionalEntity.getUsuario().setRole("PROF");
             dao.add(profesionalEntity);
             return true;
         } catch (Exception e) {
@@ -56,8 +93,8 @@ public class ProfesionalesService {
         }
     }
 
-    public Either<DAOError, Integer> update(ProfesionalEntity profesional) {
-        return dao.update(profesional);
+    public Either<DAOError, Integer> update(Profesional profesional) {
+        return dao.update(profesionalEntityMapper.toProfesionalEntity(profesional));
     }
 
     public Either<DAOError, Integer> updateVal(int id, int val) {

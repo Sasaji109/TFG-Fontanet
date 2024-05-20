@@ -3,6 +3,7 @@ package com.example.tfgfontanet.domain.servicios;
 import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOFacturas;
 import com.example.tfgfontanet.data.modelo.FacturaEntity;
+import com.example.tfgfontanet.domain.modelo.mapper.FacturaEntityMapper;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 public class FacturasService {
 
     private final DAOFacturas dao;
+    private final FacturaEntityMapper facturaEntityMapper;
 
     public Either<DAOError, List<FacturaEntity>> getAll() {
         return dao.getAll();
