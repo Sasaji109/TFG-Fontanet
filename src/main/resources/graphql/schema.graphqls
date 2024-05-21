@@ -40,6 +40,13 @@ type Material {
 
 scalar Double
 
+type Servicio {
+    servicioId: Int!
+    nombre: String
+    descripcion: String
+    tarifaBase: Double
+}
+
 type Query {
     getAllClientes: [Cliente]!
     getClienteById(clienteId: Int!): Cliente
@@ -54,10 +61,15 @@ type Query {
 
     getAllMateriales: [Material]!
     getMaterialById(materialId: Int!): Material
+
+    getAllServicios: [Servicio]!
+    getServicioById(servicioId: Int!): Servicio
 }
 
 type Mutation {
     deleteCliente(clienteId: Int!): Int
-    deleteMaterial(materialId: Int!): Int
     deleteProfesional(profesionalId: Int!): Int
+
+    deleteMaterial(materialId: Int!): Int
+    deleteServicio(servicioId: Int!): Int
 }

@@ -2,17 +2,13 @@ package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOMateriales;
-import com.example.tfgfontanet.data.modelo.ClienteEntity;
 import com.example.tfgfontanet.data.modelo.MaterialEntity;
-import com.example.tfgfontanet.domain.modelo.Cliente;
 import com.example.tfgfontanet.domain.modelo.Material;
 import com.example.tfgfontanet.domain.modelo.mapper.MaterialEntityMapper;
 import com.example.tfgfontanet.ui.errores.excepciones.CRUDException;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

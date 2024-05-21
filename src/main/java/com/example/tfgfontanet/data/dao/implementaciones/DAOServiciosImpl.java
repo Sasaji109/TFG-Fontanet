@@ -68,7 +68,7 @@ public class DAOServiciosImpl implements DAOServicios {
 
         try {
             tx.begin();
-            em.persist(servicio);
+            em.merge(servicio);
             tx.commit();
 
             int rowsAffected = 1;

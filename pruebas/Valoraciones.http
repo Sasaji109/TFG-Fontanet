@@ -1,0 +1,16 @@
+###
+# @name getValoracionesByProf
+GET http://localhost:8080/valoracion/1
+
+###
+# @name addValoracion
+POST http://localhost:8080/valoracion/add
+Content-Type: application/json
+
+{
+  "nombreCliente": "Juan",
+  "apellidoCliente": "Luque de Tena",
+  "estrellas": 5,
+  "descripcion": "Estupendo servicio, profesional muy puntual y amable"
+}
+

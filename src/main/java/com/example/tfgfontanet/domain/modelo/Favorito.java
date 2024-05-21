@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Favorito {
-    private Integer id;
     private Integer clienteId;
     private Profesional profesional;
 }

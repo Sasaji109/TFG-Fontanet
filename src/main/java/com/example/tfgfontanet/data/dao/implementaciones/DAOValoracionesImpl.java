@@ -16,6 +16,7 @@ import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
@@ -24,16 +25,17 @@ import java.util.List;
 public class DAOValoracionesImpl implements DAOValoraciones {
 
     private final MongoDatabase mongoDatabase;
-    private final Gson gson = new GsonBuilder().registerTypeAdapter(ObjectId.class, new ObjectIdAdapter()).create();
+    private final Gson gson;
 
-    @Inject
-    public DAOValoracionesImpl() {
-        this.mongoDatabase = MongoDBConfig.getMongoDatabase();
+    @Autowired
+    public DAOValoracionesImpl(MongoDatabase mongoDatabase) {
+        this.mongoDatabase = mongoDatabase;
+        this.gson = new GsonBuilder().registerTypeAdapter(ObjectId.class, new ObjectIdAdapter()).create();
     }
 
     @Override
-    public Either<DAOError, ProfesionalMongo> getAllByProf(int profesionalId) {
-        Either<DAOError, ProfesionalMongo> either;
+    public Either<DAOError, List<ValoracionMongo>> getAllByProf(int profesionalId) {
+        Either<DAOError, List<ValoracionMongo>> either;
 
         try {
             MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("profesionales");
@@ -41,7 +43,7 @@ public class DAOValoracionesImpl implements DAOValoraciones {
 
             if (profesionalDocument != null) {
                 ProfesionalMongo profesionalMongo = new Gson().fromJson(profesionalDocument.toJson(), ProfesionalMongo.class);
-                either = Either.right(profesionalMongo);
+                either = Either.right(profesionalMongo.getValoraciones());
             } else {
                 either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
             }

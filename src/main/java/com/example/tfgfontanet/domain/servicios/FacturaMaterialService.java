@@ -1,10 +1,9 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOFacturaMaterial;
-import com.example.tfgfontanet.data.modelo.FacturaMaterialEntity;
+import com.example.tfgfontanet.domain.modelo.FacturaMaterial;
 import com.example.tfgfontanet.domain.modelo.mapper.FacturaMaterialEntityMapper;
-import io.vavr.control.Either;
+import com.example.tfgfontanet.ui.errores.excepciones.CRUDException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,12 @@ public class FacturaMaterialService {
     private final DAOFacturaMaterial dao;
     private final FacturaMaterialEntityMapper facturaMaterialEntityMapper;
 
-    public Either<DAOError, Integer> addFacturaMaterial(FacturaMaterialEntity facturaMaterial) {
-        return dao.addFacturaMaterial(facturaMaterial);
+    public Boolean addFacturaMaterial(FacturaMaterial facturaMaterial) {
+        try {
+            dao.addFacturaMaterial(facturaMaterialEntityMapper.toFacturaMaterialEntity(facturaMaterial));
+            return true;
+        } catch (CRUDException e) {
+            return false;
+        }
     }
 }

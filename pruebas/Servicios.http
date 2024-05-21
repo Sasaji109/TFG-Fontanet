@@ -1,0 +1,56 @@
+###
+# @name getServicios
+GRAPHQL http://localhost:8080/graphql
+
+query getServicios {
+  getAllServicios {
+    servicioId
+    nombre
+  }
+}
+
+###
+# @name getServicioById
+GRAPHQL http://localhost:8080/graphql
+
+query getServicioById {
+  getServicioById(servicioId: 1) {
+    servicioId
+    nombre
+    descripcion
+    tarifaBase
+  }
+}
+
+###
+# @name deleteServicio
+GRAPHQL http://localhost:8080/graphql
+
+mutation deleteServicio {
+  deleteServicio(servicioId: 5)
+}
+
+###
+# @name addServicio
+POST http://localhost:8080/servicio/add
+Content-Type: application/json
+
+{
+  "servicioId": 0,
+  "nombre": "Nombre del Servicio",
+  "descripcion": "Descripción del Servicio",
+  "tarifaBase": 10.1
+}
+
+###
+# @name updateServicio
+PUT http://localhost:8080/servicio/update
+Content-Type: application/json
+
+{
+  "servicioId": 1,
+  "nombre": "Nombre del Servicio II",
+  "descripcion": "Descripción del Servicio",
+  "tarifaBase": 10.1
+}
+
