@@ -18,6 +18,11 @@ type Profesional {
     usuario: Usuario
 }
 
+type Favorito {
+    clienteId: Int!
+    profesional: Profesional
+}
+
 type Usuario {
     userId: Int!
     username: String
@@ -47,6 +52,18 @@ type Servicio {
     tarifaBase: Double
 }
 
+type Contrato {
+    contratoId: Int!
+    cliente: Cliente
+    profesional: Profesional
+    servicio: Servicio
+    fechaInicio: LocalDate
+    fechaFin: LocalDate
+    estado: String
+}
+
+scalar LocalDate
+
 type Query {
     getAllClientes: [Cliente]!
     getClienteById(clienteId: Int!): Cliente
@@ -64,6 +81,14 @@ type Query {
 
     getAllServicios: [Servicio]!
     getServicioById(servicioId: Int!): Servicio
+
+    getAllContratos: [Contrato]!
+    getContratosByCliente(clienteId: Int!): [Contrato]!
+    getContratosByProfesional(profesionalId: Int!): [Contrato]!
+    getContratosByEstado(estado: String!): [Contrato]!
+    getContratoById(contratoId: Int!): Contrato
+
+    getAllFavoritosByCliente(clienteId: Int!): [Favorito]!
 }
 
 type Mutation {
@@ -72,4 +97,6 @@ type Mutation {
 
     deleteMaterial(materialId: Int!): Int
     deleteServicio(servicioId: Int!): Int
+
+    deleteFavorito(clienteId: Int!, profesionalId: Int!): Int
 }

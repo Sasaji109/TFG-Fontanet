@@ -3,6 +3,7 @@ package com.example.tfgfontanet.domain.servicios;
 import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOContratos;
 import com.example.tfgfontanet.data.modelo.ContratoEntity;
+import com.example.tfgfontanet.domain.modelo.Cliente;
 import com.example.tfgfontanet.domain.modelo.Contrato;
 import com.example.tfgfontanet.domain.modelo.mapper.ContratoEntityMapper;
 import com.example.tfgfontanet.ui.errores.excepciones.CRUDException;
@@ -69,6 +70,9 @@ public class ContratosService {
 
     public Boolean add(Contrato contrato) {
         try {
+            Cliente cliente = new Cliente();
+            cliente.setClienteId(1);
+            contrato.setCliente(cliente);
             dao.add(contratoEntityMapper.toContratoEntity(contrato));
             return true;
         } catch (CRUDException e) {

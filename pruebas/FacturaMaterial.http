@@ -1,0 +1,12 @@
+###
+# @name addFacturaMaterial
+POST http://localhost:8080/facturaMaterial/add
+Content-Type: application/json
+
+{
+  "facturaId": 1,
+  "material": {
+    "materialId": 1
+  },
+  "cantidad": 10
+}

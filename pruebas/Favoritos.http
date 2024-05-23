@@ -1,0 +1,26 @@
+###
+# @name getAllFavoritosByCliente
+GRAPHQL http://localhost:8080/graphql
+
+query getAllFavoritosByCliente {
+  getAllFavoritosByCliente(clienteId: 1) {
+    clienteId
+    profesional {
+        profesionalId
+        nombre
+        valoracion
+    }
+  }
+}
+
+###
+# @name deleteFavorito
+GRAPHQL http://localhost:8080/graphql
+
+mutation deleteFavorito {
+  deleteFavorito(clienteId: 1, profesionalId: 1)
+}
+
+###
+# @name addFavorito
+POST http://localhost:8080/favoritos/add?clienteId=1&profesionalId=1

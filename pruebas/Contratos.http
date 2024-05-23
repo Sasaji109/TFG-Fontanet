@@ -1,0 +1,88 @@
+###
+# @name getContratos
+GRAPHQL http://localhost:8080/graphql
+
+query getContratos {
+  getAllContratos {
+    contratoId
+    cliente {clienteId}
+    profesional {profesionalId}
+    servicio {servicioId}
+    fechaInicio
+    fechaFin
+    estado
+  }
+}
+
+###
+# @name getContratosByCliente
+GRAPHQL http://localhost:8080/graphql
+
+query getContratosByCliente {
+  getContratosByCliente(clienteId: 1) {
+    profesional {nombre}
+    servicio {nombre, tarifaBase}
+    estado
+  }
+}
+
+###
+# @name getContratosByProfesional
+GRAPHQL http://localhost:8080/graphql
+
+query getContratosByProfesional {
+  getContratosByProfesional(profesionalId: 1) {
+    cliente {nombre}
+    servicio {nombre, tarifaBase}
+    estado
+  }
+}
+
+###
+# @name getContratosByEstado
+GRAPHQL http://localhost:8080/graphql
+
+query getContratosByEstado {
+  getContratosByEstado(estado: "pendiente") {
+    cliente {nombre}
+    servicio {nombre}
+    estado
+  }
+}
+
+###
+# @name getContratoById
+GRAPHQL http://localhost:8080/graphql
+
+query getContratoById {
+  getContratoById(contratoId: 1) {
+    contratoId
+    cliente {nombre}
+    servicio {nombre, descripcion, tarifaBase}
+    fechaInicio
+    fechaFin
+    estado
+  }
+}
+
+###
+# @name updateContrato
+PUT http://localhost:8080/contrato/updateEstado?contratoId=1&estado=Inactivo
+
+###
+# @name addContrato
+POST http://localhost:8080/contrato/add
+Content-Type: application/json
+
+{
+  "profesional": {
+    "profesionalId": 2
+  },
+  "servicio": {
+    "servicioId": 1,
+    "nombre": "Nombre del Servicio",
+    "tarifaBase": 10.1
+  },
+  "fechaInicio": "2024-06-01",
+  "estado": "Activo"
+}
