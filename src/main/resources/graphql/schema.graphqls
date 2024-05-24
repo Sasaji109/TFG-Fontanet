@@ -62,11 +62,30 @@ type Contrato {
     estado: String
 }
 
+
+type Factura {
+    facturaId: Int!
+    cliente: Cliente
+    profesional: Profesional
+    servicio: Servicio
+    materiales: [FacturaMaterial]
+    precio: Double
+    estado: String
+}
+
+type FacturaMaterial {
+    id: Int!
+    facturaId: Int
+    material: Material
+    cantidad: Int
+}
+
 scalar LocalDate
 
 type Query {
     getAllClientes: [Cliente]!
     getClienteById(clienteId: Int!): Cliente
+    getClienteByUserId: Cliente
 
     getAllProfesionales: [Profesional]!
     getProfesionalById(profesionalId: Int!): Profesional
@@ -87,6 +106,11 @@ type Query {
     getContratosByProfesional(profesionalId: Int!): [Contrato]!
     getContratosByEstado(estado: String!): [Contrato]!
     getContratoById(contratoId: Int!): Contrato
+
+    getAllFacturas: [Factura]!
+    getFacturasByCliente(clienteId: Int!): [Factura]!
+    getFacturasByProfesional(profesionalId: Int!): [Factura]!
+    getFacturaById(facturaId: Int!): Factura
 
     getAllFavoritosByCliente(clienteId: Int!): [Favorito]!
 }

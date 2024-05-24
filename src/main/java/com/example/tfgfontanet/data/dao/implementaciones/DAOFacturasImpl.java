@@ -144,7 +144,6 @@ public class DAOFacturasImpl implements DAOFacturas {
         } finally {
             em.close();
         }
-
         return either;
     }
 

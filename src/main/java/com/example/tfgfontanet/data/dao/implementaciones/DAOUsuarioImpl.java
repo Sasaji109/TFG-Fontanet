@@ -13,6 +13,7 @@ import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Repository
 public class DAOUsuarioImpl implements DAOUsuario {
@@ -27,12 +28,12 @@ public class DAOUsuarioImpl implements DAOUsuario {
 
 
     @Override
-    public UsuarioEntity findByUsername(String name) {
+    public Optional<UsuarioEntity> findByUsername(String name) {
         em = jpaUtil.getEntityManager();
         TypedQuery<UsuarioEntity> query = em.createQuery(
                 "SELECT u FROM UsuarioEntity u WHERE u.username = :name", UsuarioEntity.class);
         query.setParameter("name", name);
-        return query.getSingleResult();
+        return Optional.ofNullable(query.getSingleResult());
     }
 
     @Override

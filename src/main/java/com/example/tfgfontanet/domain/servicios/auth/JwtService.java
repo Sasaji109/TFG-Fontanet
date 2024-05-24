@@ -12,6 +12,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.security.Key;
@@ -51,7 +52,7 @@ public class JwtService {
     public Either<CustomError, String> generateToken(String username, int duration) {
         Either<CustomError, String> res;
         try {
-            UsuarioEntity usuarioEntity = daoUsuarios.findByUsername(username);
+            UsuarioEntity usuarioEntity = daoUsuarios.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
             Usuario user = usuarioEntityMapper.toUsuario(usuarioEntity);
             String token = Jwts.builder()
                     .setSubject(user.getUsername())

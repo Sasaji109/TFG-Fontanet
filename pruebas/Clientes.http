@@ -1,6 +1,7 @@
 ###
 # @name getClientes
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqdWFuMTIzIiwiZXhwIjoxNzE2NTUzNTUzLCJ1c2VyIjoianVhbjEyMyIsInJvbGUiOiJDTElFTlRFIn0.CXjRR67bIResarlpUBGcitZ_am0gqIq5AvwfpHKDwkVHCCjeAagQ5ojr5JIZZ0E4xs36bVc5a3-dyeX5GTy_Ziu9P58gcMkMPC4X9U3kn3dRD0fwmpftit4d1OQt9BdVFcNCmjUkIAN8otffhrfRKKG8fXfjbcCVl6HrmaFbkkQibRahfYiAIoMGVPtMWHKuEuDcqQbGp-O02G8mF0r1UZRcMjC4mchVI3kZm1HrmZWqfCMxQOQTgb-3oLExzL5qxS_R0ZpgHJmn_06CCpwlzuSNdJqidGhrJANmkGmq0jRJUMsXWvAnaBuXk2bvZzXuVMUdXMFXi6Obo9G0U_ZqbA
 
 query getClientes {
   getAllClientes {
@@ -13,6 +14,7 @@ query getClientes {
 ###
 # @name getClienteById
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqdWFuMTIzIiwiZXhwIjoxNzE2NTczODEwLCJ1c2VyIjoianVhbjEyMyIsInJvbGUiOiJDTElFTlRFIn0.GfMqikXCvVkmy0lxZ_-1xXUE7VVxduEW0Rb0FVyNYk9kLmzq0LPKv1L07LAlUVKp713wTM_9Xm1DmAlfk1dGaBbewEV9E2wEBdCaigFRGudZaLD5z4YodqiT12gS9DnGBdw6T52v7sM8IKFYRX2C17x7chfqvyTv-Y0u8ZoeSmPf3PKrboEQuF6InpGAnbq0JZsdeuc4Sxz8gJzdfszSSMFtdkxRPzazoMnHMbuTQ6U7brHUwYv539jmlSMn6ZtrU4CRf84YgyEdnyt5kC2bLPYY67wP5-QDRKwt1C7zYlfuPLpbD2E4OP1eXI9Pz1zUFFOYJ8FkGN5Xs0DLyb4nkQ
 
 query getClienteById {
   getClienteById(clienteId: 1) {
@@ -29,8 +31,28 @@ query getClienteById {
 }
 
 ###
+# @name getClienteByUserId
+GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqdWFuMTIzIiwiZXhwIjoxNzE2NTk0NDI3LCJ1c2VyIjoianVhbjEyMyIsInJvbGUiOiJDTElFTlRFIn0.DBr1WkDGUkZw-pHGoZVKRWgPMBDpO_1Vo88lE391WRGGEpWFt_405y14tkgWdAmNkR6cAQCNMCCY6BMpBucUE2omeyEKn7RuJHfbeM_3kcByAQyoVvKgfoLW7KYI_ahGdVeuAcaKBcCpmKGM8wTFcixTiG9IiUhdTX6OGCC8xqpL2X4paI5UB9jnK4Ov7zsFIO8SEq4ETybH9dN0hV7OhhlNyHqPvAZ6hAmEVaocRPoT_WLUPntpzw_6fvKuE_uYggCpQ5FeuFsNRSyh-tytjJ_zn3Y0auypoTi3aku9Ct__DZwSplrgJ7VYipvqZCH-FOQls8Gi0tjU-CP8VgI6jA
+
+query getClienteByUserId {
+  getClienteByUserId {
+    clienteId
+    nombre
+    apellidos
+    numero
+    usuario {
+        username
+        correo
+        password
+    }
+  }
+}
+
+###
 # @name deleteCliente
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
 
 mutation deleteCliente {
   deleteCliente(clienteId: 38)
@@ -39,6 +61,7 @@ mutation deleteCliente {
 ###
 # @name updateCliente
 PUT http://localhost:8080/cliente/update
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtYXJjb3MxMjMiLCJleHAiOjE3MTY1NzAwMzMsInVzZXIiOiJtYXJjb3MxMjMiLCJyb2xlIjoiUFJPRiJ9.K3Cjyuazy33lN--vYgT0clBUI6NZ8gR5N1tigE9mw-dKB52OK6f64akC9FQMuDsrRP4bOqEDXSCK-Y_-xuBwfvGtRbgN0t7ISb5-bdYbLvoKY-QysFl8t46pYbHgpjV6vQMSDkLpXOZK2mHDWSZl8zdZVE8Mxyo-wVvxrlC_kBvIy0UUz2xvlbyuKOe34EJZzNYhXx4gv37GSXroIG2RxPPtQc7EvztMwsZdMH8JyY_2jnwECFBvg9mQMTUG9Zut1AQN9KkXxsYmzGAoNRiDwx5nw9cYvT4LLVtjjxN4mSgLICx7H4g6B9mv7MUo1YOB8nkDFRnhsZR_g84C__a_PQ
 Content-Type: application/json
 
 {

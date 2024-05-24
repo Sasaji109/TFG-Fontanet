@@ -11,6 +11,7 @@ import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
@@ -44,7 +45,6 @@ public class DAOClientesImpl implements DAOClientes {
         return either;
     }
 
-
     @Override
     public Either<DAOError, ClienteEntity> get(int id) {
         Either<DAOError, ClienteEntity> either;
@@ -55,6 +55,34 @@ public class DAOClientesImpl implements DAOClientes {
             either = Either.right(cliente);
         } catch (Exception e) {
             either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+        }
+        return either;
+    }
+
+    @Override
+    public Either<DAOError, ClienteEntity> getByUserId(int userId) {
+        Either<DAOError, ClienteEntity> either;
+        em = jpaUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            ClienteEntity clienteEntity = em.createQuery(
+                            "SELECT c FROM ClienteEntity c LEFT JOIN FETCH c.profesionalesFavoritos WHERE c.usuario.userId = :userId",
+                            ClienteEntity.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+            tx.commit();
+            either = Either.right(clienteEntity);
+        } catch (NoResultException e) {
+            either = Either.left(new DAOError(404, "Cliente no encontrado", LocalDate.now()));
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+        } finally {
+            em.close();
         }
         return either;
     }

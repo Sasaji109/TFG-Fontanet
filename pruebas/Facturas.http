@@ -1,61 +1,104 @@
 ###
-# @name getServicios
+# @name getFacturas
 GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
 
-query getServicios {
-  getAllServicios {
-    servicioId
-    nombre
+query getFacturas {
+  getAllFacturas {
+    facturaId
+    cliente { clienteId }
+    profesional { profesionalId }
+    servicio { servicioId }
+    precio
+    estado
   }
 }
 
 ###
-# @name getServicioById
+# @name getFacturasByCliente
 GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
 
-query getServicioById {
-  getServicioById(servicioId: 1) {
-    servicioId
-    nombre
-    descripcion
-    tarifaBase
+query getFacturasByCliente {
+  getFacturasByCliente(clienteId: 1) {
+    profesional { nombre }
+    servicio { nombre }
+    precio
+    estado
   }
 }
 
 ###
-# @name deleteServicio
+# @name getFacturasByProfesional
 GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
 
-mutation deleteServicio {
-  deleteServicio(servicioId: 5)
+query getFacturasByProfesional {
+  getFacturasByProfesional(profesionalId: 1) {
+    cliente { nombre }
+    servicio { nombre }
+    precio
+    estado
+  }
 }
 
 ###
-# @name addServicio
-POST http://localhost:8080/servicio/add
+# @name getFacturaById
+GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
+
+query getFacturaById {
+  getFacturaById(facturaId: 1) {
+    facturaId
+    profesional { nombre, apellidos }
+    servicio { nombre }
+    precio
+    estado
+  }
+}
+
+###
+# @name updateFacturaEstado
+PUT http://localhost:8080/factura/updateEstado?facturaId=1&estado=Pagado
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
+
+###
+# @name addFactura
+POST http://localhost:8080/factura/add
 Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
 Content-Type: application/json
 
 {
-  "servicioId": 0,
-  "nombre": "Nombre del Servicio",
-  "descripcion": "Descripción del Servicio",
-  "tarifaBase": 10.1
+  "cliente": {
+    "clienteId": 2
+  },
+  "profesional": {
+    "profesionalId": 2
+  },
+  "servicio": {
+    "servicioId": 2,
+    "tarifaBase": 10.0
+  },
+  "materiales": [
+    {
+      "material": {
+        "materialId": 1,
+        "nombre": "Material 1",
+        "descripcion": "Descripción del Material 1",
+        "precio": 10.0
+      },
+      "cantidad": 5
+    },
+    {
+      "material": {
+        "materialId": 2,
+        "nombre": "Material 2",
+        "descripcion": "Descripción del Material 2",
+        "precio": 20.0
+      },
+      "cantidad": 3
+    }
+  ],
+  "precio": 0.0,
+  "estado": "Pendiente"
 }
-
-###
-# @name updateServicio
-PUT http://localhost:8080/servicio/update
-Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
-Content-Type: application/json
-
-{
-  "servicioId": 1,
-  "nombre": "Nombre del Servicio II",
-  "descripcion": "Descripción del Servicio",
-  "tarifaBase": 10.1
-}
-

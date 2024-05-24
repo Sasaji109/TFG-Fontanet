@@ -11,11 +11,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Repository
 public class DAOContratosImpl implements DAOContratos {

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,7 +28,7 @@ public class AuthService {
     private final MandarMailActivacion mandarMailActivacion;
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        UsuarioEntity usuarioEntity = dao.findByUsername(request.username());
+        UsuarioEntity usuarioEntity = dao.findByUsername(request.username()).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
         Usuario usuario = usuarioEntityMapper.toUsuario(usuarioEntity);
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));

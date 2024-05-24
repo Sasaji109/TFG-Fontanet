@@ -8,6 +8,7 @@ import java.util.List;
 public interface DAOClientes {
     Either<DAOError, List<ClienteEntity>> getAll();
     Either<DAOError, ClienteEntity> get(int id);
+    Either<DAOError, ClienteEntity> getByUserId(int userId);
     Either<DAOError, Integer> add(ClienteEntity cliente);
     Either<DAOError, Integer> update(ClienteEntity cliente);
     Either<DAOError, Integer> delete(int id);
