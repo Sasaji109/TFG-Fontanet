@@ -11,7 +11,7 @@ public interface DAOContratos {
     Either<DAOError, List<ContratoEntity>> getAllByProfesional(int profesionalId);
     Either<DAOError, List<ContratoEntity>> getAllByEstado(String estado);
     Either<DAOError, ContratoEntity> get(int id);
-    Either<DAOError, Integer> add(ContratoEntity contrato);
+    Either<DAOError, ContratoEntity> add(ContratoEntity contrato);
     Either<DAOError, Integer> update(ContratoEntity contrato);
     Either<DAOError, Integer> updateEstado(int contratoId, String estado);
 }

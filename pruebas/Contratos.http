@@ -78,12 +78,12 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1N
 ###
 # @name addContrato
 POST http://localhost:8080/contrato/add
-Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqdWFuMTIzIiwiZXhwIjoxNzE2NjU5ODUyLCJ1c2VyIjoianVhbjEyMyIsInJvbGUiOiJDTElFTlRFIn0.ZGasbWc_rWu8YD-jzJEEAXLeF9slybvKseYb5Hsm-A81i--uxY-S6NPAqM2oRPhffyKTEo_qAszULlMiBkhGCvmSkB6XouIgcHlz0FSi7ILloil8HSrMTs5N4vUkrRmomoSLCu4CNsR5xGYzuKhDQbkPWXOLnMucuOZ1w5x_Ruxl_jGShuspxJS8tDaILF3f19UnWljctk10LEPy7EFIdoSINzs0hCXtvtsSrKJW1DSRUgoVC-IQftedT5kpqVcXE4wsry-kA-v2aeCwJZZhGqSx8JSPkZG7ifL6czfoWAZT_-bVy528LdTG-DHkn7keMsiBOuRcT2jXOl02C2AvbQ
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqdWFuMTIzIiwiZXhwIjoxNzE2Njc0NTA5LCJ1c2VyIjoianVhbjEyMyIsInJvbGUiOiJDTElFTlRFIn0.NrwUSw0kO_GIO_v5T8FijRJhjlGmxqIEscZq4JCHhqQ7P5rczTPZprvBj7ADos0UhM5euGPte3a5udhDQuSWvCLAhoED8qAZNGt4QzeYzkxPh3_FiChxntQ9nY-iU6qar51P3-6v10aVVV0w0taHJ2uWRvVgQj1M26cUVNlDr66MeiVUimKELp0msF-XSErk11vxv7e7LwdekI8KBfIGAC2MaOUXkrb6iyPs4obrDhGBHMrpvb9civMYX9U4R9F0iv_nzJwTsX7r05KlJGP62keyirLgAkoGIK3VIp81wF4VFHuuTlMOeogi5Zu1r4vBFArNjIWUZ7mWA1vKMDcBEg
 Content-Type: application/json
 
 {
   "profesional": {
-    "profesionalId": 2
+    "profesionalId": 1
   },
   "servicio": {
     "servicioId": 1,

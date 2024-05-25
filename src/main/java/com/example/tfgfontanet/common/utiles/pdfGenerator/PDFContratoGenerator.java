@@ -11,10 +11,12 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
+import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
+@Service
 public class PDFContratoGenerator {
 
     public static void generarContrato(ContratoEntity contrato) throws IOException {
@@ -30,8 +32,8 @@ public class PDFContratoGenerator {
         String estado = contrato.getEstado();
 
         PDDocumentInformation pdd = document.getDocumentInformation();
-        pdd.setAuthor(cliente.getNombre() + " " + cliente.getApellidos());
-        pdd.setTitle(Constantes.CONTRATO_TRABAJO + profesional.getNombre() + " " + profesional.getApellidos());
+        pdd.setAuthor(cliente.getNombre() + Constantes.SPACE + cliente.getApellidos());
+        pdd.setTitle(Constantes.CONTRATO_TRABAJO + profesional.getNombre() + Constantes.SPACE + profesional.getApellidos());
         pdd.setCreator(Constantes.CREATOR);
         pdd.setSubject(Constantes.SUBJECTCONTRATO);
 
@@ -50,7 +52,7 @@ public class PDFContratoGenerator {
         contentStream.showText(Constantes.DATOS_CLIENTE);
         contentStream.newLine();
         contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-        contentStream.showText(Constantes.NOMBRE_APELLIDOS + cliente.getNombre() + " " + cliente.getApellidos());
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + cliente.getNombre() + Constantes.SPACE + cliente.getApellidos());
         contentStream.newLine();
         contentStream.showText(Constantes.NUMERO_TELEFONO + cliente.getNumero());
         contentStream.newLine();
@@ -60,7 +62,7 @@ public class PDFContratoGenerator {
         contentStream.showText(Constantes.DATOS_PROFESIONAL);
         contentStream.newLine();
         contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-        contentStream.showText(Constantes.NOMBRE_APELLIDOS + profesional.getNombre() + " " + profesional.getApellidos());
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + profesional.getNombre() + Constantes.SPACE + profesional.getApellidos());
         contentStream.newLine();
         contentStream.showText(Constantes.NUMERO_TELEFONO + profesional.getNumero());
         contentStream.newLine();
@@ -93,7 +95,7 @@ public class PDFContratoGenerator {
         contentStream.endText();
         contentStream.close();
 
-        document.save(new File(Constantes.RUTA_CONTRATO));
+        document.save(new File(Constantes.RUTA_CONTRATO + contrato.getProfesional().getNombre() + Constantes.NOMBRE_PDF));
         document.close();
     }
 }

@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContratosController {
 
-    public static final String CONTRATO_UPDATE_ESTADO_PATH = "/contrato/updateEstado";
     private final ContratosService contratosService;
 
     @QueryMapping
@@ -64,7 +63,7 @@ public class ContratosController {
         return contratosService.update(contrato).getOrElseThrow(() -> new CRUDException(Constantes.CONTRATO_NO_ACTUALIZADO));
     }
 
-    @PutMapping(CONTRATO_UPDATE_ESTADO_PATH)
+    @PutMapping(Constantes.CONTRATO_UPDATE_ESTADO_PATH)
     public Integer updateContratoEstado(@RequestParam(Constantes.CONTRATO_ID) Integer contratoId, @RequestParam(Constantes.ESTADO) String estado) {
         return contratosService.updateEstado(contratoId, estado).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DEL_CONTRATO_NO_ACTUALIZADO));
     }

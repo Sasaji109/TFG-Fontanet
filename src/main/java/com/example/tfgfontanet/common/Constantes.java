@@ -1,5 +1,7 @@
 package com.example.tfgfontanet.common;
 
+import lombok.RequiredArgsConstructor;
+
 public class Constantes {
 
     //Valores generales
@@ -29,7 +31,6 @@ public class Constantes {
     public static final String BEARERHEADER = "Bearer ";
     public static final int ACCESS_TOKEN_TIME = 600;
     public static final int REFRESH_TOKEN_TIME = 600;
-    public static final String ERROR_AL_GENERAR_EL_TOKEN = "Error al generar el token: ";
     public static final String ERROR_AL_RENOVAR_EL_TOKEN = "Error al renovar el token: ";
 
 
@@ -46,9 +47,7 @@ public class Constantes {
 
 
     //Mongo Configuracion
-    public static final String DATABASE_HOST = "mongodb://informatica.iesquevedo.es:";
     public static final String DATABASE = "mongodb://informatica.iesquevedo.es:2323";
-    public static final int DATABASE_PORT = 2323;
     public static final String DATABASE_NAME = "samuelsanchez_tfg";
 
 
@@ -75,6 +74,11 @@ public class Constantes {
     public static final String ENVIADO_UN_CORREO_DE_ACTIVACION = "El usuario no está activado. Se ha enviado un correo de activación.";
 
 
+    //Mandar Mail Contrato
+    public static final String CONTRATO_MSG1 = "Te han ofrecido un nuevo contrato. Por favor, acceda a la aplicación para revisarlo, y si está conforme, aceptarlo.";
+    public static final String CONTRATO_SUBJECT = "Nuevo Contrato Ofrecido";
+
+
     //PDF Generator Contrato
     public static final String CONTRATO_TRABAJO = "Contrato de Trabajo para: ";
     public static final String CREATOR = "Fontanet";
@@ -93,8 +97,8 @@ public class Constantes {
     public static final String NO_ESPECIFICADA = "No especificada";
     public static final String TARIFA_BASE = "Tarifa Base: $";
     public static final String ESTADOPDF = "Estado:";
-    public static final String RUTA_CONTRATO = "C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\contrato.pdf";
-    public static final String CONTRATO_GENERADO = "Contrato generado correctamente";
+    public static final String RUTA_CONTRATO = "C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\";
+    public static final String NOMBRE_PDF = ".pdf";
 
 
     //PDF Generator Factura
@@ -106,7 +110,6 @@ public class Constantes {
     public static final String X = " x ";
     public static final String PRECIO_TOTAL = "Precio Total: $";
     public static final String RUTA_FACTURA = "C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\factura.pdf";
-    public static final String FACTURA_GENERADA = "Factura generada correctamente";
 
 
     //Avisos de Registro, Activacion y Autenticacion
@@ -212,6 +215,7 @@ public class Constantes {
     public static final String CLIENTE_UPDATE_PATH = "/cliente/update";
     public static final String CONTRATO_ADD_PATH = "/contrato/add";
     public static final String CONTRATO_UPDATE_PATH = "/contrato/update";
+    public static final String CONTRATO_UPDATE_ESTADO_PATH = "/contrato/updateEstado";
     public static final String FACTURAMATERIAL_ADD_PATH = "/facturaMaterial/add";
     public static final String FACTURA_ADD_PATH = "/factura/add";
     public static final String FACTURA_UPDATE_ESTADO_PATH = "/factura/updateEstado";

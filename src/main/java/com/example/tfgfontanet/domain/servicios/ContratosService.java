@@ -14,6 +14,7 @@ import com.example.tfgfontanet.domain.modelo.Profesional;
 import com.example.tfgfontanet.domain.modelo.mapper.ClienteEntityMapper;
 import com.example.tfgfontanet.domain.modelo.mapper.ContratoEntityMapper;
 import com.example.tfgfontanet.domain.modelo.mapper.ProfesionalEntityMapper;
+import com.example.tfgfontanet.domain.servicios.mail.MandarMailContratoPDF;
 import com.example.tfgfontanet.ui.errores.excepciones.CRUDException;
 import com.example.tfgfontanet.ui.errores.excepciones.NotFoundException;
 import io.vavr.control.Either;
@@ -35,6 +36,7 @@ public class ContratosService {
     private final ClienteEntityMapper clienteEntityMapper;
     private final ProfesionalEntityMapper profesionalEntityMapper;
     private final ContratoEntityMapper contratoEntityMapper;
+    private final MandarMailContratoPDF mandarMailContratoPDF;
 
     public Either<DAOError, List<Contrato>> getAll() {
         return daoContratos.getAll().map(contratoEntityList -> {
@@ -98,7 +100,8 @@ public class ContratosService {
             UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
             Cliente cliente = daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
             contrato.setCliente(cliente);
-            daoContratos.add(contratoEntityMapper.toContratoEntity(contrato));
+            ContratoEntity contratoEntity = daoContratos.add(contratoEntityMapper.toContratoEntity(contrato)).get();
+            mandarMailContratoPDF.mandarMail(contratoEntity.getContratoId());
             return true;
         } catch (CRUDException e) {
             return false;

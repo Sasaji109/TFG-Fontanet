@@ -116,8 +116,8 @@ public class DAOContratosImpl implements DAOContratos {
     }
 
     @Override
-    public Either<DAOError, Integer> add(ContratoEntity contrato) {
-        Either<DAOError, Integer> either;
+    public Either<DAOError, ContratoEntity> add(ContratoEntity contrato) {
+        Either<DAOError, ContratoEntity> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -125,7 +125,7 @@ public class DAOContratosImpl implements DAOContratos {
         try {
             em.persist(contrato);
             tx.commit();
-            either = Either.right(1);
+            either = Either.right(contrato);
         } catch(Exception e) {
             if (tx.isActive()) tx.rollback();
             either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));

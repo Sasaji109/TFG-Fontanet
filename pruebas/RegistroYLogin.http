@@ -53,7 +53,7 @@ Content-Type: application/json
   "usuario": {
     "userId": 0,
     "username": "fernando23",
-    "correo": "sasaji2004@gmail.com",
+    "correo": "samper7804@gmail.com",
     "password": "2dam",
     "activado": false,
     "fechaEnvio": null,
