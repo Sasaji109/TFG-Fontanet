@@ -1,5 +1,6 @@
 package com.example.tfgfontanet.ui.config;
 
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.common.configuracion.ConfiguracionMail;
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
 import com.example.tfgfontanet.common.utiles.mail.MandarMail;
@@ -57,8 +58,8 @@ public class Configuracion {
 
     @Bean
     public MongoDatabase getMongoDatabase() {
-        MongoClient mongoClient = MongoClients.create("mongodb://informatica.iesquevedo.es:2323");
-        return mongoClient.getDatabase("samuelsanchez_tfg");
+        MongoClient mongoClient = MongoClients.create(Constantes.DATABASE);
+        return mongoClient.getDatabase(Constantes.DATABASE_NAME);
     }
 
     @Bean

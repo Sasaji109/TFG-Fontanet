@@ -66,7 +66,7 @@ public class DAOFavoritosImpl implements DAOFavoritos {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Cliente o Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.CLIENTE_O_PROFESIONAL_NOT_FOUND, LocalDate.now()));
             }
         }
         catch (PersistenceException e) {
@@ -99,10 +99,10 @@ public class DAOFavoritosImpl implements DAOFavoritos {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Favorito no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.FAVORITO_NOT_FOUND, LocalDate.now()));
             }
         } catch (NoResultException e) {
-            either = Either.left(new DAOError(404, "Favorito no encontrado", LocalDate.now()));
+            either = Either.left(new DAOError(404, Constantes.FAVORITO_NOT_FOUND, LocalDate.now()));
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
             either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));

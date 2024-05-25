@@ -28,15 +28,15 @@ public class AuthService {
     private final MandarMailActivacion mandarMailActivacion;
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        UsuarioEntity usuarioEntity = dao.findByUsername(request.username()).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        UsuarioEntity usuarioEntity = dao.findByUsername(request.username()).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
         Usuario usuario = usuarioEntityMapper.toUsuario(usuarioEntity);
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
         var user = userDetailsService.loadUserByUsername(request.username());
 
-        if (!usuario.getActivado()) {
+        if (Boolean.FALSE.equals(usuario.getActivado())) {
             mandarMailActivacion.mandarMail(usuario);
-            throw new UsuarioNoActivadoException("El usuario no está activado. Se ha enviado un correo de activación.");
+            throw new UsuarioNoActivadoException(Constantes.ENVIADO_UN_CORREO_DE_ACTIVACION);
         }
 
         var jwtToken = jwtService.generateToken(user.getUsername(), Constantes.ACCESS_TOKEN_TIME).get();

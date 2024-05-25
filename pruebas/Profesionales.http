@@ -111,6 +111,28 @@ query getProfesionalById {
 }
 
 ###
+# @name getProfesionalByUserId
+GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtYXJjb3MxMjMiLCJleHAiOjE3MTY2NTgxMTIsInVzZXIiOiJtYXJjb3MxMjMiLCJyb2xlIjoiUFJPRiJ9.Zvq3xUxFkm5DM2Gc6F3MA8tCeXW5QJvdGRwzBddVGecEUqk7Ss5OEDnxoooZLZ-Ob8OBLJN2RM7lmk77oKgsKRR3n8I1zSX38lXRRcOS3bZbug7BEPZIJHiXuiVB-U9XJkY621vrrn9FtJjVIGE8d81DqPaThonR-W210izlsaCcZgCIr45YPTa0llkcH-j0nNGoSl776xG5dwTupMKSw0kf6_4wJeppjKrMxNbVkQrkhoOQA40LO7oz3yL7TBEg1L-g1_qS9yvutdETTNS5cyn9Fv4BpK-IqIdFTdQpjht-XyNtnrC-TX4UBBsNe9YxTNWcazPMR5FmEIt9amgP0Q
+
+query getProfesionalByUserId {
+  getProfesionalByUserId {
+    profesionalId
+    nombre
+    apellidos
+    numero
+    experiencia
+    oficio
+    disponibilidad
+    usuario {
+        username
+        correo
+        password
+    }
+  }
+}
+
+###
 # @name getProfesionalParaCliente
 GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw

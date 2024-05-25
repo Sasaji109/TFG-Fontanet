@@ -25,8 +25,8 @@ public class LoginController {
         return authService.authenticate(requestAuth);
     }
 
-    @GetMapping("/refresh")
-    public String refreshToken(@RequestParam("token") String token) {
+    @GetMapping(Constantes.REFRESH_PATH)
+    public String refreshToken(@RequestParam(Constantes.TOKEN) String token) {
         return jwtService.renovarAccessToken(token).get();
     }
 }

@@ -10,6 +10,7 @@ import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
@@ -131,6 +132,33 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
         }
         return either;
     }
+    @Override
+    public Either<DAOError, ProfesionalEntity> getByUserId(int userId) {
+        Either<DAOError, ProfesionalEntity> either;
+        em = jpaUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            ProfesionalEntity profesionalEntity = em.createQuery(
+                            "SELECT p FROM ProfesionalEntity p LEFT JOIN FETCH p.usuario WHERE p.usuario.userId = :userId",
+                            ProfesionalEntity.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+            tx.commit();
+            either = Either.right(profesionalEntity);
+        } catch (NoResultException e) {
+            either = Either.left(new DAOError(404, Constantes.PROFESIONAL_NOT_FOUND, LocalDate.now()));
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+        } finally {
+            em.close();
+        }
+        return either;
+    }
 
     @Override
     public Either<DAOError, Integer> add(ProfesionalEntity profesional) {
@@ -201,7 +229,7 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.PROFESIONAL_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
@@ -235,7 +263,7 @@ public class DAOProfesionalesImpl implements DAOProfesionales {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.PROFESIONAL_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();

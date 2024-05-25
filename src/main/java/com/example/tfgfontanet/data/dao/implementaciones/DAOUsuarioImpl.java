@@ -55,28 +55,6 @@ public class DAOUsuarioImpl implements DAOUsuario {
     }
 
     @Override
-    public Either<DAOError, Integer> registrarUsuario(UsuarioEntity usuario) {
-        Either<DAOError, Integer> either;
-        em = jpaUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        try {
-            tx.begin();
-            em.merge(usuario);
-            tx.commit();
-
-            int rowsAffected = 1;
-            either = Either.right(rowsAffected);
-        } catch (Exception e) {
-            if (tx.isActive()) tx.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
-        } finally {
-            em.close();
-        }
-        return either;
-    }
-
-    @Override
     public Either<DAOError, Integer> updateUsuario(UsuarioEntity usuario) {
         Either<DAOError, Integer> either;
         em = jpaUtil.getEntityManager();

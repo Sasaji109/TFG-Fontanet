@@ -1,14 +1,25 @@
 package com.example.tfgfontanet.domain.servicios;
 
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.data.dao.DAOClientes;
 import com.example.tfgfontanet.data.dao.DAOContratos;
+import com.example.tfgfontanet.data.dao.DAOProfesionales;
+import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.modelo.ContratoEntity;
+import com.example.tfgfontanet.data.modelo.UsuarioEntity;
 import com.example.tfgfontanet.domain.modelo.Cliente;
 import com.example.tfgfontanet.domain.modelo.Contrato;
+import com.example.tfgfontanet.domain.modelo.Profesional;
+import com.example.tfgfontanet.domain.modelo.mapper.ClienteEntityMapper;
 import com.example.tfgfontanet.domain.modelo.mapper.ContratoEntityMapper;
+import com.example.tfgfontanet.domain.modelo.mapper.ProfesionalEntityMapper;
 import com.example.tfgfontanet.ui.errores.excepciones.CRUDException;
+import com.example.tfgfontanet.ui.errores.excepciones.NotFoundException;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +28,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContratosService {
 
-    private final DAOContratos dao;
+    private final DAOContratos daoContratos;
+    private final DAOProfesionales daoProfesionales;
+    private final DAOClientes daoClientes;
+    private final DAOUsuario daoUsuario;
+    private final ClienteEntityMapper clienteEntityMapper;
+    private final ProfesionalEntityMapper profesionalEntityMapper;
     private final ContratoEntityMapper contratoEntityMapper;
 
     public Either<DAOError, List<Contrato>> getAll() {
-        return dao.getAll().map(contratoEntityList -> {
+        return daoContratos.getAll().map(contratoEntityList -> {
             List<Contrato> contratos = new ArrayList<>();
             for (ContratoEntity contratoEntity : contratoEntityList) {
                 Contrato contrato = contratoEntityMapper.toContrato(contratoEntity);
@@ -31,8 +47,12 @@ public class ContratosService {
         });
     }
 
-    public Either<DAOError, List<Contrato>> getContratosByCliente(int clienteId) {
-        return dao.getAllByCliente(clienteId).map(contratoEntityList -> {
+    public Either<DAOError, List<Contrato>> getContratosByCliente() {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        Cliente cliente = daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException("Cliente no encontrado"));
+
+        return daoContratos.getAllByCliente(cliente.getClienteId()).map(contratoEntityList -> {
             List<Contrato> contratos = new ArrayList<>();
             for (ContratoEntity contratoEntity : contratoEntityList) {
                 Contrato contrato = contratoEntityMapper.toContrato(contratoEntity);
@@ -42,8 +62,12 @@ public class ContratosService {
         });
     }
 
-    public Either<DAOError, List<Contrato>> getContratosByProfesional(int profesionalId) {
-        return dao.getAllByProfesional(profesionalId).map(contratoEntityList -> {
+    public Either<DAOError, List<Contrato>> getContratosByProfesional() {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException("Profesional no encontrado"));
+
+        return daoContratos.getAllByProfesional(profesional.getProfesionalId()).map(contratoEntityList -> {
             List<Contrato> contratos = new ArrayList<>();
             for (ContratoEntity contratoEntity : contratoEntityList) {
                 Contrato contrato = contratoEntityMapper.toContrato(contratoEntity);
@@ -54,7 +78,7 @@ public class ContratosService {
     }
 
     public Either<DAOError, List<Contrato>> getContratosByEstado(String estado) {
-        return dao.getAllByEstado(estado).map(contratoEntityList -> {
+        return daoContratos.getAllByEstado(estado).map(contratoEntityList -> {
             List<Contrato> contratos = new ArrayList<>();
             for (ContratoEntity contratoEntity : contratoEntityList) {
                 Contrato contrato = contratoEntityMapper.toContrato(contratoEntity);
@@ -65,15 +89,16 @@ public class ContratosService {
     }
 
     public Either<DAOError, Contrato> get(int id) {
-        return dao.get(id).map(contratoEntityMapper::toContrato);
+        return daoContratos.get(id).map(contratoEntityMapper::toContrato);
     }
 
     public Boolean add(Contrato contrato) {
         try {
-            Cliente cliente = new Cliente();
-            cliente.setClienteId(1);
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
+            Cliente cliente = daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
             contrato.setCliente(cliente);
-            dao.add(contratoEntityMapper.toContratoEntity(contrato));
+            daoContratos.add(contratoEntityMapper.toContratoEntity(contrato));
             return true;
         } catch (CRUDException e) {
             return false;
@@ -82,10 +107,10 @@ public class ContratosService {
 
     public Either<DAOError, Integer> update(Contrato contrato) {
         ContratoEntity contratoEntity = contratoEntityMapper.toContratoEntity(contrato);
-        return dao.update(contratoEntity);
+        return daoContratos.update(contratoEntity);
     }
 
     public Either<DAOError, Integer> updateEstado(int contratoId, String estado) {
-        return dao.updateEstado(contratoId, estado);
+        return daoContratos.updateEstado(contratoId, estado);
     }
 }

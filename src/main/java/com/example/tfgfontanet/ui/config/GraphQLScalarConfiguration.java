@@ -1,5 +1,6 @@
 package com.example.tfgfontanet.ui.config;
 
+import com.example.tfgfontanet.common.Constantes;
 import graphql.schema.Coercing;
 import graphql.schema.GraphQLScalarType;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +14,8 @@ public class GraphQLScalarConfiguration {
     @Bean
     public GraphQLScalarType doubleScalar() {
         return GraphQLScalarType.newScalar()
-                .name("Double")
-                .description("Double scalar")
+                .name(Constantes.DOUBLE)
+                .description(Constantes.DOUBLE_SCALAR)
                 .coercing(new Coercing<Double, Double>() {
                     @Override
                     public Double serialize(Object dataFetcherResult) {
@@ -37,8 +38,8 @@ public class GraphQLScalarConfiguration {
     @Bean
     public GraphQLScalarType localDateTimeScalar() {
         return GraphQLScalarType.newScalar()
-                .name("LocalDateTime")
-                .description("LocalDateTime scalar")
+                .name(Constantes.LOCAL_DATE_TIME)
+                .description(Constantes.LOCAL_DATE_TIME_SCALAR)
                 .coercing(new Coercing<LocalDateTime, String>() {
                     @Override
                     public String serialize(Object dataFetcherResult) {
@@ -61,8 +62,8 @@ public class GraphQLScalarConfiguration {
     @Bean
     public GraphQLScalarType localDateScalar() {
         return GraphQLScalarType.newScalar()
-                .name("LocalDate")
-                .description("LocalDate scalar")
+                .name(Constantes.LOCAL_DATE)
+                .description(Constantes.LOCAL_DATE_SCALAR)
                 .coercing(new Coercing<LocalDate, String>() {
                     @Override
                     public String serialize(Object dataFetcherResult) {

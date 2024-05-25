@@ -1,6 +1,5 @@
 package com.example.tfgfontanet.data.dao.implementaciones;
 
-import com.example.tfgfontanet.common.configuracion.MongoDBConfig;
 import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOValoraciones;
@@ -13,7 +12,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import io.vavr.control.Either;
-import jakarta.inject.Inject;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +43,7 @@ public class DAOValoracionesImpl implements DAOValoraciones {
                 ProfesionalMongo profesionalMongo = new Gson().fromJson(profesionalDocument.toJson(), ProfesionalMongo.class);
                 either = Either.right(profesionalMongo.getValoraciones());
             } else {
-                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.PROFESIONAL_NOT_FOUND, LocalDate.now()));
             }
 
         } catch(Exception e) {
@@ -76,7 +74,7 @@ public class DAOValoracionesImpl implements DAOValoraciones {
 
                 either = Either.right(1);
             } else {
-                either = Either.left(new DAOError(404, "Profesional no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.PROFESIONAL_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             either = Either.left(new DAOError(5, Constantes.MONGO_ERROR + e.getMessage(), LocalDate.now()));

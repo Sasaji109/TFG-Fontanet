@@ -1,16 +1,15 @@
 package com.example.tfgfontanet.domain.servicios;
 
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.common.DAOError;
 import com.example.tfgfontanet.data.dao.DAOClientes;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.modelo.ClienteEntity;
 import com.example.tfgfontanet.data.modelo.FavoritosEntity;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
-import com.example.tfgfontanet.domain.modelo.Usuario;
 import com.example.tfgfontanet.domain.modelo.mapper.ClienteEntityMapper;
 import com.example.tfgfontanet.domain.modelo.Cliente;
 import com.example.tfgfontanet.ui.errores.excepciones.CRUDException;
-import com.example.tfgfontanet.ui.errores.excepciones.NotFoundException;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,7 +55,7 @@ public class ClientesService {
             ClienteEntity clienteEntity = clienteEntityMapper.toClienteEntity(cliente);
             clienteEntity.getUsuario().setFechaEnvio(LocalDateTime.now());
             clienteEntity.getUsuario().setPassword(passwordEncoder.encode(clienteEntity.getUsuario().getPassword()));
-            clienteEntity.getUsuario().setRole("CLIENTE");
+            clienteEntity.getUsuario().setRole(Constantes.CLIENTE);
             daoClientes.add(clienteEntity);
             return true;
         } catch (CRUDException e) {

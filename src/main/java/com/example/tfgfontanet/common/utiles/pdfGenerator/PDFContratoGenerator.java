@@ -1,14 +1,16 @@
 package com.example.tfgfontanet.common.utiles.pdfGenerator;
 
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.data.modelo.ClienteEntity;
 import com.example.tfgfontanet.data.modelo.ContratoEntity;
 import com.example.tfgfontanet.data.modelo.ProfesionalEntity;
 import com.example.tfgfontanet.data.modelo.ServicioEntity;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,10 +19,9 @@ public class PDFContratoGenerator {
 
     public static void generarContrato(ContratoEntity contrato) throws IOException {
         PDDocument document = new PDDocument();
-        PDPage page = new PDPage();
+        PDPage page = new PDPage(PDRectangle.A4);
         document.addPage(page);
 
-        // Obtener información del contrato
         ClienteEntity cliente = contrato.getCliente();
         ProfesionalEntity profesional = contrato.getProfesional();
         ServicioEntity servicio = contrato.getServicio();
@@ -30,70 +31,70 @@ public class PDFContratoGenerator {
 
         PDDocumentInformation pdd = document.getDocumentInformation();
         pdd.setAuthor(cliente.getNombre() + " " + cliente.getApellidos());
-        pdd.setTitle("Contrato de Trabajo para: " + profesional.getNombre() + " " + profesional.getApellidos());
-        pdd.setCreator("Fontanet");
-        pdd.setSubject("Contrato Laboral");
+        pdd.setTitle(Constantes.CONTRATO_TRABAJO + profesional.getNombre() + " " + profesional.getApellidos());
+        pdd.setCreator(Constantes.CREATOR);
+        pdd.setSubject(Constantes.SUBJECTCONTRATO);
 
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        contentStream.beginText(); 
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 18); // Estilo de letra y tamaño
-        contentStream.setLeading(20); // Espaciado entre líneas
-        contentStream.newLineAtOffset(50, 750); // Posición inicial
+        contentStream.beginText();
 
-        contentStream.showText("-- Contrato --");
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 18);
+        contentStream.setLeading(20);
+        contentStream.newLineAtOffset(50, 750);
+
+        contentStream.showText(Constantes.CONTRATO);
         contentStream.newLine();
         contentStream.newLine();
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Datos del Cliente:");
+
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.DATOS_CLIENTE);
         contentStream.newLine();
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
-        contentStream.showText("Nombre y apellidos: " + cliente.getNombre() + " " + cliente.getApellidos());
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + cliente.getNombre() + " " + cliente.getApellidos());
         contentStream.newLine();
-        contentStream.showText("Número de teléfono: " + cliente.getNumero());
-        contentStream.newLine();
-        contentStream.newLine();
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Datos del Profesional:");
-        contentStream.newLine();
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
-        contentStream.showText("Nombre y apellidos: " + profesional.getNombre() + " " + profesional.getApellidos());
-        contentStream.newLine();
-        contentStream.showText("Número de teléfono: " + profesional.getNumero());
-        contentStream.newLine();
-        contentStream.showText("Oficio: " + profesional.getOficio());
+        contentStream.showText(Constantes.NUMERO_TELEFONO + cliente.getNumero());
         contentStream.newLine();
         contentStream.newLine();
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Datos del Servicio:");
+
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.DATOS_PROFESIONAL);
         contentStream.newLine();
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
-        contentStream.showText("Nombre: " + servicio.getNombre());
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + profesional.getNombre() + " " + profesional.getApellidos());
         contentStream.newLine();
-        contentStream.showText("Descripción: " + servicio.getDescripcion());
+        contentStream.showText(Constantes.NUMERO_TELEFONO + profesional.getNumero());
         contentStream.newLine();
-        contentStream.showText("Fecha de inicio del trabajo: " + fechaInicio.toString());
-        contentStream.newLine();
-        contentStream.showText("Fecha estimada de finalización: " + (fechaFin != null ? fechaFin.toString() : "No especificada"));
-        contentStream.newLine();
-        contentStream.showText("Tarifa Base: $" + servicio.getTarifaBase());
+        contentStream.showText(Constantes.OFICIO + profesional.getOficio());
         contentStream.newLine();
         contentStream.newLine();
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Estado:");
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
+
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.DATOS_SERVICIO);
+        contentStream.newLine();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+        contentStream.showText(Constantes.NOMBRE + servicio.getNombre());
+        contentStream.newLine();
+        contentStream.showText(Constantes.DESCRIPCION + servicio.getDescripcion());
+        contentStream.newLine();
+        contentStream.showText(Constantes.FECHA_INICIO_TRABAJO + fechaInicio.toString());
+        contentStream.newLine();
+        contentStream.showText(Constantes.FECHA_FIN_TRABAJO + (fechaFin != null ? fechaFin.toString() : Constantes.NO_ESPECIFICADA));
+        contentStream.newLine();
+        contentStream.showText(Constantes.TARIFA_BASE + servicio.getTarifaBase());
+        contentStream.newLine();
+        contentStream.newLine();
+
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.ESTADOPDF);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
         contentStream.newLine();
         contentStream.showText(estado);
-        
+
         contentStream.endText();
         contentStream.close();
 
-        document.save(new File("C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\contrato.pdf"));
+        document.save(new File(Constantes.RUTA_CONTRATO));
         document.close();
-        System.out.println("Contrato generado correctamente");
     }
 }
+

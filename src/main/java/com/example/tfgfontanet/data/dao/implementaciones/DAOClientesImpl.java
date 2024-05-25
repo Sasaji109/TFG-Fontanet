@@ -75,7 +75,7 @@ public class DAOClientesImpl implements DAOClientes {
             tx.commit();
             either = Either.right(clienteEntity);
         } catch (NoResultException e) {
-            either = Either.left(new DAOError(404, "Cliente no encontrado", LocalDate.now()));
+            either = Either.left(new DAOError(404, Constantes.CLIENTE_NOT_FOUND, LocalDate.now()));
         } catch (Exception e) {
             if (tx.isActive()) {
                 tx.rollback();
@@ -165,7 +165,7 @@ public class DAOClientesImpl implements DAOClientes {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Cliente no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.CLIENTE_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();

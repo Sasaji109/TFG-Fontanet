@@ -1,5 +1,6 @@
 package com.example.tfgfontanet.ui.seguridad;
 
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
 import com.example.tfgfontanet.domain.modelo.mapper.UsuarioEntityMapper;
@@ -21,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UsuarioEntity usuario = daoUsuarios.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));;
+        UsuarioEntity usuario = daoUsuarios.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
         Usuario user = usuarioEntityMapper.toUsuario(usuario);
 
         return User.builder()

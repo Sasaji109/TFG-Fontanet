@@ -50,7 +50,7 @@ public class DAOServiciosImpl implements DAOServicios {
             if (servicio != null) {
                 either = Either.right(servicio);
             } else {
-                either = Either.left(new DAOError(404, "Servicio no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.SERVICIO_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
@@ -119,7 +119,7 @@ public class DAOServiciosImpl implements DAOServicios {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Servicio no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.SERVICIO_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();

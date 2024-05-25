@@ -108,29 +108,18 @@ public class DAOFacturasImpl implements DAOFacturas {
         try {
             tx.begin();
 
-            // Paso 1: Calcular el precio total de los materiales
             Double precioMateriales = 0.0;
             for (FacturaMaterialEntity facturaMaterial : factura.getMateriales()) {
                 MaterialEntity material = facturaMaterial.getMaterial();
-                // Acceder a la BBDD para obtener la información completa del material
                 MaterialEntity materialCompleto = em.find(MaterialEntity.class, material.getMaterialId());
-                // Sumar el precio del material multiplicado por la cantidad
                 precioMateriales += materialCompleto.getPrecio() * facturaMaterial.getCantidad();
             }
 
-            // Paso 2: Sumar el precio del servicio al precio total
             precioMateriales += factura.getServicio().getTarifaBase();
-
-            // Paso 3: Actualizar el precio total de la factura
             factura.setPrecio(precioMateriales);
-
-            // Paso 4: Añadir la factura a la BBDD
             em.persist(factura);
-
-            // Paso 5: Obtener la id de la factura recién añadida
             Integer facturaId = factura.getFacturaId();
 
-            // Paso 6: Actualizar las ids de los objetos FacturaMaterial y añadirlos a la BBDD
             for (FacturaMaterialEntity facturaMaterial : factura.getMateriales()) {
                 facturaMaterial.setFacturaId(facturaId);
                 em.persist(facturaMaterial);

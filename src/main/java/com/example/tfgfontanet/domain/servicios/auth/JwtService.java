@@ -76,7 +76,7 @@ public class JwtService {
             String accessToken = generateToken(user, Constantes.ACCESS_TOKEN_TIME).get();
             either = Either.right(accessToken);
         } catch (Exception e) {
-            either = Either.left(new CustomError("Constantes.ERROR_AL_RENOVAR_EL_TOKEN" + e.getMessage(), LocalDateTime.now()));
+            either = Either.left(new CustomError(Constantes.ERROR_AL_RENOVAR_EL_TOKEN + e.getMessage(), LocalDateTime.now()));
         }
         return either;
     }

@@ -16,55 +16,56 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContratosController {
 
+    public static final String CONTRATO_UPDATE_ESTADO_PATH = "/contrato/updateEstado";
     private final ContratosService contratosService;
 
     @QueryMapping
     public List<Contrato> getAllContratos() {
-        return contratosService.getAll().getOrElseThrow(() -> new NotFoundException("Contratos no encontrados"));
+        return contratosService.getAll().getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTES_NOT_FOUND));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.CLIENTE})
-    public List<Contrato> getContratosByCliente(@Argument int clienteId) {
-        return contratosService.getContratosByCliente(clienteId).getOrElseThrow(() -> new NotFoundException("Contratos no encontrados para el cliente"));
+    public List<Contrato> getContratosByCliente() {
+        return contratosService.getContratosByCliente().getOrElseThrow(() -> new NotFoundException(Constantes.CONTRATOS_NO_ENCONTRADOS_PARA_EL_CLIENTE));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.PROFESIONAL})
-    public List<Contrato> getContratosByProfesional(@Argument int profesionalId) {
-        return contratosService.getContratosByProfesional(profesionalId).getOrElseThrow(() -> new NotFoundException("Contratos no encontrados para el profesional"));
+    public List<Contrato> getContratosByProfesional() {
+        return contratosService.getContratosByProfesional().getOrElseThrow(() -> new NotFoundException(Constantes.CONTRATOS_NO_ENCONTRADOS_PARA_EL_PROFESIONAL));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.PROFESIONAL})
     public List<Contrato> getContratosByEstado(@Argument String estado) {
-        return contratosService.getContratosByEstado(estado).getOrElseThrow(() -> new NotFoundException("Contratos no encontrados para el estado especificado"));
+        return contratosService.getContratosByEstado(estado).getOrElseThrow(() -> new NotFoundException(Constantes.CONTRATOS_NO_ENCONTRADOS_PARA_EL_ESTADO_ESPECIFICADO));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.CLIENTE, Constantes.PROFESIONAL})
     public Contrato getContratoById(@Argument Integer contratoId) {
-        return contratosService.get(contratoId).getOrElseThrow(() -> new NotFoundException("Contrato no encontrado"));
+        return contratosService.get(contratoId).getOrElseThrow(() -> new NotFoundException(Constantes.CONTRATO_NOT_FOUND));
     }
 
-    @PostMapping("/contrato/add")
+    @PostMapping(Constantes.CONTRATO_ADD_PATH)
     @RolesAllowed({Constantes.CLIENTE})
     public String addContrato(@RequestBody Contrato contrato) {
         if (Boolean.TRUE.equals(contratosService.add(contrato))) {
-            return "Contrato añadido exitosamente";
+            return Constantes.CONTRATO_ANADIDO_EXITOSAMENTE;
         } else {
-            return "Contrato no añadido";
+            return Constantes.CONTRATO_NO_ANADIDO;
         }
     }
 
-    @PutMapping("/contrato/update")
+    @PutMapping(Constantes.CONTRATO_UPDATE_PATH)
     @RolesAllowed({Constantes.CLIENTE, Constantes.PROFESIONAL})
     public Integer updateContrato(@RequestBody Contrato contrato) {
-        return contratosService.update(contrato).getOrElseThrow(() -> new CRUDException("Contrato no actualizado"));
+        return contratosService.update(contrato).getOrElseThrow(() -> new CRUDException(Constantes.CONTRATO_NO_ACTUALIZADO));
     }
 
-    @PutMapping("/contrato/updateEstado")
-    public Integer updateContratoEstado(@RequestParam("contratoId") Integer contratoId, @RequestParam("estado") String estado) {
-        return contratosService.updateEstado(contratoId, estado).getOrElseThrow(() -> new CRUDException("Estado del contrato no actualizado"));
+    @PutMapping(CONTRATO_UPDATE_ESTADO_PATH)
+    public Integer updateContratoEstado(@RequestParam(Constantes.CONTRATO_ID) Integer contratoId, @RequestParam(Constantes.ESTADO) String estado) {
+        return contratosService.updateEstado(contratoId, estado).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DEL_CONTRATO_NO_ACTUALIZADO));
     }
 }

@@ -21,23 +21,23 @@ public class FavoritosController {
 
     @QueryMapping
     @RolesAllowed({Constantes.CLIENTE})
-    public List<Favorito> getAllFavoritosByCliente(@Argument int clienteId) {
-        return favoritosService.getAllByCliente(clienteId).getOrElseThrow(() -> new NotFoundException("Favoritos no encontrados"));
+    public List<Favorito> getAllFavoritosByCliente() {
+        return favoritosService.getAllByCliente().getOrElseThrow(() -> new NotFoundException(Constantes.FAVORITOS_NOT_FOUND));
     }
 
-    @PostMapping("/favoritos/add")
+    @PostMapping(Constantes.FAVORITO_ADD_PATH)
     @RolesAllowed({Constantes.CLIENTE})
-    public String addFavorito(@RequestParam("clienteId") Integer clienteId, @RequestParam("profesionalId") Integer profesionalId) {
-        if (Boolean.TRUE.equals(favoritosService.addFavorito(clienteId, profesionalId))) {
-            return "Favorito añadido exitosamente";
+    public String addFavorito(@RequestParam(Constantes.PROFESIONAL_ID) Integer profesionalId) {
+        if (Boolean.TRUE.equals(favoritosService.addFavorito(profesionalId))) {
+            return Constantes.FAVORITO_ANADIDO_EXITOSAMENTE;
         } else {
-            return "Favorito no añadido";
+            return Constantes.FAVORITO_NO_ANADIDO;
         }
     }
 
     @MutationMapping
     @RolesAllowed({Constantes.CLIENTE})
-    public Integer deleteFavorito(@Argument Integer clienteId, @Argument Integer profesionalId) {
-        return favoritosService.deleteFavorito(clienteId, profesionalId).getOrElseThrow(() -> new CRUDException("Favorito no eliminado"));
+    public Integer deleteFavorito(@Argument Integer profesionalId) {
+        return favoritosService.deleteFavorito(profesionalId).getOrElseThrow(() -> new CRUDException(Constantes.FAVORITO_NO_ELIMINADO));
     }
 }

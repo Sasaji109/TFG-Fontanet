@@ -89,6 +89,7 @@ type Query {
 
     getAllProfesionales: [Profesional]!
     getProfesionalById(profesionalId: Int!): Profesional
+    getProfesionalByUserId: Profesional
     getAllProfesionalesByExp(experiencia: Int!): [Profesional]!
     getAllProfesionalesByOficio(oficio: String!): [Profesional]!
     getAllProfesionalesByDisp(disponibilidad: String!): [Profesional]!
@@ -102,17 +103,17 @@ type Query {
     getServicioById(servicioId: Int!): Servicio
 
     getAllContratos: [Contrato]!
-    getContratosByCliente(clienteId: Int!): [Contrato]!
-    getContratosByProfesional(profesionalId: Int!): [Contrato]!
+    getContratosByCliente: [Contrato]!
+    getContratosByProfesional: [Contrato]!
     getContratosByEstado(estado: String!): [Contrato]!
     getContratoById(contratoId: Int!): Contrato
 
     getAllFacturas: [Factura]!
-    getFacturasByCliente(clienteId: Int!): [Factura]!
-    getFacturasByProfesional(profesionalId: Int!): [Factura]!
+    getFacturasByCliente: [Factura]!
+    getFacturasByProfesional: [Factura]!
     getFacturaById(facturaId: Int!): Factura
 
-    getAllFavoritosByCliente(clienteId: Int!): [Favorito]!
+    getAllFavoritosByCliente: [Favorito]!
 }
 
 type Mutation {
@@ -122,5 +123,5 @@ type Mutation {
     deleteMaterial(materialId: Int!): Int
     deleteServicio(servicioId: Int!): Int
 
-    deleteFavorito(clienteId: Int!, profesionalId: Int!): Int
+    deleteFavorito(profesionalId: Int!): Int
 }

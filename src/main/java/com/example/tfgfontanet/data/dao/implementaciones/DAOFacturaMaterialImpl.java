@@ -45,7 +45,7 @@ public class DAOFacturaMaterialImpl implements DAOFacturaMaterial {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Factura o Material no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.FACTURA_O_MATERIAL_NOT_FOUND, LocalDate.now()));
             }
         }
         catch (PersistenceException e) {

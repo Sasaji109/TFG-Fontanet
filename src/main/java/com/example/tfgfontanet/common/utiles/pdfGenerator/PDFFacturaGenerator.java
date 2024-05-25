@@ -1,5 +1,6 @@
 package com.example.tfgfontanet.common.utiles.pdfGenerator;
 
+import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.data.modelo.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
@@ -17,7 +18,6 @@ public class PDFFacturaGenerator {
         PDPage page = new PDPage();
         document.addPage(page);
 
-        // Obtener información del contrato
         ClienteEntity cliente = factura.getCliente();
         ProfesionalEntity profesional = factura.getProfesional();
         ServicioEntity servicio = factura.getServicio();
@@ -26,82 +26,81 @@ public class PDFFacturaGenerator {
 
         PDDocumentInformation pdd = document.getDocumentInformation();
         pdd.setAuthor(profesional.getNombre() + " " + profesional.getApellidos());
-        pdd.setTitle("Factura de Trabajo para: " + cliente.getNombre() + " " + cliente.getApellidos());
-        pdd.setCreator("Fontanet");
-        pdd.setSubject("Factura");
+        pdd.setTitle(Constantes.FACTURA_TRABAJO + cliente.getNombre() + " " + cliente.getApellidos());
+        pdd.setCreator(Constantes.CREATOR);
+        pdd.setSubject(Constantes.SUBJECT_FACTURA);
 
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        contentStream.beginText(); 
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 18); // Estilo de letra y tamaño
-        contentStream.setLeading(20); // Espaciado entre líneas
-        contentStream.newLineAtOffset(50, 750); // Posición inicial
+        contentStream.beginText();
 
-        contentStream.showText("-- Factura --");
-        contentStream.newLine();
-        contentStream.newLine();
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 18);
+        contentStream.setLeading(20);
+        contentStream.newLineAtOffset(50, 750);
 
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Datos del Profesional:");
-        contentStream.newLine();
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
-        contentStream.showText("Nombre y apellidos: " + profesional.getNombre() + " " + profesional.getApellidos());
-        contentStream.newLine();
-        contentStream.showText("Número de teléfono: " + profesional.getNumero());
-        contentStream.newLine();
-        contentStream.showText("Oficio: " + profesional.getOficio());
-        contentStream.newLine();
-        contentStream.newLine();
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Datos del Cliente:");
-        contentStream.newLine();
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
-        contentStream.showText("Nombre y apellidos: " + cliente.getNombre() + " " + cliente.getApellidos());
-        contentStream.newLine();
-        contentStream.showText("Número de teléfono: " + cliente.getNumero());
-        contentStream.newLine();
-        contentStream.newLine();
-        
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Datos del Servicio:");
-        contentStream.newLine();
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
-        contentStream.showText("Nombre: " + servicio.getNombre());
-        contentStream.newLine();
-        contentStream.showText("Descripción: " + servicio.getDescripcion());
-        contentStream.newLine();
-        contentStream.showText("Tarifa Base: $" + servicio.getTarifaBase());
+        contentStream.showText(Constantes.FACTURA);
         contentStream.newLine();
         contentStream.newLine();
 
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Materiales:");
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.DATOS_PROFESIONAL);
+        contentStream.newLine();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + profesional.getNombre() + " " + profesional.getApellidos());
+        contentStream.newLine();
+        contentStream.showText(Constantes.NUMERO_TELEFONO + profesional.getNumero());
+        contentStream.newLine();
+        contentStream.showText(Constantes.OFICIO + profesional.getOficio());
+        contentStream.newLine();
+        contentStream.newLine();
+
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.DATOS_CLIENTE);
+        contentStream.newLine();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + cliente.getNombre() + " " + cliente.getApellidos());
+        contentStream.newLine();
+        contentStream.showText(Constantes.NUMERO_TELEFONO + cliente.getNumero());
+        contentStream.newLine();
+        contentStream.newLine();
+
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.DATOS_SERVICIO);
+        contentStream.newLine();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+        contentStream.showText(Constantes.NOMBRE + servicio.getNombre());
+        contentStream.newLine();
+        contentStream.showText(Constantes.DESCRIPCION + servicio.getDescripcion());
+        contentStream.newLine();
+        contentStream.showText(Constantes.TARIFA_BASE + servicio.getTarifaBase());
+        contentStream.newLine();
+        contentStream.newLine();
+
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.MATERIALES);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
         contentStream.newLine();
         for (FacturaMaterialEntity facturaMaterial : facturaMaterialList) {
             MaterialEntity material = facturaMaterial.getMaterial();
-            contentStream.showText(material.getNombre() + ": $" + material.getPrecio() + " x " + facturaMaterial.getCantidad());
+            contentStream.showText(material.getNombre() + Constantes.PRECIO + material.getPrecio() + Constantes.X + facturaMaterial.getCantidad());
             contentStream.newLine();
         }
         contentStream.newLine();
 
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Precio Total: $" + factura.getPrecio());
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.PRECIO_TOTAL + factura.getPrecio());
         contentStream.newLine();
         contentStream.newLine();
 
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12); // Estilo de letra en negrita y tamaño
-        contentStream.showText("Estado:");
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12); // Restaurar estilo de letra normal
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText(Constantes.ESTADOPDF);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
         contentStream.newLine();
         contentStream.showText(estado);
-        
+
         contentStream.endText();
         contentStream.close();
 
-        document.save(new File("C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\factura.pdf"));
+        document.save(new File(Constantes.RUTA_FACTURA));
         document.close();
-        System.out.println("Factura generada correctamente");
     }
 }

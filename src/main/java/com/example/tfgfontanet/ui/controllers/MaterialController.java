@@ -22,34 +22,34 @@ public class MaterialController {
     @QueryMapping
     @RolesAllowed({Constantes.ADMIN, Constantes.PROFESIONAL})
     public List<Material> getAllMateriales() {
-        return materialesService.getAll().getOrElseThrow(() -> new NotFoundException("Materiales no encontrados"));
+        return materialesService.getAll().getOrElseThrow(() -> new NotFoundException(Constantes.MATERIALES_NOT_FOUND));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.ADMIN})
     public Material getMaterialById(@Argument Integer materialId) {
-        return materialesService.get(materialId).getOrElseThrow(() -> new NotFoundException("Material no encontrado"));
+        return materialesService.get(materialId).getOrElseThrow(() -> new NotFoundException(Constantes.MATERIAL_NOT_FOUND));
     }
 
     @MutationMapping
     @RolesAllowed({Constantes.ADMIN})
     public Integer deleteMaterial(@Argument Integer materialId) {
-        return materialesService.deleteMaterial(materialId).getOrElseThrow(() -> new CRUDException("Material no eliminado"));
+        return materialesService.deleteMaterial(materialId).getOrElseThrow(() -> new CRUDException(Constantes.MATERIAL_NO_ELIMINADO));
     }
 
-    @PostMapping("/material/add")
+    @PostMapping(Constantes.MATERIAL_ADD_PATH)
     @RolesAllowed({Constantes.ADMIN})
     public String addMaterial(@RequestBody Material material) {
         if (Boolean.TRUE.equals(materialesService.addMaterial(material))) {
-            return "Material añadido exitosamente";
+            return Constantes.MATERIAL_ANADIDO_EXITOSAMENTE;
         } else {
-            return "Material no añadido";
+            return Constantes.MATERIAL_NO_ANADIDO;
         }
     }
 
-    @PutMapping("/material/update")
+    @PutMapping(Constantes.MATERIAL_UPDATE_PATH)
     @RolesAllowed({Constantes.ADMIN})
     public Integer updateMaterial(@RequestBody Material material) {
-        return materialesService.updateMaterial(material).getOrElseThrow(() -> new CRUDException("Material no actualizado"));
+        return materialesService.updateMaterial(material).getOrElseThrow(() -> new CRUDException(Constantes.MATERIAL_NO_ACTUALIZADO));
     }
 }

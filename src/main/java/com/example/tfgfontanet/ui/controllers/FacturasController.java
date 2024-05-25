@@ -20,40 +20,40 @@ public class FacturasController {
 
     @QueryMapping
     public List<Factura> getAllFacturas() {
-        return facturasService.getAll().getOrElseThrow(() -> new NotFoundException("Facturas no encontradas"));
+        return facturasService.getAll().getOrElseThrow(() -> new NotFoundException(Constantes.FACTURAS_NOT_FOUND));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.CLIENTE})
-    public List<Factura> getFacturasByCliente(@Argument int clienteId) {
-        return facturasService.getFacturasByCliente(clienteId).getOrElseThrow(() -> new NotFoundException("Facturas no encontradas para el cliente"));
+    public List<Factura> getFacturasByCliente() {
+        return facturasService.getFacturasByCliente().getOrElseThrow(() -> new NotFoundException(Constantes.FACTURAS_NO_ENCONTRADAS_PARA_EL_CLIENTE));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.PROFESIONAL})
-    public List<Factura> getFacturasByProfesional(@Argument int profesionalId) {
-        return facturasService.getFacturasByProfesional(profesionalId).getOrElseThrow(() -> new NotFoundException("Facturas no encontradas para el profesional"));
+    public List<Factura> getFacturasByProfesional() {
+        return facturasService.getFacturasByProfesional().getOrElseThrow(() -> new NotFoundException(Constantes.FACTURAS_NO_ENCONTRADAS_PARA_EL_PROFESIONAL));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.CLIENTE})
     public Factura getFacturaById(@Argument Integer facturaId) {
-        return facturasService.get(facturaId).getOrElseThrow(() -> new NotFoundException("Factura no encontrada"));
+        return facturasService.get(facturaId).getOrElseThrow(() -> new NotFoundException(Constantes.FACTURA_NOT_FOUND));
     }
 
-    @PostMapping("/factura/add")
+    @PostMapping(Constantes.FACTURA_ADD_PATH)
     @RolesAllowed({Constantes.PROFESIONAL})
     public String addFactura(@RequestBody Factura factura) {
         if (Boolean.TRUE.equals(facturasService.add(factura))) {
-            return "Factura añadida exitosamente";
+            return Constantes.FACTURA_ANADIDA_EXITOSAMENTE;
         } else {
-            return "Factura no añadida";
+            return Constantes.FACTURA_NO_ANADIDA;
         }
     }
 
-    @PutMapping("/factura/updateEstado")
+    @PutMapping(Constantes.FACTURA_UPDATE_ESTADO_PATH)
     @RolesAllowed({Constantes.CLIENTE})
-    public Integer updateFacturaEstado(@RequestParam("facturaId") Integer facturaId, @RequestParam("estado") String estado) {
-        return facturasService.updateEstado(facturaId, estado).getOrElseThrow(() -> new CRUDException("Estado de la factura no actualizado"));
+    public Integer updateFacturaEstado(@RequestParam(Constantes.FACTURA_ID) Integer facturaId, @RequestParam(Constantes.ESTADO) String estado) {
+        return facturasService.updateEstado(facturaId, estado).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DE_LA_FACTURA_NO_ACTUALIZADO));
     }
 }

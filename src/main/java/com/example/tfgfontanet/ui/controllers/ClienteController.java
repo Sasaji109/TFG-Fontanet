@@ -22,30 +22,30 @@ public class ClienteController {
     @QueryMapping
     @RolesAllowed({Constantes.ADMIN})
     public List<Cliente> getAllClientes() {
-        return clientesService.getAll().getOrElseThrow(() -> new NotFoundException("Clientes no encontrados"));
+        return clientesService.getAll().getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTES_NOT_FOUND));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.CLIENTE})
     public Cliente getClienteById(@Argument Integer clienteId) {
-        return clientesService.getCliente(clienteId).getOrElseThrow(() -> new NotFoundException("Cliente no encontrado"));
+        return clientesService.getCliente(clienteId).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.CLIENTE})
     public Cliente getClienteByUserId() {
-        return clientesService.getByUserId().getOrElseThrow(() -> new NotFoundException("Cliente no encontrado"));
+        return clientesService.getByUserId().getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
     }
 
     @MutationMapping
     @RolesAllowed({Constantes.ADMIN, Constantes.CLIENTE})
     public Integer deleteCliente(@Argument Integer clienteId) {
-        return clientesService.delete(clienteId).getOrElseThrow(() -> new CRUDException("Cliente no eliminado"));
+        return clientesService.delete(clienteId).getOrElseThrow(() -> new CRUDException(Constantes.CLIENTE_NO_ELIMINADO));
     }
 
-    @PutMapping("/cliente/update")
+    @PutMapping(Constantes.CLIENTE_UPDATE_PATH)
     @RolesAllowed({Constantes.CLIENTE})
     public Integer updateCliente(@RequestBody Cliente cliente) {
-        return clientesService.update(cliente).getOrElseThrow(() -> new CRUDException("Cliente no actualizado"));
+        return clientesService.update(cliente).getOrElseThrow(() -> new CRUDException(Constantes.CLIENTE_NO_ACTUALIZADO));
     }
 }

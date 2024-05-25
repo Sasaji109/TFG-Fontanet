@@ -12,6 +12,7 @@ public interface DAOProfesionales {
     Either<DAOError, List<ProfesionalEntity>> getAllByDisp(String disponibilidad);
     Either<DAOError, List<ProfesionalEntity>> getAllByVal(int valoracion);
     Either<DAOError, ProfesionalEntity> get(int id);
+    Either<DAOError, ProfesionalEntity> getByUserId(int userId);
     Either<DAOError, Integer> add(ProfesionalEntity profesional);
     Either<DAOError, Integer> update(ProfesionalEntity profesional);
     Either<DAOError, Integer> updateVal(int id, int val);

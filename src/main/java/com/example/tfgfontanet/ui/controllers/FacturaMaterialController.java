@@ -13,13 +13,13 @@ public class FacturaMaterialController {
 
     private final FacturaMaterialService facturaMaterialService;
 
-    @PostMapping("/facturaMaterial/add")
+    @PostMapping(Constantes.FACTURAMATERIAL_ADD_PATH)
     @RolesAllowed({Constantes.PROFESIONAL})
     public String addFacturaMaterial(@RequestBody FacturaMaterial facturaMaterial) {
         if (Boolean.TRUE.equals(facturaMaterialService.addFacturaMaterial(facturaMaterial))) {
-            return "Factura de material añadida exitosamente";
+            return Constantes.FACTURA_DE_MATERIAL_ANADIDA_EXITOSAMENTE;
         } else {
-            return "Factura de material no añadida";
+            return Constantes.FACTURA_DE_MATERIAL_NO_ANADIDA;
         }
     }
 }

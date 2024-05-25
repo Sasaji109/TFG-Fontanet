@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
-@RequestMapping("/registro")
+@RequestMapping(Constantes.REGISTRO_PATH)
 public class RegistroController {
 
     private final ClientesService clientesService;
@@ -29,21 +29,21 @@ public class RegistroController {
         this.mandarMailActivacion = mandarMailActivacion;
     }
 
-    @PostMapping("/cliente")
+    @PostMapping(Constantes.CLIENTE_PATH)
     public String registroCliente(@RequestBody Cliente cliente) {
         if (Boolean.TRUE.equals(clientesService.registroCliente(cliente))) {
             mandarMailActivacion.mandarMail(cliente.getUsuario());
-            return "El registro del cliente fue exitoso";
+            return Constantes.EL_REGISTRO_DEL_CLIENTE_FUE_EXITOSO;
         } else {
             return Constantes.EL_REGISTRO_NO_PUDO_COMPLETARSE;
         }
     }
 
-    @PostMapping("/profesional")
+    @PostMapping(Constantes.PROFESIONAL_PATH)
     public String registroProfesional(@RequestBody Profesional profesional) {
         if (Boolean.TRUE.equals(profesionalesService.registroProfesional(profesional))) {
             mandarMailActivacion.mandarMail(profesional.getUsuario());
-            return "El registro del profesional fue exitoso.";
+            return Constantes.EL_REGISTRO_DEL_PROFESIONAL_FUE_EXITOSO;
         } else {
             return Constantes.EL_REGISTRO_NO_PUDO_COMPLETARSE;
         }

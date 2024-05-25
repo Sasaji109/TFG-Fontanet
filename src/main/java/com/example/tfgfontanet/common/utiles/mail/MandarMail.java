@@ -17,7 +17,7 @@ import java.util.Properties;
 @Singleton
 public class MandarMail {
 
-    private ConfiguracionMail config;
+    private final ConfiguracionMail config;
 
     @Inject
     public MandarMail(ConfiguracionMail config) {

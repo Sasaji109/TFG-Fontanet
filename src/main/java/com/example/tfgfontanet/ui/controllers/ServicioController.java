@@ -22,34 +22,34 @@ public class ServicioController {
     @QueryMapping
     @RolesAllowed({Constantes.ADMIN, Constantes.CLIENTE})
     public List<Servicio> getAllServicios() {
-        return serviciosService.getAll().getOrElseThrow(() -> new NotFoundException("Servicios no encontrados"));
+        return serviciosService.getAll().getOrElseThrow(() -> new NotFoundException(Constantes.SERVICIOS_NOT_FOUND));
     }
 
     @QueryMapping
     @RolesAllowed({Constantes.ADMIN, Constantes.CLIENTE})
     public Servicio getServicioById(@Argument Integer servicioId) {
-        return serviciosService.get(servicioId).getOrElseThrow(() -> new NotFoundException("Servicio no encontrado"));
+        return serviciosService.get(servicioId).getOrElseThrow(() -> new NotFoundException(Constantes.SERVICIO_NOT_FOUND));
     }
 
     @MutationMapping
     @RolesAllowed({Constantes.ADMIN})
     public Integer deleteServicio(@Argument Integer servicioId) {
-        return serviciosService.delete(servicioId).getOrElseThrow(() -> new CRUDException("Servicio no eliminado"));
+        return serviciosService.delete(servicioId).getOrElseThrow(() -> new CRUDException(Constantes.SERVICIO_NO_ELIMINADO));
     }
 
-    @PostMapping("/servicio/add")
+    @PostMapping(Constantes.SERVICIO_ADD_PATH)
     @RolesAllowed({Constantes.ADMIN})
     public String addServicio(@RequestBody Servicio servicio) {
         if (Boolean.TRUE.equals(serviciosService.add(servicio))) {
-            return "Servicio añadido exitosamente";
+            return Constantes.SERVICIO_ANADIDO_EXITOSAMENTE;
         } else {
-            return "Servicio no añadido";
+            return Constantes.SERVICIO_NO_ANADIDO;
         }
     }
 
-    @PutMapping("/servicio/update")
+    @PutMapping(Constantes.SERVICIO_UPDATE_PATH)
     @RolesAllowed({Constantes.ADMIN})
     public Integer updateServicio(@RequestBody Servicio servicio) {
-        return serviciosService.update(servicio).getOrElseThrow(() -> new CRUDException("Servicio no actualizado"));
+        return serviciosService.update(servicio).getOrElseThrow(() -> new CRUDException(Constantes.SERVICIO_NO_ACTUALIZADO));
     }
 }

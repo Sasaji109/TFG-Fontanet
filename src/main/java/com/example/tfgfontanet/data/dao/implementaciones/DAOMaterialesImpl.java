@@ -52,7 +52,7 @@ public class DAOMaterialesImpl implements DAOMateriales {
             if (material != null) {
                 either = Either.right(material);
             } else {
-                either = Either.left(new DAOError(404, "Material no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.MATERIAL_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
@@ -122,7 +122,7 @@ public class DAOMaterialesImpl implements DAOMateriales {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, "Material no encontrado", LocalDate.now()));
+                either = Either.left(new DAOError(404, Constantes.MATERIAL_NOT_FOUND, LocalDate.now()));
             }
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
