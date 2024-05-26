@@ -1,15 +1,15 @@
 package com.example.tfgfontanet.ui.errores;
 
-import lombok.*;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import java.time.LocalDate;
 
-@Builder
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
-@NoArgsConstructor
-@ToString
-public class CustomError {
+public class CustomError extends Throwable {
+    private int nError;
     private String message;
-    private LocalDateTime fecha;
+    private LocalDate date;
 }

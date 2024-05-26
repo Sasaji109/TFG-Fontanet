@@ -2,7 +2,7 @@ package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOFavoritos;
 import com.example.tfgfontanet.data.modelo.ClienteEntity;
 import com.example.tfgfontanet.data.modelo.FavoritosEntity;
@@ -26,27 +26,27 @@ public class DAOFavoritosImpl implements DAOFavoritos {
     }
 
     @Override
-    public Either<DAOError, List<FavoritosEntity>> getAllByCliente(int clienteId) {
-        Either<DAOError, List<FavoritosEntity>> either;
+    public Either<CustomError, List<FavoritosEntity>> getAllByCliente(int clienteId) {
+        Either<CustomError, List<FavoritosEntity>> either;
         List<FavoritosEntity> favoritos;
         em = jpaUtil.getEntityManager();
 
         try {
             String query = "FROM FavoritosEntity WHERE clienteId = :clienteId";
             favoritos = em.createQuery(query, FavoritosEntity.class)
-                    .setParameter("clienteId", clienteId)
+                    .setParameter(Constantes.CLIENTE_ID, clienteId)
                     .getResultList();
             either = Either.right(favoritos);
         }
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, Integer> addFavorito(int clienteId, int profesionalId) {
-        Either<DAOError, Integer> either;
+    public Either<CustomError, Integer> addFavorito(int clienteId, int profesionalId) {
+        Either<CustomError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction entityTransaction = em.getTransaction();
 
@@ -66,12 +66,12 @@ public class DAOFavoritosImpl implements DAOFavoritos {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, Constantes.CLIENTE_O_PROFESIONAL_NOT_FOUND, LocalDate.now()));
+                either = Either.left(new CustomError(404, Constantes.CLIENTE_O_PROFESIONAL_NOT_FOUND, LocalDate.now()));
             }
         }
         catch (PersistenceException e) {
             if (entityTransaction.isActive()) entityTransaction.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -79,8 +79,8 @@ public class DAOFavoritosImpl implements DAOFavoritos {
     }
 
     @Override
-    public Either<DAOError, Integer> deleteFavorito(int clienteId, int profesionalId) {
-        Either<DAOError, Integer> either;
+    public Either<CustomError, Integer> deleteFavorito(int clienteId, int profesionalId) {
+        Either<CustomError, Integer> either;
 
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -88,8 +88,8 @@ public class DAOFavoritosImpl implements DAOFavoritos {
 
         try {
             TypedQuery<FavoritosEntity> query = em.createQuery("SELECT f FROM FavoritosEntity f WHERE f.clienteId = :clienteId AND f.profesional.id = :profesionalId", FavoritosEntity.class);
-            query.setParameter("clienteId", clienteId);
-            query.setParameter("profesionalId", profesionalId);
+            query.setParameter(Constantes.CLIENTE_ID, clienteId);
+            query.setParameter(Constantes.PROFESIONAL_ID, profesionalId);
             FavoritosEntity favorito = query.getSingleResult();
 
             if (favorito != null) {
@@ -99,13 +99,13 @@ public class DAOFavoritosImpl implements DAOFavoritos {
                 int rowsAffected = 1;
                 either = Either.right(rowsAffected);
             } else {
-                either = Either.left(new DAOError(404, Constantes.FAVORITO_NOT_FOUND, LocalDate.now()));
+                either = Either.left(new CustomError(404, Constantes.FAVORITO_NOT_FOUND, LocalDate.now()));
             }
         } catch (NoResultException e) {
-            either = Either.left(new DAOError(404, Constantes.FAVORITO_NOT_FOUND, LocalDate.now()));
+            either = Either.left(new CustomError(404, Constantes.FAVORITO_NOT_FOUND, LocalDate.now()));
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

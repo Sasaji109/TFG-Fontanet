@@ -1,7 +1,8 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.domain.servicios.mail.MandarMailFactura;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.*;
 import com.example.tfgfontanet.data.modelo.FacturaEntity;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
@@ -32,8 +33,9 @@ public class FacturasService {
     private final ProfesionalEntityMapper profesionalEntityMapper;
     private final DAOFacturas daoFacturas;
     private final FacturaEntityMapper facturaEntityMapper;
+    private final MandarMailFactura mandarMailFactura;
 
-    public Either<DAOError, List<Factura>> getAll() {
+    public Either<CustomError, List<Factura>> getAll() {
         return daoFacturas.getAll().map(facturaEntityList -> {
             List<Factura> facturas = new ArrayList<>();
             for (FacturaEntity facturaEntity : facturaEntityList) {
@@ -44,7 +46,7 @@ public class FacturasService {
         });
     }
 
-    public Either<DAOError, List<Factura>> getFacturasByCliente() {
+    public Either<CustomError, List<Factura>> getFacturasByCliente() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
         Cliente cliente = daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
@@ -59,7 +61,7 @@ public class FacturasService {
         });
     }
 
-    public Either<DAOError, List<Factura>> getFacturasByProfesional() {
+    public Either<CustomError, List<Factura>> getFacturasByProfesional() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
         Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONAL_NOT_FOUND));
@@ -74,20 +76,31 @@ public class FacturasService {
         });
     }
 
-    public Either<DAOError, Factura> get(int id) {
+    public Either<CustomError, Factura> get(int id) {
         return daoFacturas.get(id).map(facturaEntityMapper::toFactura);
     }
 
     public Boolean add(Factura factura) {
         try {
-            daoFacturas.add(facturaEntityMapper.toFacturaEntity(factura));
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
+            Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONAL_NOT_FOUND));
+            factura.setProfesional(profesional);
+            factura.setEstado(Constantes.PENDIENTE);
+            FacturaEntity facturaEntity = daoFacturas.add(facturaEntityMapper.toFacturaEntity(factura)).get();
+            mandarMailFactura.mandarMailFacturaProfesionalPDF(facturaEntity.getFacturaId());
+            mandarMailFactura.mandarMailFacturaClientePDF(facturaEntity.getFacturaId());
             return true;
         } catch (CRUDException e) {
             return false;
         }
     }
 
-    public Either<DAOError, Integer> updateEstado(int facturaId, String estado) {
-        return daoFacturas.updateEstado(facturaId, estado);
+    public Either<CustomError, Integer> updateEstado(int facturaId) {
+        Either<CustomError, Integer> resultado = daoFacturas.updateEstado(facturaId, Constantes.PAGADA);
+        if (resultado.isRight()) {
+            mandarMailFactura.mandarMailAvisoFacturaPagada(facturaId);
+        }
+        return resultado;
     }
 }

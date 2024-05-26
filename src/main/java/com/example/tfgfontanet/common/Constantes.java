@@ -1,32 +1,51 @@
 package com.example.tfgfontanet.common;
 
-import lombok.RequiredArgsConstructor;
-
 public class Constantes {
 
     //Valores generales
     public static final String USER = "user";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+    public static final String NAME = "name";
     public static final String SERVER = "server";
     public static final String SPACE = " ";
-    public static final String PROPERTIES = "config/config.properties";
     public static final String SPRING = "SPRING";
-    public static final String TOKEN = "token";
+    public static final String PROPERTIES = "config/config.properties";
+
+
+    //Estados
+    public static final String ESTADO = "estado";
+    public static final String PENDIENTE = "pendiente";
+    public static final String VIGENTE = "vigente";
+    public static final String ACEPTADO = "aceptado";
+    public static final String PAGADA = "pagada";
+
+
+    //Atributos
+    public static final String PROFESIONAL = "profesional";
     public static final String PROFESIONAL_ID = "profesionalId";
     public static final String CONTRATO_ID = "contratoId";
     public static final String FACTURA_ID = "facturaId";
-    public static final String ESTADO = "estado";
+    public static final String CLIENTE_ID = "clienteId";
+    public static final String USER_ID = "userId";
+    public static final String CORREO = "correo";
+    public static final String CODIGO = "codigo";
+    public static final String EXPERIENCIA = "experiencia";
+    public static final String OFICIO = "oficio";
+    public static final String DISPONIBILIDAD = "disponibilidad";
+    public static final String VALORACION = "valoracion";
+    public static final String VALORACIONES = "valoraciones";
 
 
     //Roles
     public static final String ROLE = "role";
     public static final String ADMIN = "ADMIN";
-    public static final String PROFESIONAL = "PROF";
+    public static final String PROF = "PROF";
     public static final String CLIENTE = "CLIENTE";
 
 
     //Tokens
+    public static final String TOKEN = "token";
     public static final String BEARER = "Bearer";
     public static final String BEARERHEADER = "Bearer ";
     public static final int ACCESS_TOKEN_TIME = 600;
@@ -49,6 +68,8 @@ public class Constantes {
     //Mongo Configuracion
     public static final String DATABASE = "mongodb://informatica.iesquevedo.es:2323";
     public static final String DATABASE_NAME = "samuelsanchez_tfg";
+    public static final String $_SET_MONGO = "$set";
+    public static final String PROFESIONALES_MONGO_DB = "profesionales";
 
 
     //Propiedades del correo
@@ -75,8 +96,21 @@ public class Constantes {
 
 
     //Mandar Mail Contrato
-    public static final String CONTRATO_MSG1 = "Te han ofrecido un nuevo contrato. Por favor, acceda a la aplicación para revisarlo, y si está conforme, aceptarlo.";
-    public static final String CONTRATO_SUBJECT = "Nuevo Contrato Ofrecido";
+    public static final String CONTRATO_PROFESIONAL_PDF_SUBJECT = "Nuevo Contrato Ofrecido";
+    public static final String CONTRATO_PROFESIONAL_PDF_MSG = "Te han ofrecido un nuevo contrato. Por favor, acceda a la aplicación para revisarlo, y si está conforme, aceptarlo.";
+    public static final String CONTRATO_CLIENTE_PDF_SUBJECT = "Contrato Aceptado";
+    public static final String CONTRATO_CLIENTE_PDF_MSG = "El profesional ha aceptado el contrato que le has ofrecido. Por favor, acceda a la aplicación para hacerlo vigente, y para que el profesional pueda crear la factura.";
+    public static final String CONTRATO_PROFESIONAL_VIGENTE_SUBJECT = "Contrato Vigente";
+    public static final String CONTRATO_PROFESIONAL_VIGENTE_MSG = "El cliente ha aprobado el contrato. Por favor, acceda a la aplicación para crear la factura del servicio a realizar.";
+
+
+    //Mandar Mail Factura
+    public static final String FACTURA_PROFESIONAL_PDF_SUBJECT = "Factura Creada";
+    public static final String FACTURA_PROFESIONAL_PDF_MSG = "Has creado una factura. Se ha enviado al cliente, en cuanto la pague recibiras un aviso.";
+    public static final String FACTURA_CLIENTE_PDF_SUBJECT = "Factura Pendiente";
+    public static final String FACTURA_CLIENTE_PDF_MSG = "El profesional ha creado la factura. Por favor, acceda a la aplicación para aceptarla y pagarla, y si lo desea, envíe una valoración.";
+    public static final String FACTURA_PROFESIONAL_PAGADA_SUBJECT = "Factura Pagada";
+    public static final String FACTURA_PROFESIONAL_PAGADA_MSG = "El cliente ha pagado la factura. Gracias por sus servicios.";
 
 
     //PDF Generator Contrato
@@ -88,7 +122,7 @@ public class Constantes {
     public static final String NOMBRE_APELLIDOS = "Nombre y apellidos: ";
     public static final String NUMERO_TELEFONO = "Número de teléfono: ";
     public static final String DATOS_PROFESIONAL = "Datos del Profesional:";
-    public static final String OFICIO = "Oficio: ";
+    public static final String OFICIOPDF = "Oficio: ";
     public static final String DATOS_SERVICIO = "Datos del Servicio:";
     public static final String NOMBRE = "Nombre: ";
     public static final String DESCRIPCION = "Descripción: ";
@@ -97,8 +131,9 @@ public class Constantes {
     public static final String NO_ESPECIFICADA = "No especificada";
     public static final String TARIFA_BASE = "Tarifa Base: $";
     public static final String ESTADOPDF = "Estado:";
-    public static final String RUTA_CONTRATO = "C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\";
-    public static final String NOMBRE_PDF = ".pdf";
+    public static final String RUTA_CONTRATO = "C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\contratos\\";
+    public static final String CONTRATO_PDF = "ContratoDe";
+    public static final String PDF = ".pdf";
 
 
     //PDF Generator Factura
@@ -109,7 +144,8 @@ public class Constantes {
     public static final String PRECIO = ": $";
     public static final String X = " x ";
     public static final String PRECIO_TOTAL = "Precio Total: $";
-    public static final String RUTA_FACTURA = "C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\factura.pdf";
+    public static final String RUTA_FACTURA = "C:\\Users\\madrid\\IdeaProjects\\TFG-Fontanet\\facturas\\";
+    public static final String FACTURA_PDF = "FacturaDe";
 
 
     //Avisos de Registro, Activacion y Autenticacion
@@ -124,6 +160,7 @@ public class Constantes {
     //Alertas & Errores
     public static final String SQL_ERROR = "SQL error: ";
     public static final String MONGO_ERROR = "Mongo error: ";
+    public static final String NO_PERMISOS = "No tienes permisos para realizar esta función";
 
 
     public static final String CLIENTE_O_PROFESIONAL_NOT_FOUND = "Cliente o Profesional no encontrado";

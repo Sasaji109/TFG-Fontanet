@@ -1,7 +1,7 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOProfesionales;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.dao.DAOValoraciones;
@@ -31,7 +31,7 @@ public class ValoracionesService {
     private final ProfesionalEntityMapper profesionalEntityMapper;
     private final ValoracionEntityMapper valoracionEntityMapper;
 
-    public Either<DAOError, List<Valoracion>> getAllByProf() {
+    public Either<CustomError, List<Valoracion>> getAllByProf() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
         Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONAL_NOT_FOUND));

@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOMateriales;
 import com.example.tfgfontanet.data.modelo.MaterialEntity;
 import com.example.tfgfontanet.domain.modelo.Material;
@@ -19,7 +19,7 @@ public class MaterialesService {
     private final DAOMateriales dao;
     private final MaterialEntityMapper materialEntityMapper;
 
-    public Either<DAOError, List<Material>> getAll() {
+    public Either<CustomError, List<Material>> getAll() {
         return dao.getAll().map(materialEntityList -> {
             List<Material> materiales = new ArrayList<>();
             for (MaterialEntity materialEntity : materialEntityList) {
@@ -30,7 +30,7 @@ public class MaterialesService {
         });
     }
 
-    public Either<DAOError, Material> get(int id) {
+    public Either<CustomError, Material> get(int id) {
         return dao.get(id).map(materialEntityMapper::toMaterial);
     }
 
@@ -43,12 +43,12 @@ public class MaterialesService {
         }
     }
 
-    public Either<DAOError, Integer> updateMaterial(Material material) {
+    public Either<CustomError, Integer> updateMaterial(Material material) {
         MaterialEntity materialEntity = materialEntityMapper.toMaterialEntity(material);
         return dao.update(materialEntity);
     }
 
-    public Either<DAOError, Integer> deleteMaterial(int id) {
+    public Either<CustomError, Integer> deleteMaterial(int id) {
         return dao.delete(id);
     }
 }

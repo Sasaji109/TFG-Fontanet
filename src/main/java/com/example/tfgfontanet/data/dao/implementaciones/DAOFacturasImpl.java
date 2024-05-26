@@ -2,7 +2,7 @@ package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOFacturas;
 import com.example.tfgfontanet.data.modelo.FacturaEntity;
 import com.example.tfgfontanet.data.modelo.FacturaMaterialEntity;
@@ -29,8 +29,8 @@ public class DAOFacturasImpl implements DAOFacturas {
     }
 
     @Override
-    public Either<DAOError, List<FacturaEntity>> getAll() {
-        Either<DAOError, List<FacturaEntity>> either;
+    public Either<CustomError, List<FacturaEntity>> getAll() {
+        Either<CustomError, List<FacturaEntity>> either;
         List<FacturaEntity> facturas;
         em = jpaUtil.getEntityManager();
 
@@ -40,52 +40,52 @@ public class DAOFacturasImpl implements DAOFacturas {
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, List<FacturaEntity>> getAllByCliente(int clienteId) {
-        Either<DAOError, List<FacturaEntity>> either;
+    public Either<CustomError, List<FacturaEntity>> getAllByCliente(int clienteId) {
+        Either<CustomError, List<FacturaEntity>> either;
         List<FacturaEntity> facturas;
         em = jpaUtil.getEntityManager();
 
         try {
             TypedQuery<FacturaEntity> query = em.createQuery("SELECT f FROM FacturaEntity f WHERE f.cliente.clienteId = :clienteId", FacturaEntity.class);
-            query.setParameter("clienteId", clienteId);
+            query.setParameter(Constantes.CLIENTE_ID, clienteId);
             facturas = query.getResultList();
             either = Either.right(facturas);
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, List<FacturaEntity>> getAllByProfesional(int profesionalId) {
-        Either<DAOError, List<FacturaEntity>> either;
+    public Either<CustomError, List<FacturaEntity>> getAllByProfesional(int profesionalId) {
+        Either<CustomError, List<FacturaEntity>> either;
         List<FacturaEntity> facturas;
         em = jpaUtil.getEntityManager();
 
         try {
             TypedQuery<FacturaEntity> query = em.createQuery("SELECT f FROM FacturaEntity f WHERE f.profesional.profesionalId = :profesionalId", FacturaEntity.class);
-            query.setParameter("profesionalId", profesionalId);
+            query.setParameter(Constantes.PROFESIONAL_ID, profesionalId);
             facturas = query.getResultList();
             either = Either.right(facturas);
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, FacturaEntity> get(int id) {
-        Either<DAOError, FacturaEntity> either;
+    public Either<CustomError, FacturaEntity> get(int id) {
+        Either<CustomError, FacturaEntity> either;
         em = jpaUtil.getEntityManager();
 
         try {
@@ -94,14 +94,14 @@ public class DAOFacturasImpl implements DAOFacturas {
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, Integer> add(FacturaEntity factura) {
-        Either<DAOError, Integer> either;
+    public Either<CustomError, FacturaEntity> add(FacturaEntity factura) {
+        Either<CustomError, FacturaEntity> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -126,10 +126,10 @@ public class DAOFacturasImpl implements DAOFacturas {
             }
 
             tx.commit();
-            either = Either.right(facturaId);
+            either = Either.right(factura);
         } catch(Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -137,22 +137,22 @@ public class DAOFacturasImpl implements DAOFacturas {
     }
 
     @Override
-    public Either<DAOError, Integer> updateEstado(int facturaId, String estado) {
-        Either<DAOError, Integer> either;
+    public Either<CustomError, Integer> updateEstado(int facturaId, String estado) {
+        Either<CustomError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
         try {
             Query query = em.createQuery("UPDATE FacturaEntity f SET f.estado = :estado WHERE f.facturaId = :facturaId");
-            query.setParameter("estado", estado);
-            query.setParameter("facturaId", facturaId);
+            query.setParameter(Constantes.ESTADO, estado);
+            query.setParameter(Constantes.FACTURA_ID, facturaId);
             int updatedRows = query.executeUpdate();
             tx.commit();
             either = Either.right(updatedRows);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

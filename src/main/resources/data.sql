@@ -15,7 +15,7 @@ INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio
 INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (4, 'marcos123', 'samper7804@gmail.com', '$2a$10$qFvk70IVphAh/q8O4.YCwOAiogSyK8ZLgwdbCX4pwI2bcBsKMfaCe', true, null, null, 'PROF');
 INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (5, 'maria4564', 'maria4564@example.com', 'maria4564pass', false, null, null, 'PROF');
 INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (6, 'pedro7894', 'pedro7894@example.com', 'pedro7894pass', false, null, null, 'PROF');
-INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (7, 'sasaji', 'samuelsanchezjw109@gmail.com', '$2a$10$qFvk70IVphAh/q8O4.YCwOAiogSyK8ZLgwdbCX4pwI2bcBsKMfaCe', true, null, null, 'ADMIN');
+INSERT INTO usuarios (user_id, username, correo, password, activado, fecha_envio, codigo_activacion, role) VALUES (7, 'sasaji', 'admin123@gmail.com', '$2a$10$qFvk70IVphAh/q8O4.YCwOAiogSyK8ZLgwdbCX4pwI2bcBsKMfaCe', true, null, null, 'ADMIN');
 
 INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id_c) VALUES (1, 'Ana', 'García', '123456789', 1);
 INSERT INTO clientes (cliente_id, nombre, apellidos, numero, user_id_c) VALUES (2, 'Juan', 'Martínez', '987654321', 2);

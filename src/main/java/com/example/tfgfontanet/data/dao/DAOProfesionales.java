@@ -1,20 +1,20 @@
 package com.example.tfgfontanet.data.dao;
 
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.modelo.ProfesionalEntity;
 import io.vavr.control.Either;
 import java.util.List;
 
 public interface DAOProfesionales {
-    Either<DAOError, List<ProfesionalEntity>> getAll();
-    Either<DAOError, List<ProfesionalEntity>> getAllByExp(int experiencia);
-    Either<DAOError, List<ProfesionalEntity>> getAllByOficio(String oficio);
-    Either<DAOError, List<ProfesionalEntity>> getAllByDisp(String disponibilidad);
-    Either<DAOError, List<ProfesionalEntity>> getAllByVal(int valoracion);
-    Either<DAOError, ProfesionalEntity> get(int id);
-    Either<DAOError, ProfesionalEntity> getByUserId(int userId);
-    Either<DAOError, Integer> add(ProfesionalEntity profesional);
-    Either<DAOError, Integer> update(ProfesionalEntity profesional);
-    Either<DAOError, Integer> updateVal(int id, int val);
-    Either<DAOError, Integer> delete(int profesionalId);
+    Either<CustomError, List<ProfesionalEntity>> getAll();
+    Either<CustomError, List<ProfesionalEntity>> getAllByExp(int experiencia);
+    Either<CustomError, List<ProfesionalEntity>> getAllByOficio(String oficio);
+    Either<CustomError, List<ProfesionalEntity>> getAllByDisp(String disponibilidad);
+    Either<CustomError, List<ProfesionalEntity>> getAllByVal(int valoracion);
+    Either<CustomError, ProfesionalEntity> get(int id);
+    Either<CustomError, ProfesionalEntity> getByUserId(int userId);
+    Either<CustomError, Integer> add(ProfesionalEntity profesional);
+    Either<CustomError, Integer> update(ProfesionalEntity profesional);
+    Either<CustomError, Integer> updateVal(int id, int val);
+    Either<CustomError, Integer> delete(int profesionalId);
 }

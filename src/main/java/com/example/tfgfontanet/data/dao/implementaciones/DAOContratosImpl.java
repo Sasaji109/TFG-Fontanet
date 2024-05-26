@@ -2,7 +2,7 @@ package com.example.tfgfontanet.data.dao.implementaciones;
 
 import com.example.tfgfontanet.common.configuracion.JPAUtil;
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOContratos;
 import com.example.tfgfontanet.data.modelo.ContratoEntity;
 import io.vavr.control.Either;
@@ -27,8 +27,8 @@ public class DAOContratosImpl implements DAOContratos {
     }
 
     @Override
-    public Either<DAOError, List<ContratoEntity>> getAll() {
-        Either<DAOError, List<ContratoEntity>> either;
+    public Either<CustomError, List<ContratoEntity>> getAll() {
+        Either<CustomError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
@@ -38,70 +38,70 @@ public class DAOContratosImpl implements DAOContratos {
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
     @Override
-    public Either<DAOError, List<ContratoEntity>> getAllByCliente(int clienteId) {
-        Either<DAOError, List<ContratoEntity>> either;
+    public Either<CustomError, List<ContratoEntity>> getAllByCliente(int clienteId) {
+        Either<CustomError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
         try {
             TypedQuery<ContratoEntity> query = em.createQuery("SELECT c FROM ContratoEntity c WHERE c.cliente.clienteId = :clienteId", ContratoEntity.class);
-            query.setParameter("clienteId", clienteId);
+            query.setParameter(Constantes.CLIENTE_ID, clienteId);
             contratos = query.getResultList();
             either = Either.right(contratos);
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, List<ContratoEntity>> getAllByProfesional(int profesionalId) {
-        Either<DAOError, List<ContratoEntity>> either;
+    public Either<CustomError, List<ContratoEntity>> getAllByProfesional(int profesionalId) {
+        Either<CustomError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
         try {
             TypedQuery<ContratoEntity> query = em.createQuery("SELECT c FROM ContratoEntity c WHERE c.profesional.profesionalId = :profesionalId", ContratoEntity.class);
-            query.setParameter("profesionalId", profesionalId);
+            query.setParameter(Constantes.PROFESIONAL_ID, profesionalId);
             contratos = query.getResultList();
             either = Either.right(contratos);
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, List<ContratoEntity>> getAllByEstado(String estado) {
-        Either<DAOError, List<ContratoEntity>> either;
+    public Either<CustomError, List<ContratoEntity>> getAllByEstado(String estado) {
+        Either<CustomError, List<ContratoEntity>> either;
         List<ContratoEntity> contratos;
         em = jpaUtil.getEntityManager();
 
         try {
             TypedQuery<ContratoEntity> query = em.createQuery("SELECT c FROM ContratoEntity c WHERE c.estado = :estado", ContratoEntity.class);
-            query.setParameter("estado", estado);
+            query.setParameter(Constantes.ESTADO, estado);
             contratos = query.getResultList();
             either = Either.right(contratos);
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, ContratoEntity> get(int id) {
-        Either<DAOError, ContratoEntity> either;
+    public Either<CustomError, ContratoEntity> get(int id) {
+        Either<CustomError, ContratoEntity> either;
         em = jpaUtil.getEntityManager();
 
         try {
@@ -110,14 +110,14 @@ public class DAOContratosImpl implements DAOContratos {
         }
 
         catch(Exception e) {
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         }
         return either;
     }
 
     @Override
-    public Either<DAOError, ContratoEntity> add(ContratoEntity contrato) {
-        Either<DAOError, ContratoEntity> either;
+    public Either<CustomError, ContratoEntity> add(ContratoEntity contrato) {
+        Either<CustomError, ContratoEntity> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -128,7 +128,7 @@ public class DAOContratosImpl implements DAOContratos {
             either = Either.right(contrato);
         } catch(Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -137,8 +137,8 @@ public class DAOContratosImpl implements DAOContratos {
     }
 
     @Override
-    public Either<DAOError, Integer> update(ContratoEntity contrato) {
-        Either<DAOError, Integer> either;
+    public Either<CustomError, Integer> update(ContratoEntity contrato) {
+        Either<CustomError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -149,7 +149,7 @@ public class DAOContratosImpl implements DAOContratos {
             either = Either.right(1);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }
@@ -157,22 +157,22 @@ public class DAOContratosImpl implements DAOContratos {
     }
 
     @Override
-    public Either<DAOError, Integer> updateEstado(int contratoId, String estado) {
-        Either<DAOError, Integer> either;
+    public Either<CustomError, Integer> updateEstado(int contratoId, String estado) {
+        Either<CustomError, Integer> either;
         em = jpaUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
         try {
             Query query = em.createQuery("UPDATE ContratoEntity c SET c.estado = :estado WHERE c.contratoId = :contratoId");
-            query.setParameter("estado", estado);
-            query.setParameter("contratoId", contratoId);
+            query.setParameter(Constantes.ESTADO, estado);
+            query.setParameter(Constantes.CONTRATO_ID, contratoId);
             int updatedRows = query.executeUpdate();
             tx.commit();
             either = Either.right(updatedRows);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            either = Either.left(new DAOError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
+            either = Either.left(new CustomError(5, Constantes.SQL_ERROR + e.getMessage(), LocalDate.now()));
         } finally {
             em.close();
         }

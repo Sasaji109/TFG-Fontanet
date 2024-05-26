@@ -66,7 +66,7 @@ public class PDFContratoGenerator {
         contentStream.newLine();
         contentStream.showText(Constantes.NUMERO_TELEFONO + profesional.getNumero());
         contentStream.newLine();
-        contentStream.showText(Constantes.OFICIO + profesional.getOficio());
+        contentStream.showText(Constantes.OFICIOPDF + profesional.getOficio());
         contentStream.newLine();
         contentStream.newLine();
 
@@ -95,7 +95,7 @@ public class PDFContratoGenerator {
         contentStream.endText();
         contentStream.close();
 
-        document.save(new File(Constantes.RUTA_CONTRATO + contrato.getProfesional().getNombre() + Constantes.NOMBRE_PDF));
+        document.save(new File(Constantes.RUTA_CONTRATO + Constantes.CONTRATO_PDF + contrato.getProfesional().getNombre() + Constantes.PDF));
         document.close();
     }
 }

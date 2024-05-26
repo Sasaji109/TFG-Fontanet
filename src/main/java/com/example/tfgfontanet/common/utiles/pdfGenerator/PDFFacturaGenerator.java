@@ -27,8 +27,8 @@ public class PDFFacturaGenerator {
         String estado = factura.getEstado();
 
         PDDocumentInformation pdd = document.getDocumentInformation();
-        pdd.setAuthor(profesional.getNombre() + " " + profesional.getApellidos());
-        pdd.setTitle(Constantes.FACTURA_TRABAJO + cliente.getNombre() + " " + cliente.getApellidos());
+        pdd.setAuthor(profesional.getNombre() + Constantes.SPACE + profesional.getApellidos());
+        pdd.setTitle(Constantes.FACTURA_TRABAJO + cliente.getNombre() + Constantes.SPACE + cliente.getApellidos());
         pdd.setCreator(Constantes.CREATOR);
         pdd.setSubject(Constantes.SUBJECT_FACTURA);
 
@@ -47,11 +47,11 @@ public class PDFFacturaGenerator {
         contentStream.showText(Constantes.DATOS_PROFESIONAL);
         contentStream.newLine();
         contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-        contentStream.showText(Constantes.NOMBRE_APELLIDOS + profesional.getNombre() + " " + profesional.getApellidos());
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + profesional.getNombre() + Constantes.SPACE + profesional.getApellidos());
         contentStream.newLine();
         contentStream.showText(Constantes.NUMERO_TELEFONO + profesional.getNumero());
         contentStream.newLine();
-        contentStream.showText(Constantes.OFICIO + profesional.getOficio());
+        contentStream.showText(Constantes.OFICIOPDF + profesional.getOficio());
         contentStream.newLine();
         contentStream.newLine();
 
@@ -59,7 +59,7 @@ public class PDFFacturaGenerator {
         contentStream.showText(Constantes.DATOS_CLIENTE);
         contentStream.newLine();
         contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-        contentStream.showText(Constantes.NOMBRE_APELLIDOS + cliente.getNombre() + " " + cliente.getApellidos());
+        contentStream.showText(Constantes.NOMBRE_APELLIDOS + cliente.getNombre() + Constantes.SPACE + cliente.getApellidos());
         contentStream.newLine();
         contentStream.showText(Constantes.NUMERO_TELEFONO + cliente.getNumero());
         contentStream.newLine();
@@ -102,7 +102,7 @@ public class PDFFacturaGenerator {
         contentStream.endText();
         contentStream.close();
 
-        document.save(new File(Constantes.RUTA_FACTURA));
+        document.save(new File(Constantes.RUTA_FACTURA + Constantes.FACTURA_PDF + factura.getProfesional().getNombre() + Constantes.PDF));
         document.close();
     }
 }

@@ -61,19 +61,19 @@ public class ProfesionalController {
     }
 
     @QueryMapping
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public Profesional getProfesionalByUserId() {
         return profesionalesService.getByUserId().getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONALES_NOT_FOUND));
     }
 
     @MutationMapping
-    @RolesAllowed({Constantes.ADMIN, Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.ADMIN, Constantes.PROF})
     public Integer deleteProfesional(@Argument Integer profesionalId) {
         return profesionalesService.delete(profesionalId).getOrElseThrow(() -> new CRUDException(Constantes.PROFESIONAL_NO_ELIMINADO));
     }
 
     @PutMapping(Constantes.PROFESIONAL_UPDATE_PATH)
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public Integer updateProfesional(@RequestBody Profesional profesional) {
         return profesionalesService.update(profesional).getOrElseThrow(() -> new CRUDException(Constantes.PROFESIONAL_NO_ACTUALIZADO));
     }

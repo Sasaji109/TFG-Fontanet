@@ -17,7 +17,7 @@ public class ValoracionController {
     private final ValoracionesService valoracionesService;
 
     @GetMapping(Constantes.VALORACION_PATH)
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public List<Valoracion> getValoracionesByProf() {
         return valoracionesService.getAllByProf().getOrElseThrow(() -> new NotFoundException(Constantes.VALORACIONES_NOT_FOUND));
     }

@@ -30,19 +30,19 @@ public class ContratosController {
     }
 
     @QueryMapping
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public List<Contrato> getContratosByProfesional() {
         return contratosService.getContratosByProfesional().getOrElseThrow(() -> new NotFoundException(Constantes.CONTRATOS_NO_ENCONTRADOS_PARA_EL_PROFESIONAL));
     }
 
     @QueryMapping
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public List<Contrato> getContratosByEstado(@Argument String estado) {
         return contratosService.getContratosByEstado(estado).getOrElseThrow(() -> new NotFoundException(Constantes.CONTRATOS_NO_ENCONTRADOS_PARA_EL_ESTADO_ESPECIFICADO));
     }
 
     @QueryMapping
-    @RolesAllowed({Constantes.CLIENTE, Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.CLIENTE, Constantes.PROF})
     public Contrato getContratoById(@Argument Integer contratoId) {
         return contratosService.get(contratoId).getOrElseThrow(() -> new NotFoundException(Constantes.CONTRATO_NOT_FOUND));
     }
@@ -58,13 +58,13 @@ public class ContratosController {
     }
 
     @PutMapping(Constantes.CONTRATO_UPDATE_PATH)
-    @RolesAllowed({Constantes.CLIENTE, Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.CLIENTE, Constantes.PROF})
     public Integer updateContrato(@RequestBody Contrato contrato) {
         return contratosService.update(contrato).getOrElseThrow(() -> new CRUDException(Constantes.CONTRATO_NO_ACTUALIZADO));
     }
 
     @PutMapping(Constantes.CONTRATO_UPDATE_ESTADO_PATH)
-    public Integer updateContratoEstado(@RequestParam(Constantes.CONTRATO_ID) Integer contratoId, @RequestParam(Constantes.ESTADO) String estado) {
-        return contratosService.updateEstado(contratoId, estado).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DEL_CONTRATO_NO_ACTUALIZADO));
+    public Integer updateContratoEstado(@RequestParam(Constantes.CONTRATO_ID) Integer contratoId) {
+        return contratosService.updateEstado(contratoId).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DEL_CONTRATO_NO_ACTUALIZADO));
     }
 }

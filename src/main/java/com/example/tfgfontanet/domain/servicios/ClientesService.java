@@ -1,7 +1,7 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOClientes;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
 import com.example.tfgfontanet.data.modelo.ClienteEntity;
@@ -29,7 +29,7 @@ public class ClientesService {
     private final ClienteEntityMapper clienteEntityMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public Either<DAOError, List<Cliente>> getAll() {
+    public Either<CustomError, List<Cliente>> getAll() {
         return daoClientes.getAll().map(clienteEntityList -> {
             List<Cliente> clientes = new ArrayList<>();
             for (ClienteEntity clienteEntity : clienteEntityList) {
@@ -40,11 +40,11 @@ public class ClientesService {
         });
     }
 
-    public Either<DAOError, Cliente> getCliente(int clienteId) {
+    public Either<CustomError, Cliente> getCliente(int clienteId) {
         return daoClientes.get(clienteId).map(clienteEntityMapper::toCliente);
     }
 
-    public Either<DAOError, Cliente> getByUserId() {
+    public Either<CustomError, Cliente> getByUserId() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
         return daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente);
@@ -63,14 +63,14 @@ public class ClientesService {
         }
     }
 
-    public Either<DAOError, Integer> update(Cliente cliente) {
+    public Either<CustomError, Integer> update(Cliente cliente) {
         ClienteEntity clienteEntity = clienteEntityMapper.toClienteEntity(cliente);
         List<FavoritosEntity> favoritosEntities = new ArrayList<>();
         clienteEntity.setProfesionalesFavoritos(favoritosEntities);
         return daoClientes.update(clienteEntity);
     }
 
-    public Either<DAOError, Integer> delete(int id) {
+    public Either<CustomError, Integer> delete(int id) {
         return daoClientes.delete(id);
     }
 }

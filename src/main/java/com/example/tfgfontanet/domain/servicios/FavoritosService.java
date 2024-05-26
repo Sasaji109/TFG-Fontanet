@@ -1,7 +1,7 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOClientes;
 import com.example.tfgfontanet.data.dao.DAOFavoritos;
 import com.example.tfgfontanet.data.dao.DAOUsuario;
@@ -31,7 +31,7 @@ public class FavoritosService {
     private final ClienteEntityMapper clienteEntityMapper;
     private final FavoritoEntityMapper favoritoEntityMapper;
 
-    public Either<DAOError, List<Favorito>> getAllByCliente() {
+    public Either<CustomError, List<Favorito>> getAllByCliente() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
         Cliente cliente = daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
@@ -58,7 +58,7 @@ public class FavoritosService {
         }
     }
 
-    public Either<DAOError, Integer> deleteFavorito(int profesionalId) {
+    public Either<CustomError, Integer> deleteFavorito(int profesionalId) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
         Cliente cliente = daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));

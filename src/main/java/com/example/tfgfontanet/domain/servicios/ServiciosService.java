@@ -1,6 +1,6 @@
 package com.example.tfgfontanet.domain.servicios;
 
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.DAOServicios;
 import com.example.tfgfontanet.data.modelo.ServicioEntity;
 import com.example.tfgfontanet.domain.modelo.Servicio;
@@ -19,7 +19,7 @@ public class ServiciosService {
     private final DAOServicios dao;
     private final ServicioEntityMapper servicioEntityMapper;
 
-    public Either<DAOError, List<Servicio>> getAll() {
+    public Either<CustomError, List<Servicio>> getAll() {
         return dao.getAll().map(servicioEntityList -> {
             List<Servicio> servicios = new ArrayList<>();
             for (ServicioEntity servicioEntity : servicioEntityList) {
@@ -30,7 +30,7 @@ public class ServiciosService {
         });
     }
 
-    public Either<DAOError, Servicio> get(int id) {
+    public Either<CustomError, Servicio> get(int id) {
         return dao.get(id).map(servicioEntityMapper::toServicio);
     }
 
@@ -43,12 +43,12 @@ public class ServiciosService {
         }
     }
 
-    public Either<DAOError, Integer> update(Servicio servicio) {
+    public Either<CustomError, Integer> update(Servicio servicio) {
         ServicioEntity servicioEntity = servicioEntityMapper.toServicioEntity(servicio);
         return dao.update(servicioEntity);
     }
 
-    public Either<DAOError, Integer> delete(int id) {
+    public Either<CustomError, Integer> delete(int id) {
         return dao.delete(id);
     }
 }

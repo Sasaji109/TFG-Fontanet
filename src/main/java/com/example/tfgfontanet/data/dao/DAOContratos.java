@@ -1,17 +1,17 @@
 package com.example.tfgfontanet.data.dao;
 
-import com.example.tfgfontanet.common.DAOError;
+import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.modelo.ContratoEntity;
 import io.vavr.control.Either;
 import java.util.List;
 
 public interface DAOContratos {
-    Either<DAOError, List<ContratoEntity>> getAll();
-    Either<DAOError, List<ContratoEntity>> getAllByCliente(int clienteId);
-    Either<DAOError, List<ContratoEntity>> getAllByProfesional(int profesionalId);
-    Either<DAOError, List<ContratoEntity>> getAllByEstado(String estado);
-    Either<DAOError, ContratoEntity> get(int id);
-    Either<DAOError, ContratoEntity> add(ContratoEntity contrato);
-    Either<DAOError, Integer> update(ContratoEntity contrato);
-    Either<DAOError, Integer> updateEstado(int contratoId, String estado);
+    Either<CustomError, List<ContratoEntity>> getAll();
+    Either<CustomError, List<ContratoEntity>> getAllByCliente(int clienteId);
+    Either<CustomError, List<ContratoEntity>> getAllByProfesional(int profesionalId);
+    Either<CustomError, List<ContratoEntity>> getAllByEstado(String estado);
+    Either<CustomError, ContratoEntity> get(int id);
+    Either<CustomError, ContratoEntity> add(ContratoEntity contrato);
+    Either<CustomError, Integer> update(ContratoEntity contrato);
+    Either<CustomError, Integer> updateEstado(int contratoId, String estado);
 }

@@ -59,21 +59,17 @@ query getFacturaById {
 
 ###
 # @name updateFacturaEstado
-PUT http://localhost:8080/factura/updateEstado?facturaId=1&estado=Pagado
-Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
-
+PUT http://localhost:8080/factura/updateEstado?facturaId=13
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqdWFuMTIzIiwiZXhwIjoxNzE2NzM5ODczLCJ1c2VyIjoianVhbjEyMyIsInJvbGUiOiJDTElFTlRFIn0.CQQXlavWmmUL557_pWS8eP3RuYXV5DR_Lc0PESREFnqSxioIH3dQlavYzEhQ1rT-ZMCntnW3nsiD-Z6_w1Jb31NxooXmsVyP3_ZPyCK7xUWdRvvDGmBLlFPQ6Q_3pFIOIIkEMjjFxkvxiabtht3mpouQmyVW0xbqx0wtkVSsME6A7tsdhRYoxnvC40d4L9LPQnDNqsCn72mxlHLl1Bpzz82YNGW6EyPI-7L5XFic_4qtS4q4Jyqvd9ALUix65eJfL3FLWsQJ8bKOIng-nKmgbk99LMW0WdtnPwUEWSw-nTM9VW9NzXdwD4ts2PRgTyklXxEiJcUStPLYfNb38itaIw
 ###
 # @name addFactura
 POST http://localhost:8080/factura/add
-Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI1NjQ0NywidXNlciI6ImFkbWluIiwicm9sZSI6IkFETUlOIn0.yozJt2H7A1wVeQ-zXIecf759leu4JvdxtQPvnf5DOW5Agp6x-wwbMLxhn4irjuejpIevW_Envx4O_KO_Abx1UZdi4YzD4Zr0d2DJrsekCtPjFeomMgf_2_OBh1J4-rtfmMbff5CMjXbajARh7NdlbzeCZk_YPNDdLEO3WTw1SMFdNX69pG9o_DoJaL5ZXHHJxPGDjFMsxB64al4dlMSXy9Npme4HkJpPM36k4WEjc-6SEbouJifoL8uMisCUGbbx-GAFlMT3pWobuHOoCJmpC7vpQxys605VRkPxDSPHtap2zblDPAyNR6CCRRqvx3UmsXCsnZVcPnzazPyLPc3ykw
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtYXJjb3MxMjMiLCJleHAiOjE3MTY3Mzk3NDQsInVzZXIiOiJtYXJjb3MxMjMiLCJyb2xlIjoiUFJPRiJ9.GvFIzq56L3KX0Vhg1028NPXdihADjPmsbV4onNZ_UJQUkGf8aRTNddSI042o3Vu4fxrmiMWwcPsIQPn3KSAbN2a5q6hUgs4pin6l38M_VEps60Tdu_rHlxDM7PbIdPKV4WkckkJqkZnI0VFPvV9rDvkHUQf4aXa1w4D5QJRc_wZAehvRAK-Y4dzlEOXPobJH9FUHYtoavS2ECaOMy5W2AjBJ8imJVRgSnJJ5ko80WTpHiZJ01vpxxuAgTOAx1j_AAHlPTHX_-7eNsv4CYHFU6kN_3MW63_blV1_7kFbsNEUd296uOQT2RxV9T7YtJcW7thFEB6C55DtNuS9JrLU5tA
 Content-Type: application/json
 
 {
   "cliente": {
-    "clienteId": 2
-  },
-  "profesional": {
-    "profesionalId": 2
+    "clienteId": 1
   },
   "servicio": {
     "servicioId": 2,
@@ -99,6 +95,5 @@ Content-Type: application/json
       "cantidad": 3
     }
   ],
-  "precio": 0.0,
-  "estado": "Pendiente"
+  "precio": 1.0
 }

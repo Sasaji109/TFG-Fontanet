@@ -14,7 +14,7 @@ public class FacturaMaterialController {
     private final FacturaMaterialService facturaMaterialService;
 
     @PostMapping(Constantes.FACTURAMATERIAL_ADD_PATH)
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public String addFacturaMaterial(@RequestBody FacturaMaterial facturaMaterial) {
         if (Boolean.TRUE.equals(facturaMaterialService.addFacturaMaterial(facturaMaterial))) {
             return Constantes.FACTURA_DE_MATERIAL_ANADIDA_EXITOSAMENTE;

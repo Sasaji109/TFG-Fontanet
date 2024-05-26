@@ -20,7 +20,7 @@ public class MaterialController {
     private final MaterialesService materialesService;
 
     @QueryMapping
-    @RolesAllowed({Constantes.ADMIN, Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.ADMIN, Constantes.PROF})
     public List<Material> getAllMateriales() {
         return materialesService.getAll().getOrElseThrow(() -> new NotFoundException(Constantes.MATERIALES_NOT_FOUND));
     }

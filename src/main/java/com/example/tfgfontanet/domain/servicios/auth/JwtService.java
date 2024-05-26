@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.security.Key;
 import java.security.KeyStore;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -76,7 +77,7 @@ public class JwtService {
             String accessToken = generateToken(user, Constantes.ACCESS_TOKEN_TIME).get();
             either = Either.right(accessToken);
         } catch (Exception e) {
-            either = Either.left(new CustomError(Constantes.ERROR_AL_RENOVAR_EL_TOKEN + e.getMessage(), LocalDateTime.now()));
+            either = Either.left(new CustomError(403,Constantes.ERROR_AL_RENOVAR_EL_TOKEN + e.getMessage(), LocalDate.now()));
         }
         return either;
     }

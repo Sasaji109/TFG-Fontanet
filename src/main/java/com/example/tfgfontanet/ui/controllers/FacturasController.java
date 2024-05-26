@@ -30,7 +30,7 @@ public class FacturasController {
     }
 
     @QueryMapping
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public List<Factura> getFacturasByProfesional() {
         return facturasService.getFacturasByProfesional().getOrElseThrow(() -> new NotFoundException(Constantes.FACTURAS_NO_ENCONTRADAS_PARA_EL_PROFESIONAL));
     }
@@ -42,7 +42,7 @@ public class FacturasController {
     }
 
     @PostMapping(Constantes.FACTURA_ADD_PATH)
-    @RolesAllowed({Constantes.PROFESIONAL})
+    @RolesAllowed({Constantes.PROF})
     public String addFactura(@RequestBody Factura factura) {
         if (Boolean.TRUE.equals(facturasService.add(factura))) {
             return Constantes.FACTURA_ANADIDA_EXITOSAMENTE;
@@ -53,7 +53,7 @@ public class FacturasController {
 
     @PutMapping(Constantes.FACTURA_UPDATE_ESTADO_PATH)
     @RolesAllowed({Constantes.CLIENTE})
-    public Integer updateFacturaEstado(@RequestParam(Constantes.FACTURA_ID) Integer facturaId, @RequestParam(Constantes.ESTADO) String estado) {
-        return facturasService.updateEstado(facturaId, estado).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DE_LA_FACTURA_NO_ACTUALIZADO));
+    public Integer updateFacturaEstado(@RequestParam(Constantes.FACTURA_ID) Integer facturaId) {
+        return facturasService.updateEstado(facturaId).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DE_LA_FACTURA_NO_ACTUALIZADO));
     }
 }
