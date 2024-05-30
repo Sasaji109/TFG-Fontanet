@@ -3,8 +3,7 @@ GET http://localhost:8080/login?
     username=sasaji&
     password=1234
 
-###
-# @name registroCliente
+#### @name registroCliente
 POST http://localhost:8080/registro/cliente
 Content-Type: application/json
 

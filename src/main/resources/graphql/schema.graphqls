@@ -14,7 +14,7 @@ type Profesional {
     experiencia: Int
     oficio: String
     disponibilidad: String
-    valoracion: String
+    valoracion: Int
     usuario: Usuario
 }
 

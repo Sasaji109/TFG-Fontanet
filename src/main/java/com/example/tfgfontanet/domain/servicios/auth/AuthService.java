@@ -41,7 +41,8 @@ public class AuthService {
 
         var jwtToken = jwtService.generateToken(user.getUsername(), Constantes.ACCESS_TOKEN_TIME).get();
         var refreshToken = jwtService.generateToken(user.getUsername(), Constantes.REFRESH_TOKEN_TIME).get();
+        var role = usuario.getRole();
 
-        return AuthenticationResponse.builder().accessToken(jwtToken).refreshToken(refreshToken).build();
+        return AuthenticationResponse.builder().accessToken(jwtToken).refreshToken(refreshToken).role(role).build();
     }
 }

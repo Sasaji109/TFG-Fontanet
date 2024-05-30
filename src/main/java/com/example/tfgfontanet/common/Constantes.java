@@ -248,8 +248,9 @@ public class Constantes {
     public static final String REFRESH_PATH = "/refresh";
     public static final String REGISTRO_PATH = "/registro";
     public static final String CLIENTE_PATH = "/cliente";
-   public static final String PROFESIONAL_PATH = "/profesional";
     public static final String CLIENTE_UPDATE_PATH = "/cliente/update";
+    public static final String PROFESIONAL_PATH = "/profesional";
+    public static final String PROFESIONAL_UPDATE_PATH = "/profesional/update";
     public static final String CONTRATO_ADD_PATH = "/contrato/add";
     public static final String CONTRATO_UPDATE_PATH = "/contrato/update";
     public static final String CONTRATO_UPDATE_ESTADO_PATH = "/contrato/updateEstado";
@@ -263,7 +264,6 @@ public class Constantes {
     public static final String SERVICIO_UPDATE_PATH = "/servicio/update";
     public static final String VALORACION_PATH = "/valoracion";
     public static final String VALORACION_ADD_PATH = "/valoracion/add";
-    public static final String PROFESIONAL_UPDATE_PATH = "/profesional/update";
 
     private Constantes(){}
 }
