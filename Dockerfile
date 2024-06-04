@@ -8,5 +8,5 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:20-jdk-oracle
 
-COPY --from=build /app/out/artifacts/TFG_Fontanet_jar/TFG-Fontanet.jar /TFG-Fontanet.jar
-ENTRYPOINT ["java","-jar","/TFG-Fontanet.jar"]
+COPY --from=build /app/target/TFG-Fontanet-0.0.1-SNAPSHOT.jar /TFG-Fontanet-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/TFG-Fontanet-0.0.1-SNAPSHOT.jar"]
