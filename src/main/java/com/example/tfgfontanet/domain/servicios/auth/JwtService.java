@@ -12,9 +12,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.Key;
 import java.security.KeyStore;
 import java.time.LocalDate;
@@ -32,7 +33,7 @@ public class JwtService {
     private Key clavePrivadaKeyStore() {
         String passwordString = Constantes.KEYSTORE_PASSWORD;
         char[] password = passwordString.toCharArray();
-        try (FileInputStream fis = new FileInputStream(Constantes.KEYSTORE_PFX)) {
+        try (InputStream fis = new ClassPathResource(Constantes.KEYSTORE_PFX).getInputStream()) {
             KeyStore keyStore = KeyStore.getInstance(Constantes.PKCS_12);
             keyStore.load(fis, password);
             return keyStore.getKey(Constantes.SERVER, password);
