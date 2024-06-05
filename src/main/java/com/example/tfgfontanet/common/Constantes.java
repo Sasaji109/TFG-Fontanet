@@ -57,7 +57,7 @@ public class Constantes {
     public static final String RSA = "RSA";
     public static final String CN_SERVIDOR = "CN=Servidor";
     public static final String PKCS_12 = "PKCS12";
-    public static final String KEYSTORE_PFX = "src/main/resources/keystore.pfx";
+    public static final String KEYSTORE_PFX = "keystore.pfx";
     public static final String SHA_256_WITH_RSAENCRYPTION = "SHA256WithRSAEncryption";
     public static final String KEYSTORE_PASSWORD = "quevedo2dam";
     public static final int KEYSIZE = 2048;
