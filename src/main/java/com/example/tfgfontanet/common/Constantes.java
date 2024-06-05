@@ -56,8 +56,8 @@ public class Constantes {
     //KeyStore
     public static final String RSA = "RSA";
     public static final String CN_SERVIDOR = "CN=Servidor";
-    public static final String PKCS_12 = "PKCS12";
-    public static final String KEYSTORE_PFX = "keystore.pfx";
+    public static final String JKS = "JKS";
+    public static final String KEYSTORE_JKS = "keystore.jks";
     public static final String SHA_256_WITH_RSAENCRYPTION = "SHA256WithRSAEncryption";
     public static final String KEYSTORE_PASSWORD = "quevedo2dam";
     public static final int KEYSIZE = 2048;
@@ -88,7 +88,7 @@ public class Constantes {
     public static final String ACTIVACION_PATH = "/activacion";
     public static final String ACTIVACION_CODIGO = "codigo";
     public static final int TIEMPO_ACTIVACION_MINUTOS = 1;
-    public static final String MSG1 = "<html><body>Pincha en el siguiente enlace para activar tu usuario: <a href=\"http://localhost:8080/registro/activacion?codigo=";
+    public static final String MSG1 = "<html><body>Pincha en el siguiente enlace para activar tu usuario: <a href=\"http://192.168.1.137:8080/registro/activacion?codigo=";
     public static final String MSG2 = "\">Activar usuario</a></body></html>";
     public static final String SUBJECT = "Activación del usuario";
     public static final String ACTIVADO = "Usuario activado";

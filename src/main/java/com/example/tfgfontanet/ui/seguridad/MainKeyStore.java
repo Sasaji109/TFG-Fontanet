@@ -1,17 +1,23 @@
 package com.example.tfgfontanet.ui.seguridad;
-
-import com.example.tfgfontanet.common.Constantes;
-import org.bouncycastle.jce.X509Principal;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.x509.X509V3CertificateGenerator;
 import java.io.FileOutputStream;
-import java.math.BigInteger;
-import java.security.*;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.KeyStore;
+import java.security.Security;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.Date;
+
+import com.example.tfgfontanet.common.Constantes;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.jce.X509Principal;
+import org.bouncycastle.x509.X509V3CertificateGenerator;
 
 public class MainKeyStore {
 
@@ -38,11 +44,11 @@ public class MainKeyStore {
         String username = Constantes.SERVER;
         char[] password = Constantes.KEYSTORE_PASSWORD.toCharArray();
 
-        KeyStore ks = KeyStore.getInstance(Constantes.PKCS_12);
+        KeyStore ks = KeyStore.getInstance(Constantes.JKS);
         ks.load(null, password);
         ks.setCertificateEntry(username, certificate);
         ks.setKeyEntry(username, privateKey, password, new Certificate[]{certificate});
-        FileOutputStream fos = new FileOutputStream(Constantes.KEYSTORE_PFX);
+        FileOutputStream fos = new FileOutputStream(Constantes.KEYSTORE_JKS);
         ks.store(fos, password);
         fos.close();
     }

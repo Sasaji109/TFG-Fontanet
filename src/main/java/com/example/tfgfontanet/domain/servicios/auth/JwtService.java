@@ -33,8 +33,8 @@ public class JwtService {
     private Key clavePrivadaKeyStore() {
         String passwordString = Constantes.KEYSTORE_PASSWORD;
         char[] password = passwordString.toCharArray();
-        try (InputStream fis = new ClassPathResource(Constantes.KEYSTORE_PFX).getInputStream()) {
-            KeyStore keyStore = KeyStore.getInstance(Constantes.PKCS_12);
+        try (InputStream fis = new ClassPathResource(Constantes.KEYSTORE_JKS).getInputStream()) {
+            KeyStore keyStore = KeyStore.getInstance(Constantes.JKS);
             keyStore.load(fis, password);
             return keyStore.getKey(Constantes.SERVER, password);
         } catch (Exception e) {
