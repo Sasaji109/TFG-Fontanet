@@ -15,8 +15,8 @@ public class Contrato {
     private Cliente cliente;
     private Profesional profesional;
     private Servicio servicio;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
     private String estado;
 }
 
