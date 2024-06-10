@@ -64,6 +64,7 @@ public class ContratosController {
     }
 
     @PutMapping(Constantes.CONTRATO_UPDATE_ESTADO_PATH)
+    @RolesAllowed({Constantes.CLIENTE, Constantes.PROF})
     public Integer updateContratoEstado(@RequestParam(Constantes.CONTRATO_ID) Integer contratoId) {
         return contratosService.updateEstado(contratoId).getOrElseThrow(() -> new CRUDException(Constantes.ESTADO_DEL_CONTRATO_NO_ACTUALIZADO));
     }
