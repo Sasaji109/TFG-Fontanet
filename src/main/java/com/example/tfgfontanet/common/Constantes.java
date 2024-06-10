@@ -88,7 +88,7 @@ public class Constantes {
     public static final String ACTIVACION_PATH = "/activacion";
     public static final String ACTIVACION_CODIGO = "codigo";
     public static final int TIEMPO_ACTIVACION_MINUTOS = 1;
-    public static final String MSG1 = "<html><body>Pincha en el siguiente enlace para activar tu usuario: <a href=\"http://192.168.1.137:8080/registro/activacion?codigo=";
+    public static final String MSG1 = "<html><body>Pincha en el siguiente enlace para activar tu usuario: <a href=\"https://informatica.iesquevedo.es/fontanet/registro/activacion?codigo=";
     public static final String MSG2 = "\">Activar usuario</a></body></html>";
     public static final String SUBJECT = "Activación del usuario";
     public static final String ACTIVADO = "Usuario activado";
