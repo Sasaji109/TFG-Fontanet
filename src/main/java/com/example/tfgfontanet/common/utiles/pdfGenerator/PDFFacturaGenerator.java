@@ -9,13 +9,14 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.stereotype.Service;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
 @Service
 public class PDFFacturaGenerator {
 
-    public static void generarFactura(FacturaEntity factura) throws IOException {
+    public static File generarFactura(FacturaEntity factura) throws IOException {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
@@ -102,7 +103,14 @@ public class PDFFacturaGenerator {
         contentStream.endText();
         contentStream.close();
 
-        document.save(new File(Constantes.RUTA_FACTURA + Constantes.FACTURA_PDF + factura.getProfesional().getNombre() + Constantes.PDF));
-        document.close();
+        File tempFile = File.createTempFile(Constantes.FACTURA_PDF + factura.getProfesional().getNombre(), Constantes.PDF);
+
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            document.save(fos);
+        } finally {
+            document.close();
+        }
+
+        return tempFile;
     }
 }

@@ -33,9 +33,8 @@ public class MandarMailFactura {
         String mensaje = Constantes.FACTURA_PROFESIONAL_PDF_MSG;
 
         try {
-            pdfFacturaGenerator.generarFactura(facturaEntity);
-            File pdfFile = new File(Constantes.RUTA_FACTURA + Constantes.FACTURA_PDF + facturaEntity.getProfesional().getNombre() + Constantes.PDF);
-            mandarMail.generateAndSendEmailWithAttachment(correoProfesional, mensaje, Constantes.FACTURA_PROFESIONAL_PDF_SUBJECT, pdfFile);
+            File document = pdfFacturaGenerator.generarFactura(facturaEntity);
+            mandarMail.generateAndSendEmailWithAttachment(correoProfesional, mensaje, Constantes.FACTURA_PROFESIONAL_PDF_SUBJECT, document);
         } catch (MessagingException | IOException e) {
             throw new MailException(e.getMessage());
         }
@@ -48,9 +47,8 @@ public class MandarMailFactura {
         String mensaje = Constantes.FACTURA_CLIENTE_PDF_MSG;
 
         try {
-            pdfFacturaGenerator.generarFactura(facturaEntity);
-            File pdfFile = new File(Constantes.RUTA_FACTURA + Constantes.FACTURA_PDF + facturaEntity.getProfesional().getNombre() + Constantes.PDF);
-            mandarMail.generateAndSendEmailWithAttachment(correoCliente, mensaje, Constantes.FACTURA_CLIENTE_PDF_SUBJECT, pdfFile);
+            File document = pdfFacturaGenerator.generarFactura(facturaEntity);
+            mandarMail.generateAndSendEmailWithAttachment(correoCliente, mensaje, Constantes.FACTURA_CLIENTE_PDF_SUBJECT, document);
         } catch (MessagingException | IOException e) {
             throw new MailException(e.getMessage());
         }

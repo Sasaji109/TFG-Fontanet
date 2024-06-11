@@ -8,7 +8,6 @@ import com.example.tfgfontanet.data.modelo.UsuarioEntity;
 import com.example.tfgfontanet.domain.modelo.Usuario;
 import com.example.tfgfontanet.domain.modelo.mapper.UsuarioEntityMapper;
 import com.example.tfgfontanet.ui.errores.excepciones.MailException;
-import jakarta.inject.Inject;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

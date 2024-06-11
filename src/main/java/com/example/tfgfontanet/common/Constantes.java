@@ -132,7 +132,6 @@ public class Constantes {
     public static final String NO_ESPECIFICADA = "No especificada";
     public static final String TARIFA_BASE = "Tarifa Base: $";
     public static final String ESTADOPDF = "Estado:";
-    public static final String RUTA_CONTRATO = "src/pruebasYDocs/contratos/";
     public static final String CONTRATO_PDF = "ContratoDe";
     public static final String PDF = ".pdf";
 
@@ -145,7 +144,6 @@ public class Constantes {
     public static final String PRECIO = ": $";
     public static final String X = " x ";
     public static final String PRECIO_TOTAL = "Precio Total: $";
-    public static final String RUTA_FACTURA = "src/pruebasYDocs/facturas/";
     public static final String FACTURA_PDF = "FacturaDe";
 
 

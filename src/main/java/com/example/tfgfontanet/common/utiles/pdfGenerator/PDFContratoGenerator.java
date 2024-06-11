@@ -13,13 +13,14 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.springframework.stereotype.Service;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 
 @Service
 public class PDFContratoGenerator {
 
-    public static void generarContrato(ContratoEntity contrato) throws IOException {
+    public static File generarContrato(ContratoEntity contrato) throws IOException {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         document.addPage(page);
@@ -95,8 +96,15 @@ public class PDFContratoGenerator {
         contentStream.endText();
         contentStream.close();
 
-        document.save(new File(Constantes.RUTA_CONTRATO + Constantes.CONTRATO_PDF + contrato.getProfesional().getNombre() + Constantes.PDF));
-        document.close();
+        File tempFile = File.createTempFile(Constantes.CONTRATO_PDF + contrato.getProfesional().getNombre(), Constantes.PDF);
+
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            document.save(fos);
+        } finally {
+            document.close();
+        }
+
+        return tempFile;
     }
 }
 

@@ -31,5 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/pruebasYDocs/
+/pruebas/
 /out/

@@ -33,9 +33,8 @@ public class MandarMailContrato {
         String mensaje = Constantes.CONTRATO_PROFESIONAL_PDF_MSG;
 
         try {
-            pdfContratoGenerator.generarContrato(contratoEntity);
-            File pdfFile = new File(Constantes.RUTA_CONTRATO + Constantes.CONTRATO_PDF + contratoEntity.getProfesional().getNombre() + Constantes.PDF);
-            mandarMail.generateAndSendEmailWithAttachment(correoProfesional, mensaje, Constantes.CONTRATO_PROFESIONAL_PDF_SUBJECT, pdfFile);
+            File document = pdfContratoGenerator.generarContrato(contratoEntity);
+            mandarMail.generateAndSendEmailWithAttachment(correoProfesional, mensaje, Constantes.CONTRATO_PROFESIONAL_PDF_SUBJECT, document);
         } catch (MessagingException | IOException e) {
             throw new MailException(e.getMessage());
         }
@@ -48,9 +47,8 @@ public class MandarMailContrato {
         String mensaje = Constantes.CONTRATO_CLIENTE_PDF_MSG;
 
         try {
-            pdfContratoGenerator.generarContrato(contratoEntity);
-            File pdfFile = new File(Constantes.RUTA_CONTRATO + Constantes.CONTRATO_PDF + contratoEntity.getProfesional().getNombre() + Constantes.PDF);
-            mandarMail.generateAndSendEmailWithAttachment(correoCliente, mensaje, Constantes.CONTRATO_CLIENTE_PDF_SUBJECT, pdfFile);
+            File document = pdfContratoGenerator.generarContrato(contratoEntity);
+            mandarMail.generateAndSendEmailWithAttachment(correoCliente, mensaje, Constantes.CONTRATO_CLIENTE_PDF_SUBJECT, document);
         } catch (MessagingException | IOException e) {
             throw new MailException(e.getMessage());
         }
