@@ -57,8 +57,8 @@ type Contrato {
     cliente: Cliente
     profesional: Profesional
     servicio: Servicio
-    fechaInicio: String
-    fechaFin: String
+    fechaInicio: LocalDate
+    fechaFin: LocalDate
     estado: String
 }
 

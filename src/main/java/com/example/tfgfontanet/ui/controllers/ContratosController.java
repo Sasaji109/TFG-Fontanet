@@ -49,8 +49,8 @@ public class ContratosController {
 
     @PostMapping(Constantes.CONTRATO_ADD_PATH)
     @RolesAllowed({Constantes.CLIENTE})
-    public String addContrato(@RequestBody Contrato contrato) {
-        if (Boolean.TRUE.equals(contratosService.add(contrato))) {
+    public String addContrato(@RequestParam(Constantes.PROFESIONAL_ID) Integer profesionalId, @RequestParam(Constantes.SERVICIO_ID) Integer servicioId) {
+        if (Boolean.TRUE.equals(contratosService.add(profesionalId, servicioId))) {
             return Constantes.CONTRATO_ANADIDO_EXITOSAMENTE;
         } else {
             return Constantes.CONTRATO_NO_ANADIDO;

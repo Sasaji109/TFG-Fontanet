@@ -24,6 +24,7 @@ public class Constantes {
     //Atributos
     public static final String PROFESIONAL = "profesional";
     public static final String PROFESIONAL_ID = "profesionalId";
+    public static final String SERVICIO_ID = "servicioId";
     public static final String CONTRATO_ID = "contratoId";
     public static final String FACTURA_ID = "facturaId";
     public static final String CLIENTE_ID = "clienteId";

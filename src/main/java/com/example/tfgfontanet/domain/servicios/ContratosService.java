@@ -1,13 +1,9 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.data.dao.*;
+import com.example.tfgfontanet.data.modelo.*;
 import com.example.tfgfontanet.ui.errores.CustomError;
-import com.example.tfgfontanet.data.dao.DAOClientes;
-import com.example.tfgfontanet.data.dao.DAOContratos;
-import com.example.tfgfontanet.data.dao.DAOProfesionales;
-import com.example.tfgfontanet.data.dao.DAOUsuario;
-import com.example.tfgfontanet.data.modelo.ContratoEntity;
-import com.example.tfgfontanet.data.modelo.UsuarioEntity;
 import com.example.tfgfontanet.domain.modelo.Cliente;
 import com.example.tfgfontanet.domain.modelo.Contrato;
 import com.example.tfgfontanet.domain.modelo.Profesional;
@@ -22,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +28,7 @@ public class ContratosService {
 
     private final DAOContratos daoContratos;
     private final DAOProfesionales daoProfesionales;
+    private final DAOServicios daoServicios;
     private final DAOClientes daoClientes;
     private final DAOUsuario daoUsuario;
     private final ClienteEntityMapper clienteEntityMapper;
@@ -96,14 +92,24 @@ public class ContratosService {
         return daoContratos.get(id).map(contratoEntityMapper::toContrato);
     }
 
-    public Boolean add(Contrato contrato) {
+    public Boolean add(Integer profesionalId, Integer servicioId) {
         try {
+            ContratoEntity contrato = new ContratoEntity();
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
-            Cliente cliente = daoClientes.getByUserId(usuario.getUserId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
+
+            ClienteEntity cliente = daoClientes.getByUserId(usuario.getUserId()).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
+            ProfesionalEntity profesional = daoProfesionales.get(profesionalId).getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONAL_NOT_FOUND));
+            ServicioEntity servicio = daoServicios.get(servicioId).getOrElseThrow(() -> new NotFoundException(Constantes.SERVICIO_NOT_FOUND));
+
             contrato.setCliente(cliente);
+            contrato.setProfesional(profesional);
+            contrato.setServicio(servicio);
+            contrato.setFechaInicio(LocalDate.now());
+            contrato.setFechaFin(LocalDate.now());
             contrato.setEstado(Constantes.PENDIENTE);
-            ContratoEntity contratoEntity = daoContratos.add(contratoEntityMapper.toContratoEntity(contrato)).get();
+
+            ContratoEntity contratoEntity = daoContratos.add(contrato).get();
             mandarMailContrato.mandarMailContratoProfesionalPDF(contratoEntity.getContratoId());
             return true;
         } catch (CRUDException e) {
