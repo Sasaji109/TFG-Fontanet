@@ -1,7 +1,6 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.data.modelo.ClienteEntity;
 import com.example.tfgfontanet.domain.modelo.FacturaInput;
 import com.example.tfgfontanet.domain.servicios.mail.MandarMailFactura;
 import com.example.tfgfontanet.ui.errores.CustomError;
