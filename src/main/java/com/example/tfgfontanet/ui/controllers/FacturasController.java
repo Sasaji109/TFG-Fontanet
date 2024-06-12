@@ -2,6 +2,7 @@ package com.example.tfgfontanet.ui.controllers;
 
 import com.example.tfgfontanet.common.Constantes;
 import com.example.tfgfontanet.domain.modelo.Factura;
+import com.example.tfgfontanet.domain.modelo.FacturaInput;
 import com.example.tfgfontanet.domain.servicios.FacturasService;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +44,7 @@ public class FacturasController {
 
     @PostMapping(Constantes.FACTURA_ADD_PATH)
     @RolesAllowed({Constantes.PROF})
-    public String addFactura(@RequestBody Factura factura) {
+    public String addFactura(@RequestBody FacturaInput factura) {
         if (Boolean.TRUE.equals(facturasService.add(factura))) {
             return Constantes.FACTURA_ANADIDA_EXITOSAMENTE;
         } else {

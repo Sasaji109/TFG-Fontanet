@@ -1,6 +1,8 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
+import com.example.tfgfontanet.data.modelo.ClienteEntity;
+import com.example.tfgfontanet.domain.modelo.FacturaInput;
 import com.example.tfgfontanet.domain.servicios.mail.MandarMailFactura;
 import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.*;
@@ -80,12 +82,17 @@ public class FacturasService {
         return daoFacturas.get(id).map(facturaEntityMapper::toFactura);
     }
 
-    public Boolean add(Factura factura) {
+    public Boolean add(FacturaInput facturaInput) {
         try {
+            Factura factura = new Factura(0, null, null, facturaInput.getServicio(), facturaInput.getMateriales(), facturaInput.getPrecio(), facturaInput.getEstado());
+
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
             Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONAL_NOT_FOUND));
+            Cliente cliente = daoClientes.get(facturaInput.getClienteId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
+
             factura.setProfesional(profesional);
+            factura.setCliente(cliente);
             factura.setEstado(Constantes.PENDIENTE);
             FacturaEntity facturaEntity = daoFacturas.add(facturaEntityMapper.toFacturaEntity(factura)).get();
             mandarMailFactura.mandarMailFacturaProfesionalPDF(facturaEntity.getFacturaId());
