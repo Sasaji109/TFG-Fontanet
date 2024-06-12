@@ -64,6 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
 
             } catch (ExpiredJwtException e){
+                System.out.println(e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             } catch (Exception e) {
                 throw new TokenException(e.getMessage());

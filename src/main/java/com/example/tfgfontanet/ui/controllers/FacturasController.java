@@ -41,7 +41,17 @@ public class FacturasController {
     public Factura getFacturaById(@Argument Integer facturaId) {
         return facturasService.get(facturaId).getOrElseThrow(() -> new NotFoundException(Constantes.FACTURA_NOT_FOUND));
     }
-
+/*
+    @PostMapping(Constantes.FACTURA_ADD_PATH)
+    @RolesAllowed({Constantes.PROF})
+    public String addFactura(@RequestBody FacturaInput factura) {
+        if (Boolean.TRUE.equals(facturasService.add(factura))) {
+            return Constantes.FACTURA_ANADIDA_EXITOSAMENTE;
+        } else {
+            return Constantes.FACTURA_NO_ANADIDA;
+        }
+    }
+    */
     @PostMapping(Constantes.FACTURA_ADD_PATH)
     @RolesAllowed({Constantes.PROF})
     public String addFactura(@RequestBody FacturaInput factura) {

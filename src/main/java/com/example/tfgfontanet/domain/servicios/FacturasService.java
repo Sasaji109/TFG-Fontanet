@@ -1,15 +1,13 @@
 package com.example.tfgfontanet.domain.servicios;
 
 import com.example.tfgfontanet.common.Constantes;
-import com.example.tfgfontanet.domain.modelo.FacturaInput;
+import com.example.tfgfontanet.domain.modelo.*;
+import com.example.tfgfontanet.domain.modelo.mapper.ServicioEntityMapper;
 import com.example.tfgfontanet.domain.servicios.mail.MandarMailFactura;
 import com.example.tfgfontanet.ui.errores.CustomError;
 import com.example.tfgfontanet.data.dao.*;
 import com.example.tfgfontanet.data.modelo.FacturaEntity;
 import com.example.tfgfontanet.data.modelo.UsuarioEntity;
-import com.example.tfgfontanet.domain.modelo.Cliente;
-import com.example.tfgfontanet.domain.modelo.Factura;
-import com.example.tfgfontanet.domain.modelo.Profesional;
 import com.example.tfgfontanet.domain.modelo.mapper.ClienteEntityMapper;
 import com.example.tfgfontanet.domain.modelo.mapper.FacturaEntityMapper;
 import com.example.tfgfontanet.domain.modelo.mapper.ProfesionalEntityMapper;
@@ -29,9 +27,11 @@ public class FacturasService {
 
     private final DAOProfesionales daoProfesionales;
     private final DAOClientes daoClientes;
+    private final DAOServicios daoServicios;
     private final DAOUsuario daoUsuario;
     private final ClienteEntityMapper clienteEntityMapper;
     private final ProfesionalEntityMapper profesionalEntityMapper;
+    private final ServicioEntityMapper servicioEntityMapper;
     private final DAOFacturas daoFacturas;
     private final FacturaEntityMapper facturaEntityMapper;
     private final MandarMailFactura mandarMailFactura;
@@ -80,19 +80,39 @@ public class FacturasService {
     public Either<CustomError, Factura> get(int id) {
         return daoFacturas.get(id).map(facturaEntityMapper::toFactura);
     }
-
+/*
     public Boolean add(FacturaInput facturaInput) {
         try {
-            Factura factura = new Factura(0, null, null, facturaInput.getServicio(), facturaInput.getMateriales(), facturaInput.getPrecio(), facturaInput.getEstado());
+            List<FacturaMaterial> materials = new ArrayList<>();
+            Factura factura = new Factura(0, null, null, null, materials, facturaInput.getPrecio(), facturaInput.getEstado());
 
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
             UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
             Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONAL_NOT_FOUND));
             Cliente cliente = daoClientes.get(facturaInput.getClienteId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTE_NOT_FOUND));
+            Servicio servicio = daoServicios.get(facturaInput.getServicioId()).map(servicioEntityMapper::toServicio).getOrElseThrow(() -> new NotFoundException(Constantes.SERVICIO_NOT_FOUND));
 
             factura.setProfesional(profesional);
+            factura.setServicio(servicio);
             factura.setCliente(cliente);
             factura.setEstado(Constantes.PENDIENTE);
+            FacturaEntity facturaEntity = daoFacturas.add(facturaEntityMapper.toFacturaEntity(factura)).get();
+            mandarMailFactura.mandarMailFacturaProfesionalPDF(facturaEntity.getFacturaId());
+            mandarMailFactura.mandarMailFacturaClientePDF(facturaEntity.getFacturaId());
+            return true;
+        } catch (CRUDException e) {
+            return false;
+        }
+    }
+*/
+    public Boolean add(FacturaInput facturaInput) {
+        try {
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException(Constantes.USUARIO_NOT_FOUND));
+            Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException(Constantes.PROFESIONAL_NOT_FOUND));
+            Cliente cliente = daoClientes.get(facturaInput.getClienteId()).map(clienteEntityMapper::toCliente).getOrElseThrow(() -> new NotFoundException(Constantes.CLIENTES_NOT_FOUND));
+
+            Factura factura = new Factura(facturaInput.getFacturaId(), cliente, profesional, facturaInput.getServicio(), facturaInput.getMateriales(), facturaInput.getPrecio(), "pendiente");
             FacturaEntity facturaEntity = daoFacturas.add(facturaEntityMapper.toFacturaEntity(factura)).get();
             mandarMailFactura.mandarMailFacturaProfesionalPDF(facturaEntity.getFacturaId());
             mandarMailFactura.mandarMailFacturaClientePDF(facturaEntity.getFacturaId());
