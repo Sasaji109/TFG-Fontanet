@@ -78,11 +78,17 @@ public class ContratosService {
     }
 
     public Either<CustomError, List<Contrato>> getContratosByEstado(String estado) {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        UsuarioEntity usuario = daoUsuario.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        Profesional profesional = daoProfesionales.getByUserId(usuario.getUserId()).map(profesionalEntityMapper::toProfesional).getOrElseThrow(() -> new NotFoundException("Profesional no encontrado"));
+
         return daoContratos.getAllByEstado(estado).map(contratoEntityList -> {
             List<Contrato> contratos = new ArrayList<>();
             for (ContratoEntity contratoEntity : contratoEntityList) {
-                Contrato contrato = contratoEntityMapper.toContrato(contratoEntity);
-                contratos.add(contrato);
+                if (contratoEntity.getProfesional().getProfesionalId().equals(profesional.getProfesionalId())) {
+                    Contrato contrato = contratoEntityMapper.toContrato(contratoEntity);
+                    contratos.add(contrato);
+                }
             }
             return contratos;
         });
